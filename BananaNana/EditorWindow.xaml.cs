@@ -20,4 +20,12 @@ public partial class EditorWindow:Window{
  static BitmapImage LoadImage(byte[] bytes){var bmp=new BitmapImage();bmp.BeginInit();bmp.StreamSource=new MemoryStream(bytes);bmp.CacheOption=BitmapCacheOption.OnLoad;bmp.EndInit();bmp.Freeze();return bmp;}
  void Save_Click(object s,RoutedEventArgs e){var trigger=TriggerBox.Text.Trim();if(string.IsNullOrWhiteSpace(trigger)){MessageBox.Show("Enter a trigger.");return;}if(trigger.Any(char.IsWhiteSpace)){MessageBox.Show("The trigger cannot contain spaces: a space ends the trigger while typing.");return;}if(trigger.Length>TriggerMatcher.MaxWordLength){MessageBox.Show($"The trigger can be at most {TriggerMatcher.MaxWordLength} characters.");return;}Result.Trigger=trigger;Result.Content=RichContent.Save(Editor);DialogResult=true;}
  void Cancel_Click(object s,RoutedEventArgs e)=>DialogResult=false;
+ // Clicking an image shows corner handles to resize it (IsDocumentEnabled lets the image receive the click).
+ // Clicking elsewhere or typing hides them; clicks on the handles themselves are left to the handles.
+ ImageResizeAdorner? resizer;
+ void Editor_MouseDown(object s,System.Windows.Input.MouseButtonEventArgs e){if(e.OriginalSource is DependencyObject d&&FindParent<System.Windows.Controls.Primitives.Thumb>(d)!=null)return;resizer?.Detach();resizer=null;if(e.OriginalSource is System.Windows.Controls.Image image)resizer=ImageResizeAdorner.Attach(image);}
+ void Editor_KeyDown(object s,System.Windows.Input.KeyEventArgs e){resizer?.Detach();resizer=null;}
+ // Covers loaded, inserted and pasted images (e.g. from Word), so the editor shows the size that gets pasted.
+ void Editor_TextChanged(object s,System.Windows.Controls.TextChangedEventArgs e)=>EditorImages.FixSizes(Editor.Document);
+ static T? FindParent<T>(DependencyObject? d)where T:DependencyObject{while(d!=null&&d is not T)d=d is System.Windows.Media.Visual?System.Windows.Media.VisualTreeHelper.GetParent(d):LogicalTreeHelper.GetParent(d);return d as T;}
 }
