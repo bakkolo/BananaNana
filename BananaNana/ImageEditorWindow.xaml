@@ -1,0 +1,55 @@
+<Window x:Class="BananaNana.ImageEditorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Edit image" Width="960" Height="720" WindowStartupLocation="CenterOwner" PreviewKeyDown="Window_KeyDown">
+  <Window.Resources>
+    <Style x:Key="Swatch" TargetType="RadioButton">
+      <Setter Property="GroupName" Value="Color" />
+      <Setter Property="Width" Value="22" />
+      <Setter Property="Height" Value="22" />
+      <Setter Property="Margin" Value="2,0" />
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="RadioButton">
+            <Border x:Name="Ring" Background="{TemplateBinding Background}" BorderBrush="Gray" BorderThickness="1" CornerRadius="11" />
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsChecked" Value="True">
+                <Setter TargetName="Ring" Property="BorderBrush" Value="DodgerBlue" />
+                <Setter TargetName="Ring" Property="BorderThickness" Value="3" />
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+  </Window.Resources>
+  <DockPanel Margin="10">
+    <ToolBar DockPanel.Dock="Top">
+      <RadioButton GroupName="Tool" Content="Select" Tag="Select" Checked="Tool_Checked" ToolTip="Click a shape to select it, drag to move it, Delete to remove it" />
+      <RadioButton GroupName="Tool" Content="Arrow" Tag="Arrow" Checked="Tool_Checked" IsChecked="True" ToolTip="Drag from the tail to the tip" />
+      <RadioButton GroupName="Tool" Content="Rectangle" Tag="Rectangle" Checked="Tool_Checked" ToolTip="Drag to draw a frame" />
+      <RadioButton GroupName="Tool" Content="Highlight" Tag="Highlight" Checked="Tool_Checked" ToolTip="Drag to mark like a highlighter pen" />
+      <Separator />
+      <RadioButton Style="{StaticResource Swatch}" Background="#E53935" Checked="Color_Checked" IsChecked="True" ToolTip="Red" />
+      <RadioButton Style="{StaticResource Swatch}" Background="#FFEB3B" Checked="Color_Checked" ToolTip="Yellow" />
+      <RadioButton Style="{StaticResource Swatch}" Background="#43A047" Checked="Color_Checked" ToolTip="Green" />
+      <RadioButton Style="{StaticResource Swatch}" Background="#1E88E5" Checked="Color_Checked" ToolTip="Blue" />
+      <RadioButton Style="{StaticResource Swatch}" Background="#212121" Checked="Color_Checked" ToolTip="Black" />
+      <Separator />
+      <Button Content="Undo" Click="Undo_Click" ToolTip="Undo the last shape (Ctrl+Z)" />
+      <Button Content="Delete" Click="Delete_Click" ToolTip="Delete the selected shape (Delete)" />
+    </ToolBar>
+    <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+      <Button Content="Save" Click="Save_Click" Padding="12,6" />
+      <Button Content="Cancel" IsCancel="True" Margin="8,0,0,0" Padding="12,6" />
+    </StackPanel>
+    <Border Background="#EEE" Margin="0,8,0,0">
+      <Viewbox Stretch="Uniform" StretchDirection="DownOnly" Margin="10">
+        <Canvas x:Name="Surface" ClipToBounds="True" Background="Transparent" Cursor="Cross"
+                MouseLeftButtonDown="Surface_MouseDown" MouseMove="Surface_MouseMove" MouseLeftButtonUp="Surface_MouseUp">
+          <Image x:Name="Picture" Stretch="Fill" IsHitTestVisible="False" />
+        </Canvas>
+      </Viewbox>
+    </Border>
+  </DockPanel>
+</Window>

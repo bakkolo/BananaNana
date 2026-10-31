@@ -11,6 +11,7 @@
     <Compile Include="..\..\BananaNana\Paste\*.cs" Link="Paste\%(Filename)%(Extension)" />
     <Compile Include="..\..\BananaNana\Input\*.cs" Link="Input\%(Filename)%(Extension)" />
     <Compile Include="..\..\BananaNana\ImageResizeAdorner.cs" Link="ImageResizeAdorner.cs" />
+    <Compile Include="..\..\BananaNana\ImageAnnotation.cs" Link="ImageAnnotation.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />

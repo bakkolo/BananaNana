@@ -55,6 +55,8 @@ public sealed class ImageResizeAdorner : Adorner
         return adorner;
     }
 
+    public Image Target => image;
+
     public void Detach() => AdornerLayer.GetAdornerLayer(image)?.Remove(this);
 
     internal void BeginDrag(Point mouse)

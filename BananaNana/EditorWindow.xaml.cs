@@ -23,7 +23,10 @@ public partial class EditorWindow:Window{
  // Clicking an image shows corner handles to resize it (IsDocumentEnabled lets the image receive the click).
  // Clicking elsewhere or typing hides them; clicks on the handles themselves are left to the handles.
  ImageResizeAdorner? resizer;
- void Editor_MouseDown(object s,System.Windows.Input.MouseButtonEventArgs e){if(e.OriginalSource is DependencyObject d&&FindParent<System.Windows.Controls.Primitives.Thumb>(d)!=null)return;resizer?.Detach();resizer=null;if(e.OriginalSource is System.Windows.Controls.Image image)resizer=ImageResizeAdorner.Attach(image);}
+ void Editor_MouseDown(object s,System.Windows.Input.MouseButtonEventArgs e){if(e.OriginalSource is DependencyObject d&&FindParent<System.Windows.Controls.Primitives.Thumb>(d)!=null)return;resizer?.Detach();resizer=null;if(e.OriginalSource is not System.Windows.Controls.Image image)return;if(e.ClickCount==2){e.Handled=true;EditImage(image);return;}resizer=ImageResizeAdorner.Attach(image);}
+ void EditImage_Click(object s,RoutedEventArgs e){if(resizer!=null)EditImage(resizer.Target);else MessageBox.Show("Click a picture first, then Edit image (or double-click the picture).");}
+ // Drawings are flattened into a new picture with the same pixel size, so the size shown in the snippet stays.
+ void EditImage(System.Windows.Controls.Image image){if(image.Source is not BitmapSource source)return;var editor=new ImageEditorWindow(source){Owner=this};if(editor.ShowDialog()!=true||editor.Result==null)return;var encoder=new PngBitmapEncoder();encoder.Frames.Add(BitmapFrame.Create(editor.Result));using var ms=new MemoryStream();encoder.Save(ms);image.Source=LoadImage(ms.ToArray());}
  void Editor_KeyDown(object s,System.Windows.Input.KeyEventArgs e){resizer?.Detach();resizer=null;}
  // Covers loaded, inserted and pasted images (e.g. from Word), so the editor shows the size that gets pasted.
  void Editor_TextChanged(object s,System.Windows.Controls.TextChangedEventArgs e)=>EditorImages.FixSizes(Editor.Document);
