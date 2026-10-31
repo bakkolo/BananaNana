@@ -1,0 +1,33 @@
+<Window x:Class="BananaNana.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Settings" Width="560" SizeToContent="Height" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" ShowInTaskbar="False">
+  <StackPanel Margin="24,20,24,20">
+    <TextBlock Text="Settings" FontSize="22" FontWeight="SemiBold" Margin="0,0,0,16" />
+
+    <Border Padding="16,14" CornerRadius="8" Margin="0,0,0,10"
+            Background="{DynamicResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
+      <DockPanel>
+        <CheckBox x:Name="AutostartBox" DockPanel.Dock="Right" VerticalAlignment="Center" Click="Autostart_Click" AutomationProperties.Name="Start with Windows" />
+        <StackPanel>
+          <TextBlock Text="Start with Windows" FontWeight="SemiBold" />
+          <TextBlock Style="{StaticResource Caption}" TextWrapping="Wrap" Margin="0,3,12,0"
+                     Text="Starts quietly in the tray when you sign in. Closing the window keeps Banana Nana running there; use Exit in the tray menu to quit." />
+        </StackPanel>
+      </DockPanel>
+    </Border>
+
+    <Border Padding="16,14" CornerRadius="8"
+            Background="{DynamicResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
+      <DockPanel>
+        <Button DockPanel.Dock="Right" Content="Open folder" Click="OpenFolder_Click" Padding="12,6" VerticalAlignment="Center" />
+        <StackPanel>
+          <TextBlock x:Name="LibraryName" FontWeight="SemiBold" />
+          <TextBlock x:Name="LibraryPath" Style="{StaticResource Caption}" TextWrapping="Wrap" Margin="0,3,12,0" />
+        </StackPanel>
+      </DockPanel>
+    </Border>
+
+    <Button Content="Close" IsCancel="True" IsDefault="True" HorizontalAlignment="Right" Padding="20,7" Margin="0,18,0,0" />
+  </StackPanel>
+</Window>
