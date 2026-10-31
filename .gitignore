@@ -4,3 +4,6 @@
 *.user
 ~$*
 publish/
+# Local manual paste-test documents and personal libraries never belong in the repo
+*.docx
+BananaNana.library.json

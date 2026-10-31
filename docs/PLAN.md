@@ -1,5 +1,9 @@
 # Banana Nana: technical plan
 
+> **Status 2026-10-31:** stages 0–3, 5 (app shell, tray, autostart) and 6 (single-file EXE) are done, plus a
+> redesign, languages and help. Stage 4 (password fields, elevated apps, excluded apps) is still open.
+> Current design: `docs/ARCHITECTURE.md`. The plan below is kept as written.
+
 Read together with `AGENTS.md` (requirements) and `docs/RESEARCH.md` (findings that change this plan).
 
 **Stack:** C# / .NET 8 / WPF, one self-contained EXE, no admin rights. Only extra dependency: xUnit for tests.

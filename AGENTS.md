@@ -1,5 +1,9 @@
 # Banana Nana: handoff dla Codexa
 
+> **Historical (2026-10-31).** This is the original Polish handoff that started the project. The MVP has
+> since been built; for the current state see `README.md`, `docs/ARCHITECTURE.md` and `docs/USER_GUIDE.md`.
+> Where this file and the code disagree, the code and those documents win.
+
 ## Cel i decyzje
 Windows portable, C# WPF, jeden self-contained EXE bez admina. Kod startowy istnieje, ale NIE został skompilowany ani przetestowany na Windows. Nie ogłaszaj ukończenia bez testów.
 
