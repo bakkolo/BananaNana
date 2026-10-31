@@ -23,7 +23,7 @@ Outlook: classic Outlook has no mail profile on this PC, so COM automation abort
 - All six variants place the expected clipboard formats (checked via UI Automation).
 - WPF `TextRange.Save(DataFormats.Rtf)` **does** emit the image as `\pict` (tested on the .NET 10 desktop runtime via roll-forward; re-check on a self-contained .NET 8 build).
 
-Teams column: manual test 2026-10-31 (screenshot of sent chat messages, order A, B, C, D, F assumed).
+Teams column: manual test 2026-10-31 (screenshot of sent chat messages, order A, B, C, D, F confirmed by the user).
 
 ## Decision
 **One format for all apps: plain text + RTF + HTML with base64 `data:` images (variant D)**, as implemented by
