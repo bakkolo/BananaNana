@@ -4,6 +4,9 @@ A portable text expander for Windows. Type a short trigger such as `;offer` foll
 app, and Banana Nana replaces it with a saved snippet: formatted text, lists, links and pictures.
 No installation and no admin rights.
 
+**Download:** [latest release](https://github.com/bakkolo/BananaNana/releases/latest): `standalone` (66 MB, runs anywhere)
+or `small` (0.4 MB, needs the .NET Desktop Runtime 10).
+
 ![Main window](docs/images/main-window.png)
 
 ## Features
