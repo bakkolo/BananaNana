@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup>
+    <!-- Dev machines may only have a newer desktop runtime; self-contained publish ignores this. -->
+    <RollForward>LatestMajor</RollForward>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,27 @@
+<Window x:Class="PasteLab.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Banana Nana · Paste Lab" Width="900" Height="600" Topmost="True">
+  <DockPanel Margin="14">
+    <TextBlock DockPanel.Dock="Top" TextWrapping="Wrap" Margin="0,0,0,10">
+      Click a variant, switch to the target app, press Ctrl+V. Record what you see in docs/COMPAT.md.
+      Each variant pastes: a bold/italic/underlined line with Polish characters, a 3-item list, and a yellow "Banana Nana" image.
+    </TextBlock>
+    <TextBlock x:Name="Status" DockPanel.Dock="Bottom" Margin="0,10,0,0" TextWrapping="Wrap" FontWeight="SemiBold" />
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="360" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      <StackPanel x:Name="Variants" Margin="0,0,12,0" />
+      <DockPanel Grid.Column="1">
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,6">
+          <Button Content="Inspect clipboard" Click="Inspect_Click" Padding="10,4" />
+          <TextBlock Text="  Tip: copy from Word/Outlook/Teams, then inspect to see what they produce." VerticalAlignment="Center" Foreground="Gray" />
+        </StackPanel>
+        <TextBox x:Name="Inspector" IsReadOnly="True" FontFamily="Consolas" FontSize="11"
+                 VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" />
+      </DockPanel>
+    </Grid>
+  </DockPanel>
+</Window>
