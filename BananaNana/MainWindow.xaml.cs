@@ -4,8 +4,11 @@ using Microsoft.Win32;
 namespace BananaNana;
 public partial class MainWindow : Window {
  readonly LibraryStore store = new();
- public MainWindow(){InitializeComponent();store.LoadStartup();Refresh();}
- void Refresh(){SnippetsList.ItemsSource=store.Library.Snippets.Where(s=>s.Trigger.Contains(SearchBox.Text,StringComparison.OrdinalIgnoreCase)).OrderBy(s=>s.Trigger).ToList();Title="Banana Nana | "+store.Library.Name;}
+ readonly ExpansionCoordinator expander = new();
+ public MainWindow(){InitializeComponent();store.LoadStartup();expander.StatusChanged+=t=>StatusText.Text=t;expander.Start();Refresh();}
+ void Refresh(){SnippetsList.ItemsSource=store.Library.Snippets.Where(s=>s.Trigger.Contains(SearchBox.Text,StringComparison.OrdinalIgnoreCase)).OrderBy(s=>s.Trigger).ToList();Title="Banana Nana | "+store.Library.Name;expander.SetSnippets(store.Library.Snippets);}
+ void Pause_Click(object sender,RoutedEventArgs e){expander.Paused=PauseToggle.IsChecked==true;StatusText.Text=expander.Paused?"Rozwijanie skrótów wstrzymane.":"Rozwijanie skrótów włączone.";}
+ protected override void OnClosed(EventArgs e){expander.Dispose();base.OnClosed(e);}
  void New_Click(object sender,RoutedEventArgs e)=>Edit(null);
  void Edit(Snippet? current){var window=new EditorWindow(current){Owner=this};if(window.ShowDialog()!=true)return;var updated=window.Result;if(store.Library.Snippets.Any(s=>!ReferenceEquals(s,current)&&string.Equals(s.Trigger,updated.Trigger,StringComparison.OrdinalIgnoreCase))){MessageBox.Show("Taki skrót już istnieje.");return;}if(current==null)store.Library.Snippets.Add(updated);else{current.Trigger=updated.Trigger;current.Content=updated.Content;}try{store.Save();Refresh();}catch(Exception ex){MessageBox.Show(ex.Message);}}
  void List_DoubleClick(object sender,System.Windows.Input.MouseButtonEventArgs e){if(SnippetsList.SelectedItem is Snippet s)Edit(s);}
