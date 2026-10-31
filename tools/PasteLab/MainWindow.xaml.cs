@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using BananaNana.Input;
 using BananaNana.Paste;
 using Image = System.Windows.Controls.Image;
 
@@ -133,6 +134,55 @@ public partial class MainWindow : Window
             Status.Text = "Paste failed: " + ex.Message;
         }
         finally { button.IsEnabled = true; }
+    }
+
+    // Stage 3 live test: Raw Input listener + matcher drive the paste engine in any app.
+    // No password-field or elevated-app checks yet (Stage 4); PasteLab itself is skipped.
+    KeyboardInputService? listener;
+    readonly TriggerMatcher matcher = new([";bn"]);
+    readonly ClipboardPasteService paster = new();
+
+    void Live_Changed(object sender, RoutedEventArgs e)
+    {
+        if (LiveToggle.IsChecked == true)
+        {
+            listener = new KeyboardInputService();
+            listener.CharTyped += c => { if (matcher.OnChar(c) is { } trigger) Expand(trigger); };
+            listener.Backspace += matcher.OnBackspace;
+            listener.Reset += matcher.Reset;
+            listener.Start();
+            Status.Text = $"Live: type {TriggerBox.Text} and a space in any other app.";
+        }
+        else
+        {
+            listener?.Dispose();
+            listener = null;
+            matcher.Reset();
+            Status.Text = "Live test off.";
+        }
+    }
+
+    void Trigger_Changed(object sender, TextChangedEventArgs e) => matcher.SetTriggers([TriggerBox.Text.Trim()]);
+
+    async void Expand(string trigger)
+    {
+        if (IsActive) return;
+        try
+        {
+            var content = RenderEditor();
+            await paster.PasteAsync(content, backspaces: trigger.Length + 1);
+            Status.Text = $"Expanded {trigger}: {Describe(content)}.";
+        }
+        catch (Exception ex) when (ex is ExternalException or InvalidOperationException)
+        {
+            Status.Text = $"Expansion of {trigger} failed: {ex.Message}";
+        }
+    }
+
+    protected override void OnClosed(EventArgs e)
+    {
+        listener?.Dispose();
+        base.OnClosed(e);
     }
 
     FlowDocument SampleDocument()

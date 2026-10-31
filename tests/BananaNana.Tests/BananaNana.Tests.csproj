@@ -7,8 +7,9 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
-    <!-- The app is a WinExe, so the paste engine sources are linked in rather than referenced. -->
+    <!-- The app is a WinExe, so the engine sources are linked in rather than referenced. -->
     <Compile Include="..\..\BananaNana\Paste\*.cs" Link="Paste\%(Filename)%(Extension)" />
+    <Compile Include="..\..\BananaNana\Input\*.cs" Link="Input\%(Filename)%(Extension)" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />

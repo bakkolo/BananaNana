@@ -8,5 +8,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\..\BananaNana\Paste\*.cs" Link="Paste\%(Filename)%(Extension)" />
+    <Compile Include="..\..\BananaNana\Input\*.cs" Link="Input\%(Filename)%(Extension)" />
   </ItemGroup>
 </Project>
