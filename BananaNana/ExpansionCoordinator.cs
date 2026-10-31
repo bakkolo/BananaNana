@@ -53,11 +53,11 @@ public sealed class ExpansionCoordinator : IDisposable
                 ? new RenderedContent("", "", "")
                 : RichContentRenderer.Render(RichContentRenderer.LoadXamlPackage(snippet.Content));
             await paster.PasteAsync(content, backspaces: trigger.Length + 1);
-            StatusChanged?.Invoke($"Rozwinięto {trigger} ({DateTime.Now:HH:mm:ss})");
+            StatusChanged?.Invoke($"Expanded {trigger} ({DateTime.Now:HH:mm:ss})");
         }
         catch (Exception ex) when (ex is ExternalException or InvalidOperationException or FormatException)
         {
-            StatusChanged?.Invoke($"Nie udało się rozwinąć {trigger}: {ex.Message}");
+            StatusChanged?.Invoke($"Could not expand {trigger}: {ex.Message}");
         }
     }
 

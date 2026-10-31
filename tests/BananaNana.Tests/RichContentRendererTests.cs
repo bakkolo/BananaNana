@@ -79,6 +79,24 @@ public class RichContentRendererTests
     });
 
     [Fact]
+    public void Center_and_right_alignment_survive_storage_and_render() => Sta(() =>
+    {
+        var box = new RichTextBox();
+        box.Document.Blocks.Clear();
+        box.Document.Blocks.Add(new Paragraph(new Run("left")));
+        box.Document.Blocks.Add(new Paragraph(new Run("middle")) { TextAlignment = TextAlignment.Center });
+        box.Document.Blocks.Add(new Paragraph(new Run("end")) { TextAlignment = TextAlignment.Right });
+        using var stream = new MemoryStream();
+        new TextRange(box.Document.ContentStart, box.Document.ContentEnd).Save(stream, DataFormats.XamlPackage);
+
+        var content = RichContentRenderer.Render(RichContentRenderer.LoadXamlPackage(Convert.ToBase64String(stream.ToArray())));
+
+        Assert.StartsWith("<p>left</p><p style=\"text-align:center\">middle</p><p style=\"text-align:right\">end</p>", content.Html);
+        Assert.Contains(@"\qc", content.Rtf);
+        Assert.Contains(@"\qr", content.Rtf);
+    });
+
+    [Fact]
     public void Image_size_respects_max_width() => Sta(() =>
     {
         var doc = new FlowDocument(new Paragraph(new InlineUIContainer(new Image { Source = Pixel(), MaxWidth = 2 })));
