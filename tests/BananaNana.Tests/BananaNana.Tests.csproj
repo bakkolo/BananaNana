@@ -12,6 +12,7 @@
     <Compile Include="..\..\BananaNana\Input\*.cs" Link="Input\%(Filename)%(Extension)" />
     <Compile Include="..\..\BananaNana\ImageResizeAdorner.cs" Link="ImageResizeAdorner.cs" />
     <Compile Include="..\..\BananaNana\ImageAnnotation.cs" Link="ImageAnnotation.cs" />
+    <Compile Include="..\..\BananaNana\LinkUrl.cs" Link="LinkUrl.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />

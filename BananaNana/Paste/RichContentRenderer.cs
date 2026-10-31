@@ -107,7 +107,9 @@ public static class RichContentRenderer
             {
                 case Run run: AppendRun(html, run, ctx); break;
                 case LineBreak: html.Append("<br>"); break;
-                case Hyperlink { NavigateUri: not null } link:
+                // Only web and mail links are written; anything else (javascript:, file:, from an imported
+                // library) is pasted as its plain text.
+                case Hyperlink { NavigateUri: { IsAbsoluteUri: true, Scheme: "http" or "https" or "mailto" } } link:
                     html.Append("<a href=\"").Append(Encode(link.NavigateUri.ToString())).Append("\">");
                     AppendInlines(html, link.Inlines, ctx);
                     html.Append("</a>");
