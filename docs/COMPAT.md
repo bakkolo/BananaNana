@@ -8,14 +8,16 @@ Legend per cell: `B` bold/italic/underline OK · `L` list OK · `I` image shows 
 
 | Variant | Notepad | Word | Outlook (new email) | Teams (chat) |
 |---|---|---|---|---|
-| A. HTML, base64 `data:` image | | | | |
-| B. HTML, `file:///` image | | | | |
-| C. RTF, `\pngblip` image | | | | |
-| D. Text + RTF + HTML together | | | | |
-| E. WPF built-in RTF export | | | | |
-| F. Image only (bitmap + PNG) | | | | |
+| A. HTML, base64 `data:` image | T PL | B L I PL | | |
+| B. HTML, `file:///` image | T PL | B L I PL (image embedded, not linked) | | |
+| C. RTF, `\pngblip` image | T PL | B I PL, list as `•` chars only | | |
+| D. Text + RTF + HTML together | T PL | B L I PL (Word used the HTML) | | |
+| E. WPF built-in RTF export | T PL | B L I PL | | |
+| F. Image only (bitmap + PNG) | ✗ | I | | |
 
-Test environment: Word/Outlook version: ___ · Teams: new Teams (`ms-teams.exe`) · Date: ___
+Test environment: Word 16 (Microsoft 365) · Teams: new Teams (`ms-teams.exe`) · Date: 2026-10-31
+Word column: confirmed twice, by COM automation and by a manual paste saved as `Banana Nana test.docx` (6 embedded images at 240×96 px, real lists in A/B/D/E).
+Outlook: classic Outlook has no mail profile on this PC, so COM automation aborted; test the new Outlook by hand.
 
 ## Already known (automated, 2026-10-31)
 - All six variants place the expected clipboard formats (checked via UI Automation).
