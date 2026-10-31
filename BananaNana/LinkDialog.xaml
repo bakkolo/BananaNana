@@ -1,1 +1,20 @@
-<Window x:Class="BananaNana.LinkDialog" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="Link" Width="460" SizeToContent="Height" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" ShowInTaskbar="False"><StackPanel Margin="14"><TextBlock Text="Text to show"/><TextBox x:Name="TextBox" Margin="0,4,0,10"/><TextBlock Text="Address (https://…, example.com or name@example.com)"/><TextBox x:Name="UrlBox" Margin="0,4,0,4"/><TextBlock x:Name="ErrorText" Foreground="Firebrick" TextWrapping="Wrap" Visibility="Collapsed" Text="Enter a web address (http/https) or an email address."/><DockPanel Margin="0,12,0,0"><Button x:Name="RemoveButton" Content="Remove link" Click="Remove_Click" Padding="12,6" Visibility="Collapsed" DockPanel.Dock="Left"/><StackPanel Orientation="Horizontal" HorizontalAlignment="Right"><Button Content="OK" Click="Ok_Click" IsDefault="True" Padding="16,6"/><Button Content="Cancel" IsCancel="True" Margin="8,0,0,0" Padding="12,6"/></StackPanel></DockPanel></StackPanel></Window>
+<Window x:Class="BananaNana.LinkDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Link" Width="480" SizeToContent="Height" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" ShowInTaskbar="False">
+  <StackPanel Margin="22,18,22,18">
+    <TextBlock Text="Text to show" FontWeight="SemiBold" Margin="1,0,0,6" />
+    <TextBox x:Name="TextBox" Padding="8,6" Margin="0,0,0,14" />
+    <TextBlock Text="Address" FontWeight="SemiBold" Margin="1,0,0,6" />
+    <TextBox x:Name="UrlBox" Padding="8,6" />
+    <TextBlock Style="{StaticResource Caption}" Text="https://…, example.com or name@example.com" Margin="1,6,0,0" />
+    <TextBlock x:Name="ErrorText" Foreground="Firebrick" TextWrapping="Wrap" Visibility="Collapsed" Margin="1,8,0,0" />
+    <DockPanel Margin="0,20,0,0">
+      <Button x:Name="RemoveButton" Content="Remove link" Click="Remove_Click" Padding="14,7" Visibility="Collapsed" DockPanel.Dock="Left" />
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+        <Button Content="Cancel" IsCancel="True" Padding="14,7" Margin="0,0,8,0" />
+        <Button Content="OK" Click="Ok_Click" IsDefault="True" Style="{DynamicResource AccentButtonStyle}" Padding="22,7" />
+      </StackPanel>
+    </DockPanel>
+  </StackPanel>
+</Window>

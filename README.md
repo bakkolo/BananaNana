@@ -1,6 +1,6 @@
 # Banana Nana
 
-Portable Windows text expander (C# / WPF / .NET 8). Type a trigger such as `;offer` followed by a space in any app
+Portable Windows text expander (C# / WPF / .NET 10, Windows 11 Fluent theme). Type a trigger such as `;offer` followed by a space in any app
 and it is replaced by a saved snippet with formatting, lists, links and images. No installation, no admin rights.
 
 Status: editor, snippet library, live expansion (Word, Teams, Notepad verified) and single-file EXE work.
@@ -8,7 +8,7 @@ Not done yet: tray icon and autostart, password-field / elevated-app / excluded-
 Plan and findings: `docs/PLAN.md`, `docs/RESEARCH.md`, `docs/COMPAT.md`.
 
 ## Build and test
-Needs the .NET 8 SDK or newer:
+Needs the .NET 10 SDK or newer:
 
 ```
 dotnet build
@@ -20,12 +20,12 @@ dotnet test
 ## Single EXE
 Two variants; both are one file and need no installation of the app itself.
 
-**Standalone** (about 63 MB, .NET included, runs on any 64-bit Windows 10/11):
+**Standalone** (about 59 MB, .NET included, runs on any 64-bit Windows 10/11):
 ```
 dotnet publish BananaNana/BananaNana.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:EnableCompressionInSingleFile=true -p:DebugType=none -o publish/standalone
 ```
 
-**Small** (about 0.2 MB, needs the free .NET Desktop Runtime 8 or newer installed once; without it Windows shows a download link):
+**Small** (about 0.3 MB, needs the free .NET Desktop Runtime 10 or newer installed once; without it Windows shows a download link):
 ```
 dotnet publish BananaNana/BananaNana.csproj -c Release -r win-x64 --no-self-contained -p:PublishSingleFile=true -p:DebugType=none -o publish/small
 ```
