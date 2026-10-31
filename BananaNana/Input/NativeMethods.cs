@@ -39,7 +39,9 @@ static class NativeMethods
     [DllImport("user32.dll")]
     public static extern uint GetRawInputData(IntPtr hRawInput, uint uiCommand, [Out] byte[]? pData, ref uint pcbSize, uint cbSizeHeader);
 
-    [DllImport("user32.dll")]
+    // CharSet.Unicode is required: the default (Ansi) marshals char[] as a byte buffer half the size
+    // ToUnicodeEx writes into, which corrupts the native heap.
+    [DllImport("user32.dll", CharSet = CharSet.Unicode)]
     public static extern int ToUnicodeEx(uint wVirtKey, uint wScanCode, byte[] lpKeyState, [Out] char[] pwszBuff, int cchBuff, uint wFlags, IntPtr dwhkl);
 
     [DllImport("user32.dll")]
