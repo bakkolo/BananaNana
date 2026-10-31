@@ -1,13 +1,26 @@
 # Banana Nana
 
-Starter i instrukcje dla Codexa. Windows WPF/.NET 8, portable. **To nie jest gotowa aplikacja**: globalny silnik, settings, tray, clipboard rich text oraz testy wymagają dokończenia. Kod nie był kompilowany na Windows.
+Portable Windows text expander (C# / WPF / .NET 8). Type a trigger such as `;offer` followed by a space in any app
+and it is replaced by a saved snippet with formatting, lists, links and images. No installation, no admin rights.
 
-## Budowanie
-Na Windows z .NET 8 SDK:
-`dotnet build BananaNana/BananaNana.csproj`
+Status: editor, snippet library, live expansion (Word, Teams, Notepad verified) and single-file EXE work.
+Not done yet: tray icon and autostart, password-field / elevated-app / excluded-app checks (Stage 4), select-option fields.
+Plan and findings: `docs/PLAN.md`, `docs/RESEARCH.md`, `docs/COMPAT.md`.
 
-Publikacja po testach:
-`dotnet publish BananaNana/BananaNana.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true`
+## Build and test
+Needs the .NET 8 SDK or newer:
 
-## Praca z Codex
-Otwórz cały folder w Codex i poproś: `Read AGENTS.md and implement the complete MVP in its priority order. Build and test after each stage.`
+```
+dotnet build
+dotnet test
+```
+
+`tools/PasteLab` is a test bench for clipboard formats and live expansion.
+
+## Single EXE
+```
+dotnet publish BananaNana/BananaNana.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:EnableCompressionInSingleFile=true -p:DebugType=none -o publish
+```
+
+Produces `publish/BananaNana.exe` (about 70 MB, .NET included). Copy it anywhere and run it.
+The library is `BananaNana.library.json` next to the EXE or in `Documents\BananaNana`.
