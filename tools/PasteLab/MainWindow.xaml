@@ -1,7 +1,7 @@
 <Window x:Class="PasteLab.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Banana Nana · Paste Lab" Width="900" Height="600" Topmost="True">
+        Title="Banana Nana · Paste Lab" Width="980" Height="820" Topmost="True">
   <DockPanel Margin="14">
     <TextBlock DockPanel.Dock="Top" TextWrapping="Wrap" Margin="0,0,0,10">
       Click a variant, switch to the target app, press Ctrl+V. Record what you see in docs/COMPAT.md.
@@ -13,7 +13,16 @@
         <ColumnDefinition Width="360" />
         <ColumnDefinition Width="*" />
       </Grid.ColumnDefinitions>
-      <StackPanel x:Name="Variants" Margin="0,0,12,0" />
+      <DockPanel Margin="0,0,12,0">
+        <StackPanel x:Name="Variants" DockPanel.Dock="Top" />
+        <TextBlock DockPanel.Dock="Top" Margin="0,6,0,4" TextWrapping="Wrap"
+                   Text="Stage 2 engine: edit or paste anything below. It is saved and reloaded like the real editor (XamlPackage) before rendering." />
+        <StackPanel DockPanel.Dock="Bottom" Margin="0,8,0,0">
+          <Button Content="G.  Render editor → clipboard (text + RTF + HTML)" Click="Render_Click" Padding="10,8" HorizontalContentAlignment="Left" Margin="0,0,0,8" />
+          <Button Content="H.  Paste into the next window in 3 s (with clipboard restore)" Click="DelayedPaste_Click" Padding="10,8" HorizontalContentAlignment="Left" />
+        </StackPanel>
+        <RichTextBox x:Name="Editor" VerticalScrollBarVisibility="Auto" MinHeight="120" />
+      </DockPanel>
       <DockPanel Grid.Column="1">
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,6">
           <Button Content="Inspect clipboard" Click="Inspect_Click" Padding="10,4" />

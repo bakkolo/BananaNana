@@ -2,6 +2,7 @@ using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -34,6 +35,7 @@ public partial class MainWindow : Window
         AddVariant("D", "Text + RTF + HTML (data:) together", () => Data(rtf: Rtf(), html: Html("data:image/png;base64," + Convert.ToBase64String(png))));
         AddVariant("E", "WPF built-in RTF export (TextRange.Save)", () => Data(rtf: WpfRtf()));
         AddVariant("F", "Image only (bitmap + PNG)", ImageOnly);
+        Editor.Document = SampleDocument();
     }
 
     void AddVariant(string id, string label, Func<DataObject> build)
@@ -80,6 +82,61 @@ public partial class MainWindow : Window
     // Answers the open research question: does WPF's own RTF export keep images on .NET 8+?
     string WpfRtf()
     {
+        using var stream = new MemoryStream();
+        var doc = SampleDocument();
+        new TextRange(doc.ContentStart, doc.ContentEnd).Save(stream, DataFormats.Rtf);
+        var rtf = Encoding.ASCII.GetString(stream.ToArray());
+        Dispatcher.BeginInvoke(() => Status.Text += rtf.Contains(@"\pict") ? "  WPF RTF export DID include the image." : "  WPF RTF export DROPPED the image.");
+        return rtf;
+    }
+
+    // Same path as the real app: editor → XamlPackage (stored form) → reloaded document → renderer.
+    RenderedContent RenderEditor()
+    {
+        using var stream = new MemoryStream();
+        new TextRange(Editor.Document.ContentStart, Editor.Document.ContentEnd).Save(stream, DataFormats.XamlPackage);
+        return RichContentRenderer.Render(RichContentRenderer.LoadXamlPackage(Convert.ToBase64String(stream.ToArray())));
+    }
+
+    static string Describe(RenderedContent c) =>
+        $"text {c.PlainText.Length} chars, RTF {c.Rtf.Length / 1024} KB ({(c.Rtf.Contains(@"\pict") ? "with" : "NO")} image), " +
+        $"HTML {c.Html.Length / 1024} KB ({Regex.Count(c.Html, "<img ")} images)";
+
+    void Render_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            var content = RenderEditor();
+            Clipboard.SetDataObject(ClipboardPasteService.ToDataObject(content), copy: true);
+            Status.Text = "G is on the clipboard: " + Describe(content) + ". Paste it now.";
+            Inspector.Text = content.Html;
+        }
+        catch (Exception ex) when (ex is ExternalException or COMException)
+        {
+            Status.Text = $"Clipboard busy, try again: {ex.Message}";
+        }
+    }
+
+    async void DelayedPaste_Click(object sender, RoutedEventArgs e)
+    {
+        var button = (Button)sender;
+        button.IsEnabled = false;
+        try
+        {
+            var content = RenderEditor();
+            for (int s = 3; s > 0; s--) { Status.Text = $"Click into the target app… pasting in {s}"; await Task.Delay(1000); }
+            await new ClipboardPasteService().PasteAsync(content);
+            Status.Text = "H pasted: " + Describe(content) + ". Your previous clipboard has been restored.";
+        }
+        catch (Exception ex) when (ex is ExternalException or InvalidOperationException)
+        {
+            Status.Text = "Paste failed: " + ex.Message;
+        }
+        finally { button.IsEnabled = true; }
+    }
+
+    FlowDocument SampleDocument()
+    {
         var line = new Paragraph();
         line.Inlines.Add(new Bold(new Run("Banana Nana")));
         line.Inlines.Add(new Run(" test – "));
@@ -94,12 +151,7 @@ public partial class MainWindow : Window
         var doc = new FlowDocument(line);
         doc.Blocks.Add(list);
         doc.Blocks.Add(picture);
-
-        using var stream = new MemoryStream();
-        new TextRange(doc.ContentStart, doc.ContentEnd).Save(stream, DataFormats.Rtf);
-        var rtf = Encoding.ASCII.GetString(stream.ToArray());
-        Dispatcher.BeginInvoke(() => Status.Text += rtf.Contains(@"\pict") ? "  WPF RTF export DID include the image." : "  WPF RTF export DROPPED the image.");
-        return rtf;
+        return doc;
     }
 
     DataObject ImageOnly()

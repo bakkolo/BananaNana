@@ -1,12 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
-    <!-- The paste formatters have no WPF dependency, so they are tested on plain net8.0. -->
+    <!-- The app is a WinExe, so the paste engine sources are linked in rather than referenced. -->
     <Compile Include="..\..\BananaNana\Paste\*.cs" Link="Paste\%(Filename)%(Extension)" />
   </ItemGroup>
   <ItemGroup>
