@@ -13,8 +13,10 @@ public sealed record RenderedContent(string PlainText, string Rtf, string Html);
 // plain text, RTF (WPF's own exporter, which keeps images) and an HTML fragment with base64 images.
 public static class RichContentRenderer
 {
+    // Note: images larger than their displayed size are downscaled in the document itself first.
     public static RenderedContent Render(FlowDocument doc)
     {
+        foreach (var image in Images(doc)) DownscaleToDisplaySize(image);
         var range = new TextRange(doc.ContentStart, doc.ContentEnd);
         using var rtf = new MemoryStream();
         range.Save(rtf, DataFormats.Rtf);
@@ -142,12 +144,52 @@ public static class RichContentRenderer
     }
 
     // Size matches what the editor shows: explicit Width/Height, else pixel size capped by MaxWidth/MaxHeight.
-    static void AppendImage(StringBuilder html, Image image)
+    static Size DisplaySize(Image image, BitmapSource source)
     {
-        if (image.Source is not BitmapSource source) return;
         double w = double.IsNaN(image.Width) ? source.PixelWidth : image.Width;
         double h = double.IsNaN(image.Height) ? source.PixelHeight : image.Height;
         double scale = Math.Min(1, Math.Min(image.MaxWidth / w, image.MaxHeight / h));
+        return new Size(Math.Round(w * scale), Math.Round(h * scale));
+    }
+
+    // A full-resolution screenshot shown at 500 px wide can be megabytes on the clipboard; Teams then drops
+    // the paste. Pixels beyond the displayed size are never visible after pasting, so they are not sent.
+    static void DownscaleToDisplaySize(Image image)
+    {
+        if (image.Source is not BitmapSource source) return;
+        var size = DisplaySize(image, source);
+        double scale = Math.Min(size.Width / source.PixelWidth, size.Height / source.PixelHeight);
+        if (scale >= 1) return;
+        var scaled = new TransformedBitmap(source, new ScaleTransform(scale, scale));
+        var encoder = new PngBitmapEncoder();
+        encoder.Frames.Add(BitmapFrame.Create(scaled));
+        using var png = new MemoryStream();
+        encoder.Save(png);
+        var bitmap = new BitmapImage();
+        bitmap.BeginInit();
+        bitmap.StreamSource = new MemoryStream(png.ToArray());
+        bitmap.CacheOption = BitmapCacheOption.OnLoad;
+        bitmap.EndInit();
+        bitmap.Freeze();
+        image.Source = bitmap;
+        image.Width = size.Width;
+        image.Height = size.Height;
+    }
+
+    static IEnumerable<Image> Images(DependencyObject root)
+    {
+        foreach (var child in LogicalTreeHelper.GetChildren(root).OfType<DependencyObject>())
+        {
+            if (child is Image image) yield return image;
+            foreach (var nested in Images(child)) yield return nested;
+        }
+    }
+
+    static void AppendImage(StringBuilder html, Image image)
+    {
+        if (image.Source is not BitmapSource source) return;
+        var size = DisplaySize(image, source);
+        double w = size.Width, h = size.Height, scale = 1;
         var encoder = new PngBitmapEncoder();
         encoder.Frames.Add(BitmapFrame.Create(source));
         using var png = new MemoryStream();

@@ -97,6 +97,25 @@ public class RichContentRendererTests
     });
 
     [Fact]
+    public void Oversized_images_are_sent_at_displayed_size() => Sta(() =>
+    {
+        // A 1000x500 "screenshot" shown at 100x50: HTML and RTF must carry a 100x50 picture, not the original.
+        var big = BitmapSource.Create(1000, 500, 96, 96, PixelFormats.Bgra32, null, new byte[1000 * 500 * 4], 1000 * 4);
+        var doc = new FlowDocument(new Paragraph(new InlineUIContainer(new Image { Source = big, Width = 100, Height = 50 })));
+
+        var content = RichContentRenderer.Render(doc);
+
+        var base64 = System.Text.RegularExpressions.Regex.Match(content.Html, "base64,([^\"]+)").Groups[1].Value;
+        var sent = BitmapFrame.Create(new MemoryStream(Convert.FromBase64String(base64)));
+        Assert.Equal((100, 50), (sent.PixelWidth, sent.PixelHeight));
+        Assert.Contains("width=\"100\" height=\"50\"", content.Html);
+        // WPF writes {\pict\picwgoal..\pichgoal..\pngblip <hex>}: decode the embedded PNG itself.
+        var hex = System.Text.RegularExpressions.Regex.Match(content.Rtf, @"\\pngblip\s*([0-9a-fA-F\s]+)\}").Groups[1].Value;
+        var rtfPicture = BitmapFrame.Create(new MemoryStream(Convert.FromHexString(System.Text.RegularExpressions.Regex.Replace(hex, @"\s", ""))));
+        Assert.Equal((100, 50), (rtfPicture.PixelWidth, rtfPicture.PixelHeight));
+    });
+
+    [Fact]
     public void Image_size_respects_max_width() => Sta(() =>
     {
         var doc = new FlowDocument(new Paragraph(new InlineUIContainer(new Image { Source = Pixel(), MaxWidth = 2 })));

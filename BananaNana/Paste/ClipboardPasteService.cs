@@ -21,7 +21,8 @@ public sealed class ClipboardPasteService
         uint ours = GetClipboardSequenceNumber();
         if (!InputInjector.BackspacesThenPaste(backspaces))
             throw new InvalidOperationException("SendInput was blocked; the target app is probably elevated (UIPI).");
-        await Task.Delay(RestoreDelay);
+        // Large pastes take the target longer to read (Teams reads asynchronously): +1 ms per KB on the clipboard.
+        await Task.Delay(RestoreDelay + TimeSpan.FromMilliseconds((content.Html.Length + content.Rtf.Length) / 1024.0));
         // Best effort: restore only if nobody else changed the clipboard meanwhile (e.g. the user copied something).
         if (GetClipboardSequenceNumber() != ours) return;
         if (snapshot.GetFormats(false).Length == 0) Clipboard.Clear();
