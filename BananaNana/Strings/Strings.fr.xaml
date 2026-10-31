@@ -1,0 +1,135 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+  <!-- Français -->
+  <sys:String x:Key="Common.Save">Enregistrer</sys:String>
+  <sys:String x:Key="Common.Cancel">Annuler</sys:String>
+  <sys:String x:Key="Common.Close">Fermer</sys:String>
+  <sys:String x:Key="Common.OK">OK</sys:String>
+
+  <sys:String x:Key="Main.Import">Importer une bibliothèque</sys:String>
+  <sys:String x:Key="Main.Export">Exporter la bibliothèque</sys:String>
+  <sys:String x:Key="Main.Settings">Paramètres</sys:String>
+  <sys:String x:Key="Main.Help">Aide et astuces</sys:String>
+  <sys:String x:Key="Main.New">Nouvel extrait</sys:String>
+  <sys:String x:Key="Main.Search">Rechercher des extraits</sys:String>
+  <sys:String x:Key="Main.Empty">Aucun extrait pour l’instant.&#x0a;Cliquez sur Nouvel extrait pour créer le premier.</sys:String>
+  <sys:String x:Key="Main.Edit">Modifier</sys:String>
+  <sys:String x:Key="Main.Delete">Supprimer</sys:String>
+  <sys:String x:Key="Main.PreviewCaption">Aperçu : voici ce qui sera collé</sys:String>
+  <sys:String x:Key="Main.SnippetCount">Extraits : {0}</sys:String>
+  <sys:String x:Key="Main.Pause">Pause</sys:String>
+  <sys:String x:Key="Main.Resume">Reprendre</sys:String>
+  <sys:String x:Key="Main.PauseTip">Mettre en pause ou reprendre l’expansion des abréviations</sys:String>
+  <sys:String x:Key="Main.Tip">Astuce</sys:String>
+  <sys:String x:Key="Main.NextTip">Astuce suivante</sys:String>
+  <sys:String x:Key="Main.DeleteTitle">Supprimer l’extrait</sys:String>
+  <sys:String x:Key="Main.DeleteConfirm">Supprimer l’extrait {0} ?</sys:String>
+  <sys:String x:Key="Main.Duplicate">Un extrait avec cette abréviation existe déjà.</sys:String>
+  <sys:String x:Key="Main.ImportTitle">Importer</sys:String>
+  <sys:String x:Key="Main.ImportChoice">Oui = dossier de l’EXE, Non = Documents, Annuler = choisir un fichier</sys:String>
+  <sys:String x:Key="Main.LibraryFilter">Bibliothèque Banana Nana</sys:String>
+  <sys:String x:Key="Main.SummaryEmpty">(vide)</sys:String>
+  <sys:String x:Key="Main.SummaryImage">(image)</sys:String>
+  <sys:String x:Key="Main.SummaryUnreadable">(contenu illisible)</sys:String>
+
+  <sys:String x:Key="Status.On">Expansion active : tapez une abréviation puis un espace dans n’importe quelle application.</sys:String>
+  <sys:String x:Key="Status.Paused">Expansion en pause.</sys:String>
+  <sys:String x:Key="Status.Expanded">Développé : {0} ({1})</sys:String>
+  <sys:String x:Key="Status.Failed">Impossible de développer {0} : {1}</sys:String>
+
+  <sys:String x:Key="Tray.Open">Ouvrir Banana Nana</sys:String>
+  <sys:String x:Key="Tray.Pause">Mettre l’expansion en pause</sys:String>
+  <sys:String x:Key="Tray.Autostart">Démarrer avec Windows</sys:String>
+  <sys:String x:Key="Tray.Exit">Quitter</sys:String>
+  <sys:String x:Key="Tray.Paused">Banana Nana (en pause)</sys:String>
+  <sys:String x:Key="Tray.HiddenTitle">Banana Nana fonctionne toujours</sys:String>
+  <sys:String x:Key="Tray.HiddenText">Les abréviations continuent de se développer. Cliquez sur l’icône de la zone de notification pour ouvrir la fenêtre, ou faites un clic droit pour quitter.</sys:String>
+
+  <sys:String x:Key="Lib.TwoFound">Deux bibliothèques trouvées. Oui = à côté de l’EXE, Non = Documents, Annuler = nouvelle bibliothèque.</sys:String>
+  <sys:String x:Key="Lib.Invalid">Fichier de bibliothèque non valide</sys:String>
+  <sys:String x:Key="Lib.Duplicates">La bibliothèque contient des abréviations en double ou vides</sys:String>
+
+  <sys:String x:Key="Editor.Title">Éditeur</sys:String>
+  <sys:String x:Key="Editor.Trigger">Abréviation</sys:String>
+  <sys:String x:Key="Editor.TriggerHint">Tapez-la suivie d’un espace dans n’importe quelle application, par ex. ;offre. Pas d’espace à l’intérieur.</sys:String>
+  <sys:String x:Key="Editor.Bold">Gras (Ctrl+B)</sys:String>
+  <sys:String x:Key="Editor.Italic">Italique (Ctrl+I)</sys:String>
+  <sys:String x:Key="Editor.Underline">Souligné (Ctrl+U)</sys:String>
+  <sys:String x:Key="Editor.AlignLeft">Aligner à gauche (Ctrl+L)</sys:String>
+  <sys:String x:Key="Editor.AlignCenter">Centrer (Ctrl+E)</sys:String>
+  <sys:String x:Key="Editor.AlignRight">Aligner à droite (Ctrl+R)</sys:String>
+  <sys:String x:Key="Editor.Bullets">Liste à puces</sys:String>
+  <sys:String x:Key="Editor.Numbering">Liste numérotée</sys:String>
+  <sys:String x:Key="Editor.Link">Ajouter ou modifier un lien (Ctrl+K). Ctrl+clic ouvre un lien.</sys:String>
+  <sys:String x:Key="Editor.InsertImage">Insérer une image depuis un fichier, ou la coller avec Ctrl+V</sys:String>
+  <sys:String x:Key="Editor.EditImage">Dessiner des flèches, cadres et surlignages sur l’image sélectionnée (ou double-cliquer dessus)</sys:String>
+  <sys:String x:Key="Editor.ImageFilter">Images</sys:String>
+  <sys:String x:Key="Editor.ImageLoadFailed">Impossible de charger l’image : </sys:String>
+  <sys:String x:Key="Editor.EnterTrigger">Saisissez une abréviation.</sys:String>
+  <sys:String x:Key="Editor.NoSpaces">L’abréviation ne peut pas contenir d’espace : un espace termine l’abréviation pendant la saisie.</sys:String>
+  <sys:String x:Key="Editor.TooLong">L’abréviation peut comporter au maximum {0} caractères.</sys:String>
+  <sys:String x:Key="Editor.SelectImageFirst">Cliquez d’abord sur une image, puis sur Modifier l’image (ou double-cliquez sur l’image).</sys:String>
+  <sys:String x:Key="Editor.LinkOneParagraph">Un lien doit rester dans un seul paragraphe.</sys:String>
+
+  <sys:String x:Key="Link.Title">Lien</sys:String>
+  <sys:String x:Key="Link.Text">Texte affiché</sys:String>
+  <sys:String x:Key="Link.Address">Adresse</sys:String>
+  <sys:String x:Key="Link.Hint">https://…, exemple.fr ou nom@exemple.fr</sys:String>
+  <sys:String x:Key="Link.Remove">Supprimer le lien</sys:String>
+  <sys:String x:Key="Link.BadAddress">Saisissez une adresse web (http/https) ou une adresse e-mail.</sys:String>
+  <sys:String x:Key="Link.NoText">Saisissez le texte affiché.</sys:String>
+
+  <sys:String x:Key="Img.Title">Modifier l’image</sys:String>
+  <sys:String x:Key="Img.Select">Sélection</sys:String>
+  <sys:String x:Key="Img.SelectTip">Cliquez sur une forme pour la sélectionner, faites-la glisser pour la déplacer, Suppr pour la supprimer</sys:String>
+  <sys:String x:Key="Img.Arrow">Flèche</sys:String>
+  <sys:String x:Key="Img.ArrowTip">Faites glisser de la base vers la pointe</sys:String>
+  <sys:String x:Key="Img.Frame">Cadre</sys:String>
+  <sys:String x:Key="Img.FrameTip">Faites glisser pour dessiner un cadre</sys:String>
+  <sys:String x:Key="Img.Highlight">Surligneur</sys:String>
+  <sys:String x:Key="Img.HighlightTip">Faites glisser pour surligner comme avec un feutre fluo</sys:String>
+  <sys:String x:Key="Img.Red">Rouge</sys:String>
+  <sys:String x:Key="Img.Yellow">Jaune</sys:String>
+  <sys:String x:Key="Img.Green">Vert</sys:String>
+  <sys:String x:Key="Img.Blue">Bleu</sys:String>
+  <sys:String x:Key="Img.Black">Noir</sys:String>
+  <sys:String x:Key="Img.Undo">Annuler la dernière forme (Ctrl+Z)</sys:String>
+  <sys:String x:Key="Img.Delete">Supprimer la forme sélectionnée (Suppr)</sys:String>
+
+  <sys:String x:Key="Set.Title">Paramètres</sys:String>
+  <sys:String x:Key="Set.Language">Langue</sys:String>
+  <sys:String x:Key="Set.LanguageHint">Langue de l’application. Vos extraits ne sont pas modifiés.</sys:String>
+  <sys:String x:Key="Set.Autostart">Démarrer avec Windows</sys:String>
+  <sys:String x:Key="Set.AutostartHint">Démarre discrètement dans la zone de notification à l’ouverture de session. Fermer la fenêtre laisse Banana Nana actif ; utilisez Quitter dans le menu de l’icône pour l’arrêter.</sys:String>
+  <sys:String x:Key="Set.Library">Bibliothèque : {0}</sys:String>
+  <sys:String x:Key="Set.NotSaved">Pas encore enregistrée. Elle sera créée dans Documents\BananaNana lors de l’enregistrement du premier extrait.</sys:String>
+  <sys:String x:Key="Set.OpenFolder">Ouvrir le dossier</sys:String>
+  <sys:String x:Key="Set.AutostartFailed">Impossible de modifier le démarrage automatique de Windows : </sys:String>
+  <sys:String x:Key="Set.NoFolder">Le dossier n’existe pas encore : </sys:String>
+
+  <sys:String x:Key="Help.Title">Aide et astuces</sys:String>
+  <sys:String x:Key="Help.Welcome">Bienvenue dans Banana Nana</sys:String>
+  <sys:String x:Key="Help.Intro">Tapez une courte abréviation n’importe où et Banana Nana la remplace par votre texte enregistré, avec sa mise en forme et ses images.</sys:String>
+  <sys:String x:Key="Help.S1.Title">Créez un extrait</sys:String>
+  <sys:String x:Key="Help.S1.Body">Cliquez sur Nouvel extrait. Choisissez une abréviation comme ;offre, écrivez ou collez le contenu, puis cliquez sur Enregistrer. Commencez les abréviations par un symbole comme ; pour qu’elles n’apparaissent jamais dans des mots courants.</sys:String>
+  <sys:String x:Key="Help.S2.Title">Utilisez-le partout</sys:String>
+  <sys:String x:Key="Help.S2.Body">Dans Word, Outlook, Teams ou toute autre application, tapez l’abréviation suivie d’un espace. L’abréviation disparaît et l’extrait est collé. Entrée ne déclenche jamais l’expansion, donc rien n’est envoyé par erreur.</sys:String>
+  <sys:String x:Key="Help.S3.Title">Mise en forme et liens</sys:String>
+  <sys:String x:Key="Help.S3.Body">Utilisez la barre d’outils pour le gras, les listes et l’alignement. Coller depuis Word conserve la mise en forme. Ctrl+K ajoute un lien.</sys:String>
+  <sys:String x:Key="Help.S4.Title">Images</sys:String>
+  <sys:String x:Key="Help.S4.Body">Insérez une image ou collez une capture d’écran. Cliquez dessus et faites glisser un coin pour la redimensionner ; double-cliquez pour ajouter des flèches, cadres et surlignages.</sys:String>
+  <sys:String x:Key="Help.S5.Title">Fonctionne en arrière-plan</sys:String>
+  <sys:String x:Key="Help.S5.Body">Quand vous fermez la fenêtre, Banana Nana reste dans la zone de notification près de l’horloge. Faites un clic droit sur l’icône pour mettre en pause ou quitter, et activez Démarrer avec Windows dans les Paramètres.</sys:String>
+  <sys:String x:Key="Help.TipsTitle">Astuces</sys:String>
+  <sys:String x:Key="Help.GotIt">Compris</sys:String>
+
+  <sys:String x:Key="Tip.1">Commencez vos abréviations par ; ou / pour qu’elles n’entrent jamais en conflit avec de vrais mots.</sys:String>
+  <sys:String x:Key="Tip.2">Le presse-papiers est restauré après chaque collage : copier-coller fonctionne comme d’habitude.</sys:String>
+  <sys:String x:Key="Tip.3">Mettez l’expansion en pause depuis l’icône de notification quand vous devez taper une abréviation telle quelle.</sys:String>
+  <sys:String x:Key="Tip.4">Exportez votre bibliothèque pour la sauvegarder ou la partager avec un collègue.</sys:String>
+  <sys:String x:Key="Tip.5">Les images sont collées à la taille affichée dans l’éditeur : réduisez les grandes captures avant d’enregistrer.</sys:String>
+  <sys:String x:Key="Tip.6">Placez BananaNana.library.json à côté de l’EXE pour emporter vos extraits sur une clé USB.</sys:String>
+  <sys:String x:Key="Tip.7">Ctrl+clic sur un lien dans l’éditeur pour vérifier où il mène.</sys:String>
+  <sys:String x:Key="Tip.8">La zone de recherche filtre vos extraits au fil de la saisie.</sys:String>
+</ResourceDictionary>

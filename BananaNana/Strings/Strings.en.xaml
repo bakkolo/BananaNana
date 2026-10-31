@@ -1,0 +1,147 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+  <!-- English: the reference and fallback for every other language. Keep {0} placeholders in translations. -->
+
+  <!-- Common -->
+  <sys:String x:Key="Common.Save">Save</sys:String>
+  <sys:String x:Key="Common.Cancel">Cancel</sys:String>
+  <sys:String x:Key="Common.Close">Close</sys:String>
+  <sys:String x:Key="Common.OK">OK</sys:String>
+
+  <!-- Main window -->
+  <sys:String x:Key="Main.Import">Import a library</sys:String>
+  <sys:String x:Key="Main.Export">Export the library</sys:String>
+  <sys:String x:Key="Main.Settings">Settings</sys:String>
+  <sys:String x:Key="Main.Help">Help and tips</sys:String>
+  <sys:String x:Key="Main.New">New snippet</sys:String>
+  <sys:String x:Key="Main.Search">Search snippets</sys:String>
+  <sys:String x:Key="Main.Empty">No snippets yet.&#x0a;Click New snippet to create your first one.</sys:String>
+  <sys:String x:Key="Main.Edit">Edit</sys:String>
+  <sys:String x:Key="Main.Delete">Delete</sys:String>
+  <sys:String x:Key="Main.PreviewCaption">Preview: this is what gets pasted</sys:String>
+  <sys:String x:Key="Main.SnippetCount">Snippets: {0}</sys:String>
+  <sys:String x:Key="Main.Pause">Pause</sys:String>
+  <sys:String x:Key="Main.Resume">Resume</sys:String>
+  <sys:String x:Key="Main.PauseTip">Pause or resume snippet expansion</sys:String>
+  <sys:String x:Key="Main.Tip">Tip</sys:String>
+  <sys:String x:Key="Main.NextTip">Next tip</sys:String>
+  <sys:String x:Key="Main.DeleteTitle">Delete snippet</sys:String>
+  <sys:String x:Key="Main.DeleteConfirm">Delete the snippet {0}?</sys:String>
+  <sys:String x:Key="Main.Duplicate">A snippet with this trigger already exists.</sys:String>
+  <sys:String x:Key="Main.ImportTitle">Import</sys:String>
+  <sys:String x:Key="Main.ImportChoice">Yes = EXE folder, No = Documents, Cancel = choose a file</sys:String>
+  <sys:String x:Key="Main.LibraryFilter">Banana Nana library</sys:String>
+  <sys:String x:Key="Main.SummaryEmpty">(empty)</sys:String>
+  <sys:String x:Key="Main.SummaryImage">(image)</sys:String>
+  <sys:String x:Key="Main.SummaryUnreadable">(unreadable content)</sys:String>
+
+  <!-- Status bar -->
+  <sys:String x:Key="Status.On">Expansion on: type a trigger and a space in any app.</sys:String>
+  <sys:String x:Key="Status.Paused">Expansion paused.</sys:String>
+  <sys:String x:Key="Status.Expanded">Expanded {0} ({1})</sys:String>
+  <sys:String x:Key="Status.Failed">Could not expand {0}: {1}</sys:String>
+
+  <!-- Tray -->
+  <sys:String x:Key="Tray.Open">Open Banana Nana</sys:String>
+  <sys:String x:Key="Tray.Pause">Pause expansion</sys:String>
+  <sys:String x:Key="Tray.Autostart">Start with Windows</sys:String>
+  <sys:String x:Key="Tray.Exit">Exit</sys:String>
+  <sys:String x:Key="Tray.Paused">Banana Nana (paused)</sys:String>
+  <sys:String x:Key="Tray.HiddenTitle">Banana Nana is still running</sys:String>
+  <sys:String x:Key="Tray.HiddenText">Snippets keep expanding. Click the tray icon to open it, or right-click for Exit.</sys:String>
+
+  <!-- Library -->
+  <sys:String x:Key="Lib.TwoFound">Two libraries found. Yes = next to the EXE, No = Documents, Cancel = new library.</sys:String>
+  <sys:String x:Key="Lib.Invalid">Invalid library file</sys:String>
+  <sys:String x:Key="Lib.Duplicates">The library has duplicate or empty triggers</sys:String>
+
+  <!-- Editor -->
+  <sys:String x:Key="Editor.Title">Editor</sys:String>
+  <sys:String x:Key="Editor.Trigger">Trigger</sys:String>
+  <sys:String x:Key="Editor.TriggerHint">Type it and a space in any app, e.g. ;offer. No spaces inside.</sys:String>
+  <sys:String x:Key="Editor.Bold">Bold (Ctrl+B)</sys:String>
+  <sys:String x:Key="Editor.Italic">Italic (Ctrl+I)</sys:String>
+  <sys:String x:Key="Editor.Underline">Underline (Ctrl+U)</sys:String>
+  <sys:String x:Key="Editor.AlignLeft">Align left (Ctrl+L)</sys:String>
+  <sys:String x:Key="Editor.AlignCenter">Center (Ctrl+E)</sys:String>
+  <sys:String x:Key="Editor.AlignRight">Align right (Ctrl+R)</sys:String>
+  <sys:String x:Key="Editor.Bullets">Bulleted list</sys:String>
+  <sys:String x:Key="Editor.Numbering">Numbered list</sys:String>
+  <sys:String x:Key="Editor.Link">Add or change a link (Ctrl+K). Ctrl+click a link to open it.</sys:String>
+  <sys:String x:Key="Editor.InsertImage">Insert an image from a file, or paste one with Ctrl+V</sys:String>
+  <sys:String x:Key="Editor.EditImage">Draw arrows, frames and highlights on the selected picture (or double-click it)</sys:String>
+  <sys:String x:Key="Editor.ImageFilter">Images</sys:String>
+  <sys:String x:Key="Editor.ImageLoadFailed">Could not load the image: </sys:String>
+  <sys:String x:Key="Editor.EnterTrigger">Enter a trigger.</sys:String>
+  <sys:String x:Key="Editor.NoSpaces">The trigger cannot contain spaces: a space ends the trigger while typing.</sys:String>
+  <sys:String x:Key="Editor.TooLong">The trigger can be at most {0} characters.</sys:String>
+  <sys:String x:Key="Editor.SelectImageFirst">Click a picture first, then Edit image (or double-click the picture).</sys:String>
+  <sys:String x:Key="Editor.LinkOneParagraph">A link has to stay within one paragraph.</sys:String>
+
+  <!-- Link dialog -->
+  <sys:String x:Key="Link.Title">Link</sys:String>
+  <sys:String x:Key="Link.Text">Text to show</sys:String>
+  <sys:String x:Key="Link.Address">Address</sys:String>
+  <sys:String x:Key="Link.Hint">https://…, example.com or name@example.com</sys:String>
+  <sys:String x:Key="Link.Remove">Remove link</sys:String>
+  <sys:String x:Key="Link.BadAddress">Enter a web address (http/https) or an email address.</sys:String>
+  <sys:String x:Key="Link.NoText">Enter the text to show.</sys:String>
+
+  <!-- Image editor -->
+  <sys:String x:Key="Img.Title">Edit image</sys:String>
+  <sys:String x:Key="Img.Select">Select</sys:String>
+  <sys:String x:Key="Img.SelectTip">Click a shape to select it, drag to move it, Delete to remove it</sys:String>
+  <sys:String x:Key="Img.Arrow">Arrow</sys:String>
+  <sys:String x:Key="Img.ArrowTip">Drag from the tail to the tip</sys:String>
+  <sys:String x:Key="Img.Frame">Frame</sys:String>
+  <sys:String x:Key="Img.FrameTip">Drag to draw a frame</sys:String>
+  <sys:String x:Key="Img.Highlight">Highlight</sys:String>
+  <sys:String x:Key="Img.HighlightTip">Drag to mark like a highlighter pen</sys:String>
+  <sys:String x:Key="Img.Red">Red</sys:String>
+  <sys:String x:Key="Img.Yellow">Yellow</sys:String>
+  <sys:String x:Key="Img.Green">Green</sys:String>
+  <sys:String x:Key="Img.Blue">Blue</sys:String>
+  <sys:String x:Key="Img.Black">Black</sys:String>
+  <sys:String x:Key="Img.Undo">Undo the last shape (Ctrl+Z)</sys:String>
+  <sys:String x:Key="Img.Delete">Delete the selected shape (Delete)</sys:String>
+
+  <!-- Settings -->
+  <sys:String x:Key="Set.Title">Settings</sys:String>
+  <sys:String x:Key="Set.Language">Language</sys:String>
+  <sys:String x:Key="Set.LanguageHint">Language of the app. Your snippets are not changed.</sys:String>
+  <sys:String x:Key="Set.Autostart">Start with Windows</sys:String>
+  <sys:String x:Key="Set.AutostartHint">Starts quietly in the tray when you sign in. Closing the window keeps Banana Nana running there; use Exit in the tray menu to quit.</sys:String>
+  <sys:String x:Key="Set.Library">Library: {0}</sys:String>
+  <sys:String x:Key="Set.NotSaved">Not saved yet. It will be created in Documents\BananaNana when you save the first snippet.</sys:String>
+  <sys:String x:Key="Set.OpenFolder">Open folder</sys:String>
+  <sys:String x:Key="Set.AutostartFailed">Could not change the Windows startup setting: </sys:String>
+  <sys:String x:Key="Set.NoFolder">The folder does not exist yet: </sys:String>
+
+  <!-- Help and welcome -->
+  <sys:String x:Key="Help.Title">Help and tips</sys:String>
+  <sys:String x:Key="Help.Welcome">Welcome to Banana Nana</sys:String>
+  <sys:String x:Key="Help.Intro">Type a short trigger anywhere and Banana Nana replaces it with your saved text, formatting and pictures.</sys:String>
+  <sys:String x:Key="Help.S1.Title">Create a snippet</sys:String>
+  <sys:String x:Key="Help.S1.Body">Click New snippet. Choose a trigger such as ;offer, write or paste the content, then Save. Start triggers with a symbol like ; so they never appear in normal words.</sys:String>
+  <sys:String x:Key="Help.S2.Title">Use it anywhere</sys:String>
+  <sys:String x:Key="Help.S2.Body">In Word, Outlook, Teams or any other app, type the trigger followed by a space. The trigger disappears and the snippet is pasted. Enter never expands, so nothing gets sent by accident.</sys:String>
+  <sys:String x:Key="Help.S3.Title">Format and link</sys:String>
+  <sys:String x:Key="Help.S3.Body">Use the toolbar for bold, lists and alignment. Paste from Word to keep its formatting. Press Ctrl+K to add a link.</sys:String>
+  <sys:String x:Key="Help.S4.Title">Pictures</sys:String>
+  <sys:String x:Key="Help.S4.Body">Insert an image or paste a screenshot. Click it and drag a corner to resize it; double-click it to add arrows, frames and highlights.</sys:String>
+  <sys:String x:Key="Help.S5.Title">Runs in the background</sys:String>
+  <sys:String x:Key="Help.S5.Body">Closing the window keeps Banana Nana in the tray next to the clock. Right-click the icon to pause or exit, and turn on Start with Windows in Settings.</sys:String>
+  <sys:String x:Key="Help.TipsTitle">Tips</sys:String>
+  <sys:String x:Key="Help.GotIt">Got it</sys:String>
+
+  <!-- Tips (shown in the main window and the help window) -->
+  <sys:String x:Key="Tip.1">Start triggers with ; or / so they never clash with real words.</sys:String>
+  <sys:String x:Key="Tip.2">Your clipboard is restored after each paste, so copy and paste keep working as usual.</sys:String>
+  <sys:String x:Key="Tip.3">Pause expansion from the tray icon when you need to type a trigger literally.</sys:String>
+  <sys:String x:Key="Tip.4">Export your library to back it up or to share it with a colleague.</sys:String>
+  <sys:String x:Key="Tip.5">Pictures are pasted at the size you see in the editor, so shrink big screenshots before saving.</sys:String>
+  <sys:String x:Key="Tip.6">Put BananaNana.library.json next to the EXE to carry your snippets on a USB stick.</sys:String>
+  <sys:String x:Key="Tip.7">Ctrl+click a link in the editor to check where it goes.</sys:String>
+  <sys:String x:Key="Tip.8">The search box filters your snippets as you type.</sys:String>
+</ResourceDictionary>

@@ -21,8 +21,18 @@ public partial class App : Application
             Shutdown();
             return;
         }
-        var window = new MainWindow();
+        var settings = AppSettings.Load();
+        Loc.Apply(settings.Language);
+        var window = new MainWindow(settings);
         ThreadPool.RegisterWaitForSingleObject(showRequest, (_, _) => Dispatcher.BeginInvoke(window.ShowFromTray), null, Timeout.Infinite, executeOnlyOnce: false);
-        if (!e.Args.Contains(Autostart.TrayArgument)) window.Show();
+        if (e.Args.Contains(Autostart.TrayArgument)) return;
+        window.Show();
+        // First start: open the guide (with the language picker) once.
+        if (!settings.WelcomeShown)
+        {
+            settings.WelcomeShown = true;
+            settings.Save();
+            window.ShowHelp(welcome: true);
+        }
     }
 }

@@ -1,0 +1,110 @@
+<Window x:Class="BananaNana.HelpWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="{DynamicResource Help.Title}" Width="720" Height="760" MinWidth="520" MinHeight="480" WindowStartupLocation="CenterOwner">
+  <Window.Resources>
+    <Style x:Key="StepCard" TargetType="Border">
+      <Setter Property="Padding" Value="16,14" />
+      <Setter Property="Margin" Value="0,0,0,10" />
+      <Setter Property="CornerRadius" Value="8" />
+      <Setter Property="Background" Value="{DynamicResource CardBackgroundFillColorDefaultBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource CardStrokeColorDefaultBrush}" />
+      <Setter Property="BorderThickness" Value="1" />
+    </Style>
+    <Style x:Key="StepNumber" TargetType="Border">
+      <Setter Property="Width" Value="30" />
+      <Setter Property="Height" Value="30" />
+      <Setter Property="CornerRadius" Value="15" />
+      <Setter Property="Margin" Value="0,0,14,0" />
+      <Setter Property="VerticalAlignment" Value="Top" />
+      <Setter Property="Background" Value="#FFD54F" />
+    </Style>
+    <Style x:Key="StepNumberText" TargetType="TextBlock">
+      <Setter Property="HorizontalAlignment" Value="Center" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="FontWeight" Value="Bold" />
+      <Setter Property="Foreground" Value="#4E342E" />
+    </Style>
+    <Style x:Key="StepTitle" TargetType="TextBlock">
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="FontSize" Value="15" />
+      <Setter Property="Margin" Value="0,0,0,4" />
+    </Style>
+    <Style x:Key="StepBody" TargetType="TextBlock">
+      <Setter Property="TextWrapping" Value="Wrap" />
+      <Setter Property="Opacity" Value="0.85" />
+      <Setter Property="LineHeight" Value="20" />
+    </Style>
+    <Style x:Key="TipLine" TargetType="TextBlock">
+      <Setter Property="TextWrapping" Value="Wrap" />
+      <Setter Property="Margin" Value="0,0,0,8" />
+    </Style>
+  </Window.Resources>
+  <DockPanel Margin="24,18,24,18">
+    <!-- Header with language picker (also the first thing new users see) -->
+    <DockPanel DockPanel.Dock="Top" Margin="0,0,0,6">
+      <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
+        <TextBlock Style="{StaticResource Icon}" Text="&#xE774;" Margin="0,0,8,0" Opacity="0.7" />
+        <ComboBox x:Name="LanguageBox" Width="150" DisplayMemberPath="Name" SelectionChanged="Language_Changed" AutomationProperties.Name="Language" />
+      </StackPanel>
+      <TextBlock x:Name="Heading" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" />
+    </DockPanel>
+    <TextBlock DockPanel.Dock="Top" Text="{DynamicResource Help.Intro}" TextWrapping="Wrap" Opacity="0.85" Margin="0,0,0,16" FontSize="14" />
+
+    <Button DockPanel.Dock="Bottom" Content="{DynamicResource Help.GotIt}" Click="Close_Click" IsCancel="True" IsDefault="True" HorizontalAlignment="Right"
+            Style="{DynamicResource AccentButtonStyle}" Padding="22,7" Margin="0,14,0,0" AutomationProperties.Name="Got it" />
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="0,0,6,0">
+      <StackPanel>
+        <Border Style="{StaticResource StepCard}">
+          <DockPanel>
+            <Border Style="{StaticResource StepNumber}"><TextBlock Style="{StaticResource StepNumberText}" Text="1" /></Border>
+            <StackPanel><TextBlock Style="{StaticResource StepTitle}" Text="{DynamicResource Help.S1.Title}" /><TextBlock Style="{StaticResource StepBody}" Text="{DynamicResource Help.S1.Body}" /></StackPanel>
+          </DockPanel>
+        </Border>
+        <Border Style="{StaticResource StepCard}">
+          <DockPanel>
+            <Border Style="{StaticResource StepNumber}"><TextBlock Style="{StaticResource StepNumberText}" Text="2" /></Border>
+            <StackPanel><TextBlock Style="{StaticResource StepTitle}" Text="{DynamicResource Help.S2.Title}" /><TextBlock Style="{StaticResource StepBody}" Text="{DynamicResource Help.S2.Body}" /></StackPanel>
+          </DockPanel>
+        </Border>
+        <Border Style="{StaticResource StepCard}">
+          <DockPanel>
+            <Border Style="{StaticResource StepNumber}"><TextBlock Style="{StaticResource StepNumberText}" Text="3" /></Border>
+            <StackPanel><TextBlock Style="{StaticResource StepTitle}" Text="{DynamicResource Help.S3.Title}" /><TextBlock Style="{StaticResource StepBody}" Text="{DynamicResource Help.S3.Body}" /></StackPanel>
+          </DockPanel>
+        </Border>
+        <Border Style="{StaticResource StepCard}">
+          <DockPanel>
+            <Border Style="{StaticResource StepNumber}"><TextBlock Style="{StaticResource StepNumberText}" Text="4" /></Border>
+            <StackPanel><TextBlock Style="{StaticResource StepTitle}" Text="{DynamicResource Help.S4.Title}" /><TextBlock Style="{StaticResource StepBody}" Text="{DynamicResource Help.S4.Body}" /></StackPanel>
+          </DockPanel>
+        </Border>
+        <Border Style="{StaticResource StepCard}">
+          <DockPanel>
+            <Border Style="{StaticResource StepNumber}"><TextBlock Style="{StaticResource StepNumberText}" Text="5" /></Border>
+            <StackPanel><TextBlock Style="{StaticResource StepTitle}" Text="{DynamicResource Help.S5.Title}" /><TextBlock Style="{StaticResource StepBody}" Text="{DynamicResource Help.S5.Body}" /></StackPanel>
+          </DockPanel>
+        </Border>
+
+        <!-- Tips -->
+        <Border Style="{StaticResource StepCard}" Background="{DynamicResource SubtleFillColorSecondaryBrush}">
+          <DockPanel>
+            <TextBlock Style="{StaticResource Icon}" Text="&#xEA80;" FontSize="20" Foreground="#F2B600" VerticalAlignment="Top" Margin="4,0,16,0" />
+            <StackPanel>
+              <TextBlock Style="{StaticResource StepTitle}" Text="{DynamicResource Help.TipsTitle}" Margin="0,0,0,8" />
+              <TextBlock Style="{StaticResource TipLine}" Text="{DynamicResource Tip.1}" />
+              <TextBlock Style="{StaticResource TipLine}" Text="{DynamicResource Tip.2}" />
+              <TextBlock Style="{StaticResource TipLine}" Text="{DynamicResource Tip.3}" />
+              <TextBlock Style="{StaticResource TipLine}" Text="{DynamicResource Tip.4}" />
+              <TextBlock Style="{StaticResource TipLine}" Text="{DynamicResource Tip.5}" />
+              <TextBlock Style="{StaticResource TipLine}" Text="{DynamicResource Tip.6}" />
+              <TextBlock Style="{StaticResource TipLine}" Text="{DynamicResource Tip.7}" />
+              <TextBlock Style="{StaticResource TipLine}" Text="{DynamicResource Tip.8}" Margin="0" />
+            </StackPanel>
+          </DockPanel>
+        </Border>
+      </StackPanel>
+    </ScrollViewer>
+  </DockPanel>
+</Window>

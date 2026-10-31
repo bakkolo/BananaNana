@@ -1,0 +1,135 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+  <!-- Polski -->
+  <sys:String x:Key="Common.Save">Zapisz</sys:String>
+  <sys:String x:Key="Common.Cancel">Anuluj</sys:String>
+  <sys:String x:Key="Common.Close">Zamknij</sys:String>
+  <sys:String x:Key="Common.OK">OK</sys:String>
+
+  <sys:String x:Key="Main.Import">Importuj bibliotekę</sys:String>
+  <sys:String x:Key="Main.Export">Eksportuj bibliotekę</sys:String>
+  <sys:String x:Key="Main.Settings">Ustawienia</sys:String>
+  <sys:String x:Key="Main.Help">Pomoc i porady</sys:String>
+  <sys:String x:Key="Main.New">Nowy szablon</sys:String>
+  <sys:String x:Key="Main.Search">Szukaj szablonów</sys:String>
+  <sys:String x:Key="Main.Empty">Nie masz jeszcze szablonów.&#x0a;Kliknij Nowy szablon, aby utworzyć pierwszy.</sys:String>
+  <sys:String x:Key="Main.Edit">Edytuj</sys:String>
+  <sys:String x:Key="Main.Delete">Usuń</sys:String>
+  <sys:String x:Key="Main.PreviewCaption">Podgląd: tak to zostanie wklejone</sys:String>
+  <sys:String x:Key="Main.SnippetCount">Szablony: {0}</sys:String>
+  <sys:String x:Key="Main.Pause">Wstrzymaj</sys:String>
+  <sys:String x:Key="Main.Resume">Wznów</sys:String>
+  <sys:String x:Key="Main.PauseTip">Wstrzymaj lub wznów rozwijanie skrótów</sys:String>
+  <sys:String x:Key="Main.Tip">Porada</sys:String>
+  <sys:String x:Key="Main.NextTip">Następna porada</sys:String>
+  <sys:String x:Key="Main.DeleteTitle">Usuń szablon</sys:String>
+  <sys:String x:Key="Main.DeleteConfirm">Usunąć szablon {0}?</sys:String>
+  <sys:String x:Key="Main.Duplicate">Szablon z takim skrótem już istnieje.</sys:String>
+  <sys:String x:Key="Main.ImportTitle">Import</sys:String>
+  <sys:String x:Key="Main.ImportChoice">Tak = folder z EXE, Nie = Dokumenty, Anuluj = wybierz plik</sys:String>
+  <sys:String x:Key="Main.LibraryFilter">Biblioteka Banana Nana</sys:String>
+  <sys:String x:Key="Main.SummaryEmpty">(pusty)</sys:String>
+  <sys:String x:Key="Main.SummaryImage">(obraz)</sys:String>
+  <sys:String x:Key="Main.SummaryUnreadable">(nieczytelna treść)</sys:String>
+
+  <sys:String x:Key="Status.On">Rozwijanie włączone: wpisz skrót i spację w dowolnym programie.</sys:String>
+  <sys:String x:Key="Status.Paused">Rozwijanie wstrzymane.</sys:String>
+  <sys:String x:Key="Status.Expanded">Rozwinięto {0} ({1})</sys:String>
+  <sys:String x:Key="Status.Failed">Nie udało się rozwinąć {0}: {1}</sys:String>
+
+  <sys:String x:Key="Tray.Open">Otwórz Banana Nana</sys:String>
+  <sys:String x:Key="Tray.Pause">Wstrzymaj rozwijanie</sys:String>
+  <sys:String x:Key="Tray.Autostart">Uruchamiaj z Windows</sys:String>
+  <sys:String x:Key="Tray.Exit">Zakończ</sys:String>
+  <sys:String x:Key="Tray.Paused">Banana Nana (wstrzymane)</sys:String>
+  <sys:String x:Key="Tray.HiddenTitle">Banana Nana nadal działa</sys:String>
+  <sys:String x:Key="Tray.HiddenText">Skróty dalej się rozwijają. Kliknij ikonę w zasobniku, aby otworzyć okno, lub prawym przyciskiem, aby zakończyć.</sys:String>
+
+  <sys:String x:Key="Lib.TwoFound">Znaleziono dwie biblioteki. Tak = obok EXE, Nie = Dokumenty, Anuluj = nowa biblioteka.</sys:String>
+  <sys:String x:Key="Lib.Invalid">Nieprawidłowy plik biblioteki</sys:String>
+  <sys:String x:Key="Lib.Duplicates">Biblioteka zawiera powtórzone lub puste skróty</sys:String>
+
+  <sys:String x:Key="Editor.Title">Edytor</sys:String>
+  <sys:String x:Key="Editor.Trigger">Skrót</sys:String>
+  <sys:String x:Key="Editor.TriggerHint">Wpisz go ze spacją w dowolnym programie, np. ;oferta. Bez spacji w środku.</sys:String>
+  <sys:String x:Key="Editor.Bold">Pogrubienie (Ctrl+B)</sys:String>
+  <sys:String x:Key="Editor.Italic">Kursywa (Ctrl+I)</sys:String>
+  <sys:String x:Key="Editor.Underline">Podkreślenie (Ctrl+U)</sys:String>
+  <sys:String x:Key="Editor.AlignLeft">Do lewej (Ctrl+L)</sys:String>
+  <sys:String x:Key="Editor.AlignCenter">Wyśrodkuj (Ctrl+E)</sys:String>
+  <sys:String x:Key="Editor.AlignRight">Do prawej (Ctrl+R)</sys:String>
+  <sys:String x:Key="Editor.Bullets">Lista punktowana</sys:String>
+  <sys:String x:Key="Editor.Numbering">Lista numerowana</sys:String>
+  <sys:String x:Key="Editor.Link">Dodaj lub zmień link (Ctrl+K). Ctrl+klik otwiera link.</sys:String>
+  <sys:String x:Key="Editor.InsertImage">Wstaw obraz z pliku lub wklej go Ctrl+V</sys:String>
+  <sys:String x:Key="Editor.EditImage">Rysuj strzałki, ramki i zakreślenia na zaznaczonym obrazie (lub kliknij go dwukrotnie)</sys:String>
+  <sys:String x:Key="Editor.ImageFilter">Obrazy</sys:String>
+  <sys:String x:Key="Editor.ImageLoadFailed">Nie można wczytać obrazu: </sys:String>
+  <sys:String x:Key="Editor.EnterTrigger">Wpisz skrót.</sys:String>
+  <sys:String x:Key="Editor.NoSpaces">Skrót nie może zawierać spacji: spacja kończy skrót podczas pisania.</sys:String>
+  <sys:String x:Key="Editor.TooLong">Skrót może mieć najwyżej {0} znaków.</sys:String>
+  <sys:String x:Key="Editor.SelectImageFirst">Najpierw kliknij obraz, potem Edytuj obraz (lub kliknij obraz dwukrotnie).</sys:String>
+  <sys:String x:Key="Editor.LinkOneParagraph">Link musi mieścić się w jednym akapicie.</sys:String>
+
+  <sys:String x:Key="Link.Title">Link</sys:String>
+  <sys:String x:Key="Link.Text">Wyświetlany tekst</sys:String>
+  <sys:String x:Key="Link.Address">Adres</sys:String>
+  <sys:String x:Key="Link.Hint">https://…, przyklad.pl lub imie@przyklad.pl</sys:String>
+  <sys:String x:Key="Link.Remove">Usuń link</sys:String>
+  <sys:String x:Key="Link.BadAddress">Wpisz adres strony (http/https) lub adres e-mail.</sys:String>
+  <sys:String x:Key="Link.NoText">Wpisz wyświetlany tekst.</sys:String>
+
+  <sys:String x:Key="Img.Title">Edytuj obraz</sys:String>
+  <sys:String x:Key="Img.Select">Zaznacz</sys:String>
+  <sys:String x:Key="Img.SelectTip">Kliknij kształt, aby go zaznaczyć, przeciągnij, aby przesunąć, Delete usuwa</sys:String>
+  <sys:String x:Key="Img.Arrow">Strzałka</sys:String>
+  <sys:String x:Key="Img.ArrowTip">Przeciągnij od początku do grotu</sys:String>
+  <sys:String x:Key="Img.Frame">Ramka</sys:String>
+  <sys:String x:Key="Img.FrameTip">Przeciągnij, aby narysować ramkę</sys:String>
+  <sys:String x:Key="Img.Highlight">Zakreślacz</sys:String>
+  <sys:String x:Key="Img.HighlightTip">Przeciągnij, aby zaznaczyć jak zakreślaczem</sys:String>
+  <sys:String x:Key="Img.Red">Czerwony</sys:String>
+  <sys:String x:Key="Img.Yellow">Żółty</sys:String>
+  <sys:String x:Key="Img.Green">Zielony</sys:String>
+  <sys:String x:Key="Img.Blue">Niebieski</sys:String>
+  <sys:String x:Key="Img.Black">Czarny</sys:String>
+  <sys:String x:Key="Img.Undo">Cofnij ostatni kształt (Ctrl+Z)</sys:String>
+  <sys:String x:Key="Img.Delete">Usuń zaznaczony kształt (Delete)</sys:String>
+
+  <sys:String x:Key="Set.Title">Ustawienia</sys:String>
+  <sys:String x:Key="Set.Language">Język</sys:String>
+  <sys:String x:Key="Set.LanguageHint">Język aplikacji. Twoje szablony się nie zmieniają.</sys:String>
+  <sys:String x:Key="Set.Autostart">Uruchamiaj z Windows</sys:String>
+  <sys:String x:Key="Set.AutostartHint">Uruchamia się po cichu w zasobniku po zalogowaniu. Zamknięcie okna zostawia Banana Nana w zasobniku; aby zakończyć, użyj Zakończ w menu ikony.</sys:String>
+  <sys:String x:Key="Set.Library">Biblioteka: {0}</sys:String>
+  <sys:String x:Key="Set.NotSaved">Jeszcze nie zapisana. Zostanie utworzona w Dokumenty\BananaNana po zapisaniu pierwszego szablonu.</sys:String>
+  <sys:String x:Key="Set.OpenFolder">Otwórz folder</sys:String>
+  <sys:String x:Key="Set.AutostartFailed">Nie udało się zmienić ustawienia autostartu Windows: </sys:String>
+  <sys:String x:Key="Set.NoFolder">Folder jeszcze nie istnieje: </sys:String>
+
+  <sys:String x:Key="Help.Title">Pomoc i porady</sys:String>
+  <sys:String x:Key="Help.Welcome">Witaj w Banana Nana</sys:String>
+  <sys:String x:Key="Help.Intro">Wpisz krótki skrót w dowolnym miejscu, a Banana Nana zamieni go na zapisany tekst z formatowaniem i obrazami.</sys:String>
+  <sys:String x:Key="Help.S1.Title">Utwórz szablon</sys:String>
+  <sys:String x:Key="Help.S1.Body">Kliknij Nowy szablon. Wybierz skrót, np. ;oferta, wpisz lub wklej treść i kliknij Zapisz. Zaczynaj skróty od znaku takiego jak ;, aby nigdy nie pojawiały się w zwykłych słowach.</sys:String>
+  <sys:String x:Key="Help.S2.Title">Używaj wszędzie</sys:String>
+  <sys:String x:Key="Help.S2.Body">W Wordzie, Outlooku, Teams lub innym programie wpisz skrót, a po nim spację. Skrót znika, a w jego miejsce wkleja się szablon. Enter nigdy nie rozwija skrótu, więc nic nie zostanie wysłane przypadkiem.</sys:String>
+  <sys:String x:Key="Help.S3.Title">Formatowanie i linki</sys:String>
+  <sys:String x:Key="Help.S3.Body">Pasek narzędzi służy do pogrubienia, list i wyrównania. Wklejanie z Worda zachowuje formatowanie. Ctrl+K dodaje link.</sys:String>
+  <sys:String x:Key="Help.S4.Title">Obrazy</sys:String>
+  <sys:String x:Key="Help.S4.Body">Wstaw obraz lub wklej zrzut ekranu. Kliknij go i przeciągnij róg, aby zmienić rozmiar; kliknij dwukrotnie, aby dodać strzałki, ramki i zakreślenia.</sys:String>
+  <sys:String x:Key="Help.S5.Title">Działa w tle</sys:String>
+  <sys:String x:Key="Help.S5.Body">Po zamknięciu okna Banana Nana zostaje w zasobniku obok zegara. Kliknij ikonę prawym przyciskiem, aby wstrzymać lub zakończyć, a w Ustawieniach włącz uruchamianie z Windows.</sys:String>
+  <sys:String x:Key="Help.TipsTitle">Porady</sys:String>
+  <sys:String x:Key="Help.GotIt">Rozumiem</sys:String>
+
+  <sys:String x:Key="Tip.1">Zaczynaj skróty od ; lub /, aby nie kolidowały z prawdziwymi słowami.</sys:String>
+  <sys:String x:Key="Tip.2">Schowek jest przywracany po każdym wklejeniu, więc kopiowanie i wklejanie działa jak zwykle.</sys:String>
+  <sys:String x:Key="Tip.3">Wstrzymaj rozwijanie z ikony w zasobniku, gdy chcesz wpisać skrót dosłownie.</sys:String>
+  <sys:String x:Key="Tip.4">Eksportuj bibliotekę, aby zrobić kopię zapasową lub przekazać ją koledze.</sys:String>
+  <sys:String x:Key="Tip.5">Obrazy są wklejane w rozmiarze widocznym w edytorze, więc zmniejsz duże zrzuty ekranu przed zapisaniem.</sys:String>
+  <sys:String x:Key="Tip.6">Umieść BananaNana.library.json obok pliku EXE, aby nosić szablony na pendrivie.</sys:String>
+  <sys:String x:Key="Tip.7">Ctrl+klik na linku w edytorze pokazuje, dokąd prowadzi.</sys:String>
+  <sys:String x:Key="Tip.8">Pole wyszukiwania filtruje szablony podczas pisania.</sys:String>
+</ResourceDictionary>

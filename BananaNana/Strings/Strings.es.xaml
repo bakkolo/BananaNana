@@ -1,0 +1,135 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+  <!-- Español -->
+  <sys:String x:Key="Common.Save">Guardar</sys:String>
+  <sys:String x:Key="Common.Cancel">Cancelar</sys:String>
+  <sys:String x:Key="Common.Close">Cerrar</sys:String>
+  <sys:String x:Key="Common.OK">Aceptar</sys:String>
+
+  <sys:String x:Key="Main.Import">Importar una biblioteca</sys:String>
+  <sys:String x:Key="Main.Export">Exportar la biblioteca</sys:String>
+  <sys:String x:Key="Main.Settings">Configuración</sys:String>
+  <sys:String x:Key="Main.Help">Ayuda y consejos</sys:String>
+  <sys:String x:Key="Main.New">Nueva plantilla</sys:String>
+  <sys:String x:Key="Main.Search">Buscar plantillas</sys:String>
+  <sys:String x:Key="Main.Empty">Todavía no hay plantillas.&#x0a;Haz clic en Nueva plantilla para crear la primera.</sys:String>
+  <sys:String x:Key="Main.Edit">Editar</sys:String>
+  <sys:String x:Key="Main.Delete">Eliminar</sys:String>
+  <sys:String x:Key="Main.PreviewCaption">Vista previa: esto es lo que se pega</sys:String>
+  <sys:String x:Key="Main.SnippetCount">Plantillas: {0}</sys:String>
+  <sys:String x:Key="Main.Pause">Pausar</sys:String>
+  <sys:String x:Key="Main.Resume">Reanudar</sys:String>
+  <sys:String x:Key="Main.PauseTip">Pausar o reanudar la expansión de atajos</sys:String>
+  <sys:String x:Key="Main.Tip">Consejo</sys:String>
+  <sys:String x:Key="Main.NextTip">Siguiente consejo</sys:String>
+  <sys:String x:Key="Main.DeleteTitle">Eliminar plantilla</sys:String>
+  <sys:String x:Key="Main.DeleteConfirm">¿Eliminar la plantilla {0}?</sys:String>
+  <sys:String x:Key="Main.Duplicate">Ya existe una plantilla con este atajo.</sys:String>
+  <sys:String x:Key="Main.ImportTitle">Importar</sys:String>
+  <sys:String x:Key="Main.ImportChoice">Sí = carpeta del EXE, No = Documentos, Cancelar = elegir un archivo</sys:String>
+  <sys:String x:Key="Main.LibraryFilter">Biblioteca de Banana Nana</sys:String>
+  <sys:String x:Key="Main.SummaryEmpty">(vacía)</sys:String>
+  <sys:String x:Key="Main.SummaryImage">(imagen)</sys:String>
+  <sys:String x:Key="Main.SummaryUnreadable">(contenido ilegible)</sys:String>
+
+  <sys:String x:Key="Status.On">Expansión activada: escribe un atajo y un espacio en cualquier aplicación.</sys:String>
+  <sys:String x:Key="Status.Paused">Expansión en pausa.</sys:String>
+  <sys:String x:Key="Status.Expanded">Expandido {0} ({1})</sys:String>
+  <sys:String x:Key="Status.Failed">No se pudo expandir {0}: {1}</sys:String>
+
+  <sys:String x:Key="Tray.Open">Abrir Banana Nana</sys:String>
+  <sys:String x:Key="Tray.Pause">Pausar la expansión</sys:String>
+  <sys:String x:Key="Tray.Autostart">Iniciar con Windows</sys:String>
+  <sys:String x:Key="Tray.Exit">Salir</sys:String>
+  <sys:String x:Key="Tray.Paused">Banana Nana (en pausa)</sys:String>
+  <sys:String x:Key="Tray.HiddenTitle">Banana Nana sigue en marcha</sys:String>
+  <sys:String x:Key="Tray.HiddenText">Los atajos se siguen expandiendo. Haz clic en el icono de la bandeja para abrir la ventana o con el botón derecho para salir.</sys:String>
+
+  <sys:String x:Key="Lib.TwoFound">Se encontraron dos bibliotecas. Sí = junto al EXE, No = Documentos, Cancelar = biblioteca nueva.</sys:String>
+  <sys:String x:Key="Lib.Invalid">Archivo de biblioteca no válido</sys:String>
+  <sys:String x:Key="Lib.Duplicates">La biblioteca tiene atajos repetidos o vacíos</sys:String>
+
+  <sys:String x:Key="Editor.Title">Editor</sys:String>
+  <sys:String x:Key="Editor.Trigger">Atajo</sys:String>
+  <sys:String x:Key="Editor.TriggerHint">Escríbelo seguido de un espacio en cualquier aplicación, p. ej. ;oferta. Sin espacios dentro.</sys:String>
+  <sys:String x:Key="Editor.Bold">Negrita (Ctrl+B)</sys:String>
+  <sys:String x:Key="Editor.Italic">Cursiva (Ctrl+I)</sys:String>
+  <sys:String x:Key="Editor.Underline">Subrayado (Ctrl+U)</sys:String>
+  <sys:String x:Key="Editor.AlignLeft">Alinear a la izquierda (Ctrl+L)</sys:String>
+  <sys:String x:Key="Editor.AlignCenter">Centrar (Ctrl+E)</sys:String>
+  <sys:String x:Key="Editor.AlignRight">Alinear a la derecha (Ctrl+R)</sys:String>
+  <sys:String x:Key="Editor.Bullets">Lista con viñetas</sys:String>
+  <sys:String x:Key="Editor.Numbering">Lista numerada</sys:String>
+  <sys:String x:Key="Editor.Link">Añadir o cambiar un enlace (Ctrl+K). Ctrl+clic abre un enlace.</sys:String>
+  <sys:String x:Key="Editor.InsertImage">Insertar una imagen desde un archivo o pegarla con Ctrl+V</sys:String>
+  <sys:String x:Key="Editor.EditImage">Dibujar flechas, marcos y resaltados en la imagen seleccionada (o hacer doble clic en ella)</sys:String>
+  <sys:String x:Key="Editor.ImageFilter">Imágenes</sys:String>
+  <sys:String x:Key="Editor.ImageLoadFailed">No se pudo cargar la imagen: </sys:String>
+  <sys:String x:Key="Editor.EnterTrigger">Escribe un atajo.</sys:String>
+  <sys:String x:Key="Editor.NoSpaces">El atajo no puede contener espacios: un espacio termina el atajo al escribir.</sys:String>
+  <sys:String x:Key="Editor.TooLong">El atajo puede tener como máximo {0} caracteres.</sys:String>
+  <sys:String x:Key="Editor.SelectImageFirst">Primero haz clic en una imagen y luego en Editar imagen (o haz doble clic en la imagen).</sys:String>
+  <sys:String x:Key="Editor.LinkOneParagraph">Un enlace debe quedar dentro de un mismo párrafo.</sys:String>
+
+  <sys:String x:Key="Link.Title">Enlace</sys:String>
+  <sys:String x:Key="Link.Text">Texto que se muestra</sys:String>
+  <sys:String x:Key="Link.Address">Dirección</sys:String>
+  <sys:String x:Key="Link.Hint">https://…, ejemplo.com o nombre@ejemplo.com</sys:String>
+  <sys:String x:Key="Link.Remove">Quitar enlace</sys:String>
+  <sys:String x:Key="Link.BadAddress">Escribe una dirección web (http/https) o una dirección de correo.</sys:String>
+  <sys:String x:Key="Link.NoText">Escribe el texto que se muestra.</sys:String>
+
+  <sys:String x:Key="Img.Title">Editar imagen</sys:String>
+  <sys:String x:Key="Img.Select">Seleccionar</sys:String>
+  <sys:String x:Key="Img.SelectTip">Haz clic en una forma para seleccionarla, arrástrala para moverla, Supr para eliminarla</sys:String>
+  <sys:String x:Key="Img.Arrow">Flecha</sys:String>
+  <sys:String x:Key="Img.ArrowTip">Arrastra desde el origen hasta la punta</sys:String>
+  <sys:String x:Key="Img.Frame">Marco</sys:String>
+  <sys:String x:Key="Img.FrameTip">Arrastra para dibujar un marco</sys:String>
+  <sys:String x:Key="Img.Highlight">Resaltador</sys:String>
+  <sys:String x:Key="Img.HighlightTip">Arrastra para marcar como con un rotulador fluorescente</sys:String>
+  <sys:String x:Key="Img.Red">Rojo</sys:String>
+  <sys:String x:Key="Img.Yellow">Amarillo</sys:String>
+  <sys:String x:Key="Img.Green">Verde</sys:String>
+  <sys:String x:Key="Img.Blue">Azul</sys:String>
+  <sys:String x:Key="Img.Black">Negro</sys:String>
+  <sys:String x:Key="Img.Undo">Deshacer la última forma (Ctrl+Z)</sys:String>
+  <sys:String x:Key="Img.Delete">Eliminar la forma seleccionada (Supr)</sys:String>
+
+  <sys:String x:Key="Set.Title">Configuración</sys:String>
+  <sys:String x:Key="Set.Language">Idioma</sys:String>
+  <sys:String x:Key="Set.LanguageHint">Idioma de la aplicación. Tus plantillas no cambian.</sys:String>
+  <sys:String x:Key="Set.Autostart">Iniciar con Windows</sys:String>
+  <sys:String x:Key="Set.AutostartHint">Se inicia en silencio en la bandeja al iniciar sesión. Al cerrar la ventana, Banana Nana sigue en la bandeja; usa Salir en el menú del icono para cerrarlo.</sys:String>
+  <sys:String x:Key="Set.Library">Biblioteca: {0}</sys:String>
+  <sys:String x:Key="Set.NotSaved">Aún no se ha guardado. Se creará en Documentos\BananaNana al guardar la primera plantilla.</sys:String>
+  <sys:String x:Key="Set.OpenFolder">Abrir carpeta</sys:String>
+  <sys:String x:Key="Set.AutostartFailed">No se pudo cambiar el inicio automático de Windows: </sys:String>
+  <sys:String x:Key="Set.NoFolder">La carpeta aún no existe: </sys:String>
+
+  <sys:String x:Key="Help.Title">Ayuda y consejos</sys:String>
+  <sys:String x:Key="Help.Welcome">Te damos la bienvenida a Banana Nana</sys:String>
+  <sys:String x:Key="Help.Intro">Escribe un atajo corto en cualquier lugar y Banana Nana lo sustituye por tu texto guardado, con formato e imágenes.</sys:String>
+  <sys:String x:Key="Help.S1.Title">Crea una plantilla</sys:String>
+  <sys:String x:Key="Help.S1.Body">Haz clic en Nueva plantilla. Elige un atajo como ;oferta, escribe o pega el contenido y pulsa Guardar. Empieza los atajos con un símbolo como ; para que nunca aparezcan en palabras normales.</sys:String>
+  <sys:String x:Key="Help.S2.Title">Úsala en cualquier sitio</sys:String>
+  <sys:String x:Key="Help.S2.Body">En Word, Outlook, Teams o cualquier otra aplicación, escribe el atajo seguido de un espacio. El atajo desaparece y se pega la plantilla. Intro nunca expande, así que nada se envía por accidente.</sys:String>
+  <sys:String x:Key="Help.S3.Title">Formato y enlaces</sys:String>
+  <sys:String x:Key="Help.S3.Body">Usa la barra de herramientas para negrita, listas y alineación. Al pegar desde Word se conserva el formato. Pulsa Ctrl+K para añadir un enlace.</sys:String>
+  <sys:String x:Key="Help.S4.Title">Imágenes</sys:String>
+  <sys:String x:Key="Help.S4.Body">Inserta una imagen o pega una captura de pantalla. Haz clic en ella y arrastra una esquina para cambiar su tamaño; haz doble clic para añadir flechas, marcos y resaltados.</sys:String>
+  <sys:String x:Key="Help.S5.Title">Funciona en segundo plano</sys:String>
+  <sys:String x:Key="Help.S5.Body">Al cerrar la ventana, Banana Nana sigue en la bandeja junto al reloj. Haz clic derecho en el icono para pausar o salir, y activa Iniciar con Windows en Configuración.</sys:String>
+  <sys:String x:Key="Help.TipsTitle">Consejos</sys:String>
+  <sys:String x:Key="Help.GotIt">Entendido</sys:String>
+
+  <sys:String x:Key="Tip.1">Empieza los atajos con ; o / para que nunca choquen con palabras reales.</sys:String>
+  <sys:String x:Key="Tip.2">El portapapeles se restaura después de cada pegado, así que copiar y pegar sigue funcionando como siempre.</sys:String>
+  <sys:String x:Key="Tip.3">Pausa la expansión desde el icono de la bandeja cuando necesites escribir un atajo tal cual.</sys:String>
+  <sys:String x:Key="Tip.4">Exporta tu biblioteca para tener una copia de seguridad o compartirla con un compañero.</sys:String>
+  <sys:String x:Key="Tip.5">Las imágenes se pegan al tamaño que ves en el editor, así que reduce las capturas grandes antes de guardar.</sys:String>
+  <sys:String x:Key="Tip.6">Pon BananaNana.library.json junto al EXE para llevar tus plantillas en una memoria USB.</sys:String>
+  <sys:String x:Key="Tip.7">Ctrl+clic en un enlace del editor muestra adónde lleva.</sys:String>
+  <sys:String x:Key="Tip.8">El cuadro de búsqueda filtra tus plantillas mientras escribes.</sys:String>
+</ResourceDictionary>

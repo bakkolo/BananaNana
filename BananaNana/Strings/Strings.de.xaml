@@ -1,0 +1,135 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+  <!-- Deutsch -->
+  <sys:String x:Key="Common.Save">Speichern</sys:String>
+  <sys:String x:Key="Common.Cancel">Abbrechen</sys:String>
+  <sys:String x:Key="Common.Close">Schließen</sys:String>
+  <sys:String x:Key="Common.OK">OK</sys:String>
+
+  <sys:String x:Key="Main.Import">Bibliothek importieren</sys:String>
+  <sys:String x:Key="Main.Export">Bibliothek exportieren</sys:String>
+  <sys:String x:Key="Main.Settings">Einstellungen</sys:String>
+  <sys:String x:Key="Main.Help">Hilfe und Tipps</sys:String>
+  <sys:String x:Key="Main.New">Neuer Textbaustein</sys:String>
+  <sys:String x:Key="Main.Search">Textbausteine suchen</sys:String>
+  <sys:String x:Key="Main.Empty">Noch keine Textbausteine.&#x0a;Klicken Sie auf Neuer Textbaustein, um den ersten anzulegen.</sys:String>
+  <sys:String x:Key="Main.Edit">Bearbeiten</sys:String>
+  <sys:String x:Key="Main.Delete">Löschen</sys:String>
+  <sys:String x:Key="Main.PreviewCaption">Vorschau: so wird es eingefügt</sys:String>
+  <sys:String x:Key="Main.SnippetCount">Textbausteine: {0}</sys:String>
+  <sys:String x:Key="Main.Pause">Pausieren</sys:String>
+  <sys:String x:Key="Main.Resume">Fortsetzen</sys:String>
+  <sys:String x:Key="Main.PauseTip">Erweiterung pausieren oder fortsetzen</sys:String>
+  <sys:String x:Key="Main.Tip">Tipp</sys:String>
+  <sys:String x:Key="Main.NextTip">Nächster Tipp</sys:String>
+  <sys:String x:Key="Main.DeleteTitle">Textbaustein löschen</sys:String>
+  <sys:String x:Key="Main.DeleteConfirm">Den Textbaustein {0} löschen?</sys:String>
+  <sys:String x:Key="Main.Duplicate">Ein Textbaustein mit diesem Kürzel existiert bereits.</sys:String>
+  <sys:String x:Key="Main.ImportTitle">Import</sys:String>
+  <sys:String x:Key="Main.ImportChoice">Ja = EXE-Ordner, Nein = Dokumente, Abbrechen = Datei auswählen</sys:String>
+  <sys:String x:Key="Main.LibraryFilter">Banana-Nana-Bibliothek</sys:String>
+  <sys:String x:Key="Main.SummaryEmpty">(leer)</sys:String>
+  <sys:String x:Key="Main.SummaryImage">(Bild)</sys:String>
+  <sys:String x:Key="Main.SummaryUnreadable">(unlesbarer Inhalt)</sys:String>
+
+  <sys:String x:Key="Status.On">Erweiterung aktiv: Kürzel und Leertaste in einem beliebigen Programm eingeben.</sys:String>
+  <sys:String x:Key="Status.Paused">Erweiterung pausiert.</sys:String>
+  <sys:String x:Key="Status.Expanded">Erweitert: {0} ({1})</sys:String>
+  <sys:String x:Key="Status.Failed">Fehler beim Erweitern von {0}: {1}</sys:String>
+
+  <sys:String x:Key="Tray.Open">Banana Nana öffnen</sys:String>
+  <sys:String x:Key="Tray.Pause">Erweiterung pausieren</sys:String>
+  <sys:String x:Key="Tray.Autostart">Mit Windows starten</sys:String>
+  <sys:String x:Key="Tray.Exit">Beenden</sys:String>
+  <sys:String x:Key="Tray.Paused">Banana Nana (pausiert)</sys:String>
+  <sys:String x:Key="Tray.HiddenTitle">Banana Nana läuft weiter</sys:String>
+  <sys:String x:Key="Tray.HiddenText">Kürzel werden weiter erweitert. Klicken Sie auf das Symbol im Infobereich, um das Fenster zu öffnen, oder mit rechts, um zu beenden.</sys:String>
+
+  <sys:String x:Key="Lib.TwoFound">Zwei Bibliotheken gefunden. Ja = neben der EXE, Nein = Dokumente, Abbrechen = neue Bibliothek.</sys:String>
+  <sys:String x:Key="Lib.Invalid">Ungültige Bibliotheksdatei</sys:String>
+  <sys:String x:Key="Lib.Duplicates">Die Bibliothek enthält doppelte oder leere Kürzel</sys:String>
+
+  <sys:String x:Key="Editor.Title">Editor</sys:String>
+  <sys:String x:Key="Editor.Trigger">Kürzel</sys:String>
+  <sys:String x:Key="Editor.TriggerHint">In einem beliebigen Programm mit Leertaste eingeben, z. B. ;angebot. Keine Leerzeichen darin.</sys:String>
+  <sys:String x:Key="Editor.Bold">Fett (Strg+B)</sys:String>
+  <sys:String x:Key="Editor.Italic">Kursiv (Strg+I)</sys:String>
+  <sys:String x:Key="Editor.Underline">Unterstrichen (Strg+U)</sys:String>
+  <sys:String x:Key="Editor.AlignLeft">Linksbündig (Strg+L)</sys:String>
+  <sys:String x:Key="Editor.AlignCenter">Zentriert (Strg+E)</sys:String>
+  <sys:String x:Key="Editor.AlignRight">Rechtsbündig (Strg+R)</sys:String>
+  <sys:String x:Key="Editor.Bullets">Aufzählung</sys:String>
+  <sys:String x:Key="Editor.Numbering">Nummerierte Liste</sys:String>
+  <sys:String x:Key="Editor.Link">Link hinzufügen oder ändern (Strg+K). Strg+Klick öffnet einen Link.</sys:String>
+  <sys:String x:Key="Editor.InsertImage">Bild aus einer Datei einfügen oder mit Strg+V einfügen</sys:String>
+  <sys:String x:Key="Editor.EditImage">Pfeile, Rahmen und Markierungen auf das ausgewählte Bild zeichnen (oder doppelklicken)</sys:String>
+  <sys:String x:Key="Editor.ImageFilter">Bilder</sys:String>
+  <sys:String x:Key="Editor.ImageLoadFailed">Das Bild konnte nicht geladen werden: </sys:String>
+  <sys:String x:Key="Editor.EnterTrigger">Bitte ein Kürzel eingeben.</sys:String>
+  <sys:String x:Key="Editor.NoSpaces">Das Kürzel darf keine Leerzeichen enthalten: Ein Leerzeichen beendet das Kürzel beim Tippen.</sys:String>
+  <sys:String x:Key="Editor.TooLong">Das Kürzel darf höchstens {0} Zeichen lang sein.</sys:String>
+  <sys:String x:Key="Editor.SelectImageFirst">Klicken Sie zuerst auf ein Bild, dann auf Bild bearbeiten (oder doppelklicken Sie auf das Bild).</sys:String>
+  <sys:String x:Key="Editor.LinkOneParagraph">Ein Link muss innerhalb eines Absatzes bleiben.</sys:String>
+
+  <sys:String x:Key="Link.Title">Link</sys:String>
+  <sys:String x:Key="Link.Text">Angezeigter Text</sys:String>
+  <sys:String x:Key="Link.Address">Adresse</sys:String>
+  <sys:String x:Key="Link.Hint">https://…, beispiel.de oder name@beispiel.de</sys:String>
+  <sys:String x:Key="Link.Remove">Link entfernen</sys:String>
+  <sys:String x:Key="Link.BadAddress">Bitte eine Webadresse (http/https) oder eine E-Mail-Adresse eingeben.</sys:String>
+  <sys:String x:Key="Link.NoText">Bitte den angezeigten Text eingeben.</sys:String>
+
+  <sys:String x:Key="Img.Title">Bild bearbeiten</sys:String>
+  <sys:String x:Key="Img.Select">Auswählen</sys:String>
+  <sys:String x:Key="Img.SelectTip">Form anklicken zum Auswählen, ziehen zum Verschieben, Entf zum Löschen</sys:String>
+  <sys:String x:Key="Img.Arrow">Pfeil</sys:String>
+  <sys:String x:Key="Img.ArrowTip">Vom Ende zur Spitze ziehen</sys:String>
+  <sys:String x:Key="Img.Frame">Rahmen</sys:String>
+  <sys:String x:Key="Img.FrameTip">Ziehen, um einen Rahmen zu zeichnen</sys:String>
+  <sys:String x:Key="Img.Highlight">Marker</sys:String>
+  <sys:String x:Key="Img.HighlightTip">Ziehen, um wie mit einem Textmarker zu markieren</sys:String>
+  <sys:String x:Key="Img.Red">Rot</sys:String>
+  <sys:String x:Key="Img.Yellow">Gelb</sys:String>
+  <sys:String x:Key="Img.Green">Grün</sys:String>
+  <sys:String x:Key="Img.Blue">Blau</sys:String>
+  <sys:String x:Key="Img.Black">Schwarz</sys:String>
+  <sys:String x:Key="Img.Undo">Letzte Form rückgängig machen (Strg+Z)</sys:String>
+  <sys:String x:Key="Img.Delete">Ausgewählte Form löschen (Entf)</sys:String>
+
+  <sys:String x:Key="Set.Title">Einstellungen</sys:String>
+  <sys:String x:Key="Set.Language">Sprache</sys:String>
+  <sys:String x:Key="Set.LanguageHint">Sprache der App. Ihre Textbausteine bleiben unverändert.</sys:String>
+  <sys:String x:Key="Set.Autostart">Mit Windows starten</sys:String>
+  <sys:String x:Key="Set.AutostartHint">Startet nach der Anmeldung unauffällig im Infobereich. Beim Schließen des Fensters läuft Banana Nana dort weiter; zum Beenden Beenden im Symbolmenü wählen.</sys:String>
+  <sys:String x:Key="Set.Library">Bibliothek: {0}</sys:String>
+  <sys:String x:Key="Set.NotSaved">Noch nicht gespeichert. Sie wird beim Speichern des ersten Textbausteins unter Dokumente\BananaNana angelegt.</sys:String>
+  <sys:String x:Key="Set.OpenFolder">Ordner öffnen</sys:String>
+  <sys:String x:Key="Set.AutostartFailed">Die Windows-Autostart-Einstellung konnte nicht geändert werden: </sys:String>
+  <sys:String x:Key="Set.NoFolder">Der Ordner existiert noch nicht: </sys:String>
+
+  <sys:String x:Key="Help.Title">Hilfe und Tipps</sys:String>
+  <sys:String x:Key="Help.Welcome">Willkommen bei Banana Nana</sys:String>
+  <sys:String x:Key="Help.Intro">Geben Sie überall ein kurzes Kürzel ein, und Banana Nana ersetzt es durch Ihren gespeicherten Text mit Formatierung und Bildern.</sys:String>
+  <sys:String x:Key="Help.S1.Title">Textbaustein anlegen</sys:String>
+  <sys:String x:Key="Help.S1.Body">Klicken Sie auf Neuer Textbaustein. Wählen Sie ein Kürzel wie ;angebot, schreiben oder fügen Sie den Inhalt ein und klicken Sie auf Speichern. Beginnen Sie Kürzel mit einem Zeichen wie ;, damit sie nie in normalen Wörtern vorkommen.</sys:String>
+  <sys:String x:Key="Help.S2.Title">Überall verwenden</sys:String>
+  <sys:String x:Key="Help.S2.Body">Geben Sie in Word, Outlook, Teams oder einem anderen Programm das Kürzel und danach ein Leerzeichen ein. Das Kürzel verschwindet und der Textbaustein wird eingefügt. Die Eingabetaste erweitert nie, damit nichts versehentlich gesendet wird.</sys:String>
+  <sys:String x:Key="Help.S3.Title">Formatieren und verlinken</sys:String>
+  <sys:String x:Key="Help.S3.Body">Mit der Symbolleiste formatieren Sie fett, als Liste oder ausgerichtet. Beim Einfügen aus Word bleibt die Formatierung erhalten. Strg+K fügt einen Link hinzu.</sys:String>
+  <sys:String x:Key="Help.S4.Title">Bilder</sys:String>
+  <sys:String x:Key="Help.S4.Body">Fügen Sie ein Bild oder einen Screenshot ein. Klicken Sie darauf und ziehen Sie an einer Ecke, um die Größe zu ändern; ein Doppelklick fügt Pfeile, Rahmen und Markierungen hinzu.</sys:String>
+  <sys:String x:Key="Help.S5.Title">Läuft im Hintergrund</sys:String>
+  <sys:String x:Key="Help.S5.Body">Nach dem Schließen des Fensters bleibt Banana Nana im Infobereich neben der Uhr. Mit einem Rechtsklick auf das Symbol pausieren oder beenden Sie es; in den Einstellungen aktivieren Sie den Start mit Windows.</sys:String>
+  <sys:String x:Key="Help.TipsTitle">Tipps</sys:String>
+  <sys:String x:Key="Help.GotIt">Verstanden</sys:String>
+
+  <sys:String x:Key="Tip.1">Beginnen Sie Kürzel mit ; oder /, damit sie nie mit echten Wörtern kollidieren.</sys:String>
+  <sys:String x:Key="Tip.2">Die Zwischenablage wird nach jedem Einfügen wiederhergestellt, Kopieren und Einfügen funktioniert also wie gewohnt.</sys:String>
+  <sys:String x:Key="Tip.3">Pausieren Sie die Erweiterung über das Symbol im Infobereich, wenn Sie ein Kürzel wörtlich tippen möchten.</sys:String>
+  <sys:String x:Key="Tip.4">Exportieren Sie Ihre Bibliothek als Sicherung oder um sie mit Kollegen zu teilen.</sys:String>
+  <sys:String x:Key="Tip.5">Bilder werden in der Größe eingefügt, die Sie im Editor sehen; verkleinern Sie große Screenshots vor dem Speichern.</sys:String>
+  <sys:String x:Key="Tip.6">Legen Sie BananaNana.library.json neben die EXE, um Ihre Textbausteine auf einem USB-Stick mitzunehmen.</sys:String>
+  <sys:String x:Key="Tip.7">Strg+Klick auf einen Link im Editor zeigt, wohin er führt.</sys:String>
+  <sys:String x:Key="Tip.8">Das Suchfeld filtert Ihre Textbausteine während der Eingabe.</sys:String>
+</ResourceDictionary>

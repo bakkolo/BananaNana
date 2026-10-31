@@ -1,45 +1,44 @@
 <Window x:Class="BananaNana.EditorWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Editor" Width="860" Height="640" MinWidth="600" MinHeight="440" WindowStartupLocation="CenterOwner">
+        Title="{DynamicResource Editor.Title}" Width="860" Height="640" MinWidth="600" MinHeight="440" WindowStartupLocation="CenterOwner">
   <DockPanel Margin="24,18,24,18">
     <!-- Trigger -->
     <StackPanel DockPanel.Dock="Top" Margin="0,0,0,14">
-      <TextBlock Text="Trigger" FontWeight="SemiBold" Margin="1,0,0,6" />
-      <StackPanel Orientation="Horizontal">
+      <TextBlock Text="{DynamicResource Editor.Trigger}" FontWeight="SemiBold" Margin="1,0,0,6" />
+      <DockPanel>
         <TextBox x:Name="TriggerBox" Width="300" FontFamily="Cascadia Mono, Consolas" FontSize="16" Padding="10,6" AutomationProperties.Name="Trigger" />
-        <TextBlock Style="{StaticResource Caption}" VerticalAlignment="Center" Margin="14,0,0,0" TextWrapping="Wrap"
-                   Text="Type it and a space in any app, e.g. ;offer. No spaces inside." />
-      </StackPanel>
+        <TextBlock Style="{StaticResource Caption}" VerticalAlignment="Center" Margin="14,0,0,0" TextWrapping="Wrap" Text="{DynamicResource Editor.TriggerHint}" />
+      </DockPanel>
     </StackPanel>
 
     <!-- Formatting toolbar -->
     <Border DockPanel.Dock="Top" Margin="0,0,0,10" Padding="6,4" CornerRadius="8"
             Background="{DynamicResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
       <WrapPanel>
-        <Button Style="{StaticResource IconButton}" Content="&#xE8DD;" Click="Bold_Click" ToolTip="Bold (Ctrl+B)" AutomationProperties.Name="Bold" />
-        <Button Style="{StaticResource IconButton}" Content="&#xE8DB;" Click="Italic_Click" ToolTip="Italic (Ctrl+I)" AutomationProperties.Name="Italic" />
-        <Button Style="{StaticResource IconButton}" Content="&#xE8DC;" Click="Underline_Click" ToolTip="Underline (Ctrl+U)" AutomationProperties.Name="Underline" />
+        <Button Style="{StaticResource IconButton}" Content="&#xE8DD;" Click="Bold_Click" ToolTip="{DynamicResource Editor.Bold}" AutomationProperties.Name="Bold" />
+        <Button Style="{StaticResource IconButton}" Content="&#xE8DB;" Click="Italic_Click" ToolTip="{DynamicResource Editor.Italic}" AutomationProperties.Name="Italic" />
+        <Button Style="{StaticResource IconButton}" Content="&#xE8DC;" Click="Underline_Click" ToolTip="{DynamicResource Editor.Underline}" AutomationProperties.Name="Underline" />
         <Border Style="{StaticResource ToolSeparator}" />
-        <Button Style="{StaticResource IconButton}" Content="&#xE8E4;" Command="EditingCommands.AlignLeft" CommandTarget="{Binding ElementName=Editor}" ToolTip="Align left (Ctrl+L)" AutomationProperties.Name="Align left" />
-        <Button Style="{StaticResource IconButton}" Content="&#xE8E3;" Command="EditingCommands.AlignCenter" CommandTarget="{Binding ElementName=Editor}" ToolTip="Center (Ctrl+E)" AutomationProperties.Name="Center" />
-        <Button Style="{StaticResource IconButton}" Content="&#xE8E2;" Command="EditingCommands.AlignRight" CommandTarget="{Binding ElementName=Editor}" ToolTip="Align right (Ctrl+R)" AutomationProperties.Name="Align right" />
+        <Button Style="{StaticResource IconButton}" Content="&#xE8E4;" Command="EditingCommands.AlignLeft" CommandTarget="{Binding ElementName=Editor}" ToolTip="{DynamicResource Editor.AlignLeft}" AutomationProperties.Name="Align left" />
+        <Button Style="{StaticResource IconButton}" Content="&#xE8E3;" Command="EditingCommands.AlignCenter" CommandTarget="{Binding ElementName=Editor}" ToolTip="{DynamicResource Editor.AlignCenter}" AutomationProperties.Name="Center" />
+        <Button Style="{StaticResource IconButton}" Content="&#xE8E2;" Command="EditingCommands.AlignRight" CommandTarget="{Binding ElementName=Editor}" ToolTip="{DynamicResource Editor.AlignRight}" AutomationProperties.Name="Align right" />
         <Border Style="{StaticResource ToolSeparator}" />
-        <Button Style="{StaticResource IconButton}" Content="&#xE8FD;" Command="EditingCommands.ToggleBullets" CommandTarget="{Binding ElementName=Editor}" ToolTip="Bulleted list" AutomationProperties.Name="Bulleted list" />
-        <Button Style="{StaticResource IconButton}" Command="EditingCommands.ToggleNumbering" CommandTarget="{Binding ElementName=Editor}" ToolTip="Numbered list" AutomationProperties.Name="Numbered list">
+        <Button Style="{StaticResource IconButton}" Content="&#xE8FD;" Command="EditingCommands.ToggleBullets" CommandTarget="{Binding ElementName=Editor}" ToolTip="{DynamicResource Editor.Bullets}" AutomationProperties.Name="Bulleted list" />
+        <Button Style="{StaticResource IconButton}" Command="EditingCommands.ToggleNumbering" CommandTarget="{Binding ElementName=Editor}" ToolTip="{DynamicResource Editor.Numbering}" AutomationProperties.Name="Numbered list">
           <TextBlock Text="1." FontFamily="Segoe UI" FontSize="14" FontWeight="SemiBold" />
         </Button>
         <Border Style="{StaticResource ToolSeparator}" />
-        <Button Style="{StaticResource IconButton}" Content="&#xE71B;" Click="Link_Click" ToolTip="Add or change a link (Ctrl+K). Ctrl+click a link to open it." AutomationProperties.Name="Link" />
-        <Button Style="{StaticResource IconButton}" Content="&#xEB9F;" Click="Image_Click" ToolTip="Insert an image from a file, or paste one with Ctrl+V" AutomationProperties.Name="Insert image" />
-        <Button Style="{StaticResource IconButton}" Content="&#xE70F;" Click="EditImage_Click" ToolTip="Draw arrows, frames and highlights on the selected picture (or double-click it)" AutomationProperties.Name="Edit image" />
+        <Button Style="{StaticResource IconButton}" Content="&#xE71B;" Click="Link_Click" ToolTip="{DynamicResource Editor.Link}" AutomationProperties.Name="Link" />
+        <Button Style="{StaticResource IconButton}" Content="&#xEB9F;" Click="Image_Click" ToolTip="{DynamicResource Editor.InsertImage}" AutomationProperties.Name="Insert image" />
+        <Button Style="{StaticResource IconButton}" Content="&#xE70F;" Click="EditImage_Click" ToolTip="{DynamicResource Editor.EditImage}" AutomationProperties.Name="Edit image" />
       </WrapPanel>
     </Border>
 
     <!-- Actions -->
     <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,14,0,0">
-      <Button Content="Cancel" Click="Cancel_Click" IsCancel="True" Padding="16,7" Margin="0,0,8,0" />
-      <Button Content="Save" Click="Save_Click" Style="{DynamicResource AccentButtonStyle}" Padding="22,7" />
+      <Button Content="{DynamicResource Common.Cancel}" Click="Cancel_Click" IsCancel="True" Padding="16,7" Margin="0,0,8,0" AutomationProperties.Name="Cancel" />
+      <Button Content="{DynamicResource Common.Save}" Click="Save_Click" Style="{DynamicResource AccentButtonStyle}" Padding="22,7" AutomationProperties.Name="Save" />
     </StackPanel>
 
     <!-- Content on white paper: what you see is what gets pasted -->

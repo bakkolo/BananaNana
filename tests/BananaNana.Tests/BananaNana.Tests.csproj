@@ -15,6 +15,7 @@
     <Compile Include="..\..\BananaNana\LinkUrl.cs" Link="LinkUrl.cs" />
     <Compile Include="..\..\BananaNana\LibraryStore.cs" Link="LibraryStore.cs" />
     <Compile Include="..\..\BananaNana\Autostart.cs" Link="Autostart.cs" />
+    <Compile Include="..\..\BananaNana\Loc.cs" Link="Loc.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />

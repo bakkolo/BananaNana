@@ -1,0 +1,135 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+  <!-- ไทย -->
+  <sys:String x:Key="Common.Save">บันทึก</sys:String>
+  <sys:String x:Key="Common.Cancel">ยกเลิก</sys:String>
+  <sys:String x:Key="Common.Close">ปิด</sys:String>
+  <sys:String x:Key="Common.OK">ตกลง</sys:String>
+
+  <sys:String x:Key="Main.Import">นำเข้าคลังข้อความ</sys:String>
+  <sys:String x:Key="Main.Export">ส่งออกคลังข้อความ</sys:String>
+  <sys:String x:Key="Main.Settings">การตั้งค่า</sys:String>
+  <sys:String x:Key="Main.Help">วิธีใช้และเคล็ดลับ</sys:String>
+  <sys:String x:Key="Main.New">ข้อความสำเร็จรูปใหม่</sys:String>
+  <sys:String x:Key="Main.Search">ค้นหาข้อความสำเร็จรูป</sys:String>
+  <sys:String x:Key="Main.Empty">ยังไม่มีข้อความสำเร็จรูป&#x0a;คลิก ข้อความสำเร็จรูปใหม่ เพื่อสร้างรายการแรก</sys:String>
+  <sys:String x:Key="Main.Edit">แก้ไข</sys:String>
+  <sys:String x:Key="Main.Delete">ลบ</sys:String>
+  <sys:String x:Key="Main.PreviewCaption">ตัวอย่าง: นี่คือสิ่งที่จะถูกวาง</sys:String>
+  <sys:String x:Key="Main.SnippetCount">ข้อความสำเร็จรูป: {0}</sys:String>
+  <sys:String x:Key="Main.Pause">หยุดชั่วคราว</sys:String>
+  <sys:String x:Key="Main.Resume">ทำงานต่อ</sys:String>
+  <sys:String x:Key="Main.PauseTip">หยุดหรือเริ่มการแทนที่คำย่ออีกครั้ง</sys:String>
+  <sys:String x:Key="Main.Tip">เคล็ดลับ</sys:String>
+  <sys:String x:Key="Main.NextTip">เคล็ดลับถัดไป</sys:String>
+  <sys:String x:Key="Main.DeleteTitle">ลบข้อความสำเร็จรูป</sys:String>
+  <sys:String x:Key="Main.DeleteConfirm">ลบข้อความสำเร็จรูป {0} หรือไม่</sys:String>
+  <sys:String x:Key="Main.Duplicate">มีข้อความสำเร็จรูปที่ใช้คำย่อนี้อยู่แล้ว</sys:String>
+  <sys:String x:Key="Main.ImportTitle">นำเข้า</sys:String>
+  <sys:String x:Key="Main.ImportChoice">ใช่ = โฟลเดอร์ของไฟล์ EXE, ไม่ = เอกสาร, ยกเลิก = เลือกไฟล์</sys:String>
+  <sys:String x:Key="Main.LibraryFilter">คลังข้อความ Banana Nana</sys:String>
+  <sys:String x:Key="Main.SummaryEmpty">(ว่าง)</sys:String>
+  <sys:String x:Key="Main.SummaryImage">(รูปภาพ)</sys:String>
+  <sys:String x:Key="Main.SummaryUnreadable">(อ่านเนื้อหาไม่ได้)</sys:String>
+
+  <sys:String x:Key="Status.On">เปิดการแทนที่คำย่อแล้ว: พิมพ์คำย่อตามด้วยเว้นวรรคในโปรแกรมใดก็ได้</sys:String>
+  <sys:String x:Key="Status.Paused">หยุดการแทนที่คำย่อชั่วคราว</sys:String>
+  <sys:String x:Key="Status.Expanded">แทนที่ {0} แล้ว ({1})</sys:String>
+  <sys:String x:Key="Status.Failed">แทนที่ {0} ไม่สำเร็จ: {1}</sys:String>
+
+  <sys:String x:Key="Tray.Open">เปิด Banana Nana</sys:String>
+  <sys:String x:Key="Tray.Pause">หยุดการแทนที่คำย่อชั่วคราว</sys:String>
+  <sys:String x:Key="Tray.Autostart">เริ่มพร้อม Windows</sys:String>
+  <sys:String x:Key="Tray.Exit">ออก</sys:String>
+  <sys:String x:Key="Tray.Paused">Banana Nana (หยุดชั่วคราว)</sys:String>
+  <sys:String x:Key="Tray.HiddenTitle">Banana Nana ยังทำงานอยู่</sys:String>
+  <sys:String x:Key="Tray.HiddenText">คำย่อยังถูกแทนที่ตามปกติ คลิกไอคอนในถาดระบบเพื่อเปิดหน้าต่าง หรือคลิกขวาเพื่อออก</sys:String>
+
+  <sys:String x:Key="Lib.TwoFound">พบคลังข้อความสองชุด ใช่ = ข้างไฟล์ EXE, ไม่ = เอกสาร, ยกเลิก = คลังใหม่</sys:String>
+  <sys:String x:Key="Lib.Invalid">ไฟล์คลังข้อความไม่ถูกต้อง</sys:String>
+  <sys:String x:Key="Lib.Duplicates">คลังข้อความมีคำย่อซ้ำหรือว่างเปล่า</sys:String>
+
+  <sys:String x:Key="Editor.Title">ตัวแก้ไข</sys:String>
+  <sys:String x:Key="Editor.Trigger">คำย่อ</sys:String>
+  <sys:String x:Key="Editor.TriggerHint">พิมพ์คำย่อตามด้วยเว้นวรรคในโปรแกรมใดก็ได้ เช่น ;offer ห้ามมีเว้นวรรคข้างใน</sys:String>
+  <sys:String x:Key="Editor.Bold">ตัวหนา (Ctrl+B)</sys:String>
+  <sys:String x:Key="Editor.Italic">ตัวเอียง (Ctrl+I)</sys:String>
+  <sys:String x:Key="Editor.Underline">ขีดเส้นใต้ (Ctrl+U)</sys:String>
+  <sys:String x:Key="Editor.AlignLeft">จัดชิดซ้าย (Ctrl+L)</sys:String>
+  <sys:String x:Key="Editor.AlignCenter">จัดกึ่งกลาง (Ctrl+E)</sys:String>
+  <sys:String x:Key="Editor.AlignRight">จัดชิดขวา (Ctrl+R)</sys:String>
+  <sys:String x:Key="Editor.Bullets">รายการสัญลักษณ์แสดงหัวข้อย่อย</sys:String>
+  <sys:String x:Key="Editor.Numbering">รายการลำดับเลข</sys:String>
+  <sys:String x:Key="Editor.Link">เพิ่มหรือเปลี่ยนลิงก์ (Ctrl+K) กด Ctrl ค้างแล้วคลิกเพื่อเปิดลิงก์</sys:String>
+  <sys:String x:Key="Editor.InsertImage">แทรกรูปภาพจากไฟล์ หรือวางด้วย Ctrl+V</sys:String>
+  <sys:String x:Key="Editor.EditImage">วาดลูกศร กรอบ และไฮไลต์บนรูปที่เลือก (หรือดับเบิลคลิกที่รูป)</sys:String>
+  <sys:String x:Key="Editor.ImageFilter">รูปภาพ</sys:String>
+  <sys:String x:Key="Editor.ImageLoadFailed">โหลดรูปภาพไม่ได้: </sys:String>
+  <sys:String x:Key="Editor.EnterTrigger">กรุณาใส่คำย่อ</sys:String>
+  <sys:String x:Key="Editor.NoSpaces">คำย่อต้องไม่มีเว้นวรรค เพราะเว้นวรรคเป็นตัวสิ้นสุดคำย่อขณะพิมพ์</sys:String>
+  <sys:String x:Key="Editor.TooLong">คำย่อยาวได้ไม่เกิน {0} ตัวอักษร</sys:String>
+  <sys:String x:Key="Editor.SelectImageFirst">คลิกที่รูปก่อน แล้วจึงกด แก้ไขรูปภาพ (หรือดับเบิลคลิกที่รูป)</sys:String>
+  <sys:String x:Key="Editor.LinkOneParagraph">ลิงก์ต้องอยู่ภายในย่อหน้าเดียว</sys:String>
+
+  <sys:String x:Key="Link.Title">ลิงก์</sys:String>
+  <sys:String x:Key="Link.Text">ข้อความที่แสดง</sys:String>
+  <sys:String x:Key="Link.Address">ที่อยู่</sys:String>
+  <sys:String x:Key="Link.Hint">https://…, example.com หรือ name@example.com</sys:String>
+  <sys:String x:Key="Link.Remove">ลบลิงก์</sys:String>
+  <sys:String x:Key="Link.BadAddress">กรุณาใส่ที่อยู่เว็บ (http/https) หรือที่อยู่อีเมล</sys:String>
+  <sys:String x:Key="Link.NoText">กรุณาใส่ข้อความที่แสดง</sys:String>
+
+  <sys:String x:Key="Img.Title">แก้ไขรูปภาพ</sys:String>
+  <sys:String x:Key="Img.Select">เลือก</sys:String>
+  <sys:String x:Key="Img.SelectTip">คลิกรูปทรงเพื่อเลือก ลากเพื่อย้าย กด Delete เพื่อลบ</sys:String>
+  <sys:String x:Key="Img.Arrow">ลูกศร</sys:String>
+  <sys:String x:Key="Img.ArrowTip">ลากจากหางไปยังหัวลูกศร</sys:String>
+  <sys:String x:Key="Img.Frame">กรอบ</sys:String>
+  <sys:String x:Key="Img.FrameTip">ลากเพื่อวาดกรอบ</sys:String>
+  <sys:String x:Key="Img.Highlight">ไฮไลต์</sys:String>
+  <sys:String x:Key="Img.HighlightTip">ลากเพื่อทำเครื่องหมายเหมือนปากกาเน้นข้อความ</sys:String>
+  <sys:String x:Key="Img.Red">แดง</sys:String>
+  <sys:String x:Key="Img.Yellow">เหลือง</sys:String>
+  <sys:String x:Key="Img.Green">เขียว</sys:String>
+  <sys:String x:Key="Img.Blue">น้ำเงิน</sys:String>
+  <sys:String x:Key="Img.Black">ดำ</sys:String>
+  <sys:String x:Key="Img.Undo">เลิกทำรูปทรงล่าสุด (Ctrl+Z)</sys:String>
+  <sys:String x:Key="Img.Delete">ลบรูปทรงที่เลือก (Delete)</sys:String>
+
+  <sys:String x:Key="Set.Title">การตั้งค่า</sys:String>
+  <sys:String x:Key="Set.Language">ภาษา</sys:String>
+  <sys:String x:Key="Set.LanguageHint">ภาษาของแอป ข้อความสำเร็จรูปของคุณจะไม่ถูกเปลี่ยน</sys:String>
+  <sys:String x:Key="Set.Autostart">เริ่มพร้อม Windows</sys:String>
+  <sys:String x:Key="Set.AutostartHint">เริ่มทำงานเงียบ ๆ ในถาดระบบเมื่อคุณลงชื่อเข้าใช้ การปิดหน้าต่างจะยังให้ Banana Nana ทำงานอยู่ในถาดระบบ ใช้ ออก ในเมนูของไอคอนเพื่อปิดโปรแกรม</sys:String>
+  <sys:String x:Key="Set.Library">คลังข้อความ: {0}</sys:String>
+  <sys:String x:Key="Set.NotSaved">ยังไม่ได้บันทึก ระบบจะสร้างไว้ใน Documents\BananaNana เมื่อคุณบันทึกข้อความสำเร็จรูปรายการแรก</sys:String>
+  <sys:String x:Key="Set.OpenFolder">เปิดโฟลเดอร์</sys:String>
+  <sys:String x:Key="Set.AutostartFailed">เปลี่ยนการตั้งค่าเริ่มพร้อม Windows ไม่ได้: </sys:String>
+  <sys:String x:Key="Set.NoFolder">ยังไม่มีโฟลเดอร์นี้: </sys:String>
+
+  <sys:String x:Key="Help.Title">วิธีใช้และเคล็ดลับ</sys:String>
+  <sys:String x:Key="Help.Welcome">ยินดีต้อนรับสู่ Banana Nana</sys:String>
+  <sys:String x:Key="Help.Intro">พิมพ์คำย่อสั้น ๆ ที่ใดก็ได้ แล้ว Banana Nana จะแทนที่ด้วยข้อความที่คุณบันทึกไว้ พร้อมรูปแบบและรูปภาพ</sys:String>
+  <sys:String x:Key="Help.S1.Title">สร้างข้อความสำเร็จรูป</sys:String>
+  <sys:String x:Key="Help.S1.Body">คลิก ข้อความสำเร็จรูปใหม่ เลือกคำย่อ เช่น ;offer พิมพ์หรือวางเนื้อหา แล้วกด บันทึก ควรขึ้นต้นคำย่อด้วยสัญลักษณ์อย่าง ; เพื่อไม่ให้ซ้ำกับคำทั่วไป</sys:String>
+  <sys:String x:Key="Help.S2.Title">ใช้ได้ทุกที่</sys:String>
+  <sys:String x:Key="Help.S2.Body">ใน Word, Outlook, Teams หรือโปรแกรมอื่น ให้พิมพ์คำย่อแล้วตามด้วยเว้นวรรค คำย่อจะหายไปและข้อความสำเร็จรูปจะถูกวางแทน ปุ่ม Enter จะไม่แทนที่คำย่อ จึงไม่มีอะไรถูกส่งออกไปโดยไม่ตั้งใจ</sys:String>
+  <sys:String x:Key="Help.S3.Title">จัดรูปแบบและลิงก์</sys:String>
+  <sys:String x:Key="Help.S3.Body">ใช้แถบเครื่องมือสำหรับตัวหนา รายการ และการจัดแนว การวางจาก Word จะคงรูปแบบไว้ กด Ctrl+K เพื่อเพิ่มลิงก์</sys:String>
+  <sys:String x:Key="Help.S4.Title">รูปภาพ</sys:String>
+  <sys:String x:Key="Help.S4.Body">แทรกรูปภาพหรือวางภาพหน้าจอ คลิกที่รูปแล้วลากมุมเพื่อปรับขนาด ดับเบิลคลิกเพื่อเพิ่มลูกศร กรอบ และไฮไลต์</sys:String>
+  <sys:String x:Key="Help.S5.Title">ทำงานเบื้องหลัง</sys:String>
+  <sys:String x:Key="Help.S5.Body">เมื่อปิดหน้าต่าง Banana Nana จะยังอยู่ในถาดระบบข้างนาฬิกา คลิกขวาที่ไอคอนเพื่อหยุดชั่วคราวหรือออก และเปิด เริ่มพร้อม Windows ได้ในการตั้งค่า</sys:String>
+  <sys:String x:Key="Help.TipsTitle">เคล็ดลับ</sys:String>
+  <sys:String x:Key="Help.GotIt">เข้าใจแล้ว</sys:String>
+
+  <sys:String x:Key="Tip.1">ขึ้นต้นคำย่อด้วย ; หรือ / เพื่อไม่ให้ซ้ำกับคำจริง</sys:String>
+  <sys:String x:Key="Tip.2">คลิปบอร์ดจะถูกคืนค่าหลังการวางทุกครั้ง การคัดลอกและวางจึงใช้ได้ตามปกติ</sys:String>
+  <sys:String x:Key="Tip.3">หยุดการแทนที่ชั่วคราวจากไอคอนในถาดระบบเมื่อต้องการพิมพ์คำย่อตามตัวอักษร</sys:String>
+  <sys:String x:Key="Tip.4">ส่งออกคลังข้อความเพื่อสำรองข้อมูลหรือแบ่งปันให้เพื่อนร่วมงาน</sys:String>
+  <sys:String x:Key="Tip.5">รูปภาพจะถูกวางตามขนาดที่เห็นในตัวแก้ไข ควรย่อภาพหน้าจอขนาดใหญ่ก่อนบันทึก</sys:String>
+  <sys:String x:Key="Tip.6">วางไฟล์ BananaNana.library.json ไว้ข้างไฟล์ EXE เพื่อพกข้อความสำเร็จรูปไปกับแฟลชไดรฟ์</sys:String>
+  <sys:String x:Key="Tip.7">กด Ctrl ค้างแล้วคลิกลิงก์ในตัวแก้ไขเพื่อตรวจดูว่าลิงก์ไปที่ใด</sys:String>
+  <sys:String x:Key="Tip.8">ช่องค้นหาจะกรองข้อความสำเร็จรูปขณะที่คุณพิมพ์</sys:String>
+</ResourceDictionary>
