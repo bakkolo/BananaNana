@@ -27,6 +27,35 @@ public static class RichContentRenderer
         return new(range.Text.TrimEnd('\r', '\n'), Encoding.Latin1.GetString(rtf.ToArray()), html.ToString());
     }
 
+    // Draws the whole snippet as one picture (white background) for manual pasting, e.g. into Teams.
+    // Must run on the UI thread: the document needs a real layout pass before it can be rendered.
+    public static BitmapSource RenderImage(FlowDocument doc, double width = 640)
+    {
+        doc.Background = Brushes.White;
+        doc.PagePadding = new Thickness(16);
+        var viewer = new FlowDocumentScrollViewer
+        {
+            Document = doc,
+            VerticalScrollBarVisibility = ScrollBarVisibility.Hidden,
+            HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden,
+            Background = Brushes.White,
+            BorderThickness = new Thickness(0),
+        };
+        viewer.Measure(new Size(width, double.PositiveInfinity));
+        viewer.Arrange(new Rect(viewer.DesiredSize));
+        viewer.UpdateLayout();
+        // Let the document finish its deferred layout before drawing.
+        viewer.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Loaded, new Action(() => { }));
+        viewer.Measure(new Size(width, double.PositiveInfinity));
+        viewer.Arrange(new Rect(viewer.DesiredSize));
+        viewer.UpdateLayout();
+        var size = viewer.DesiredSize;
+        var bitmap = new RenderTargetBitmap((int)Math.Ceiling(size.Width), Math.Max(1, (int)Math.Ceiling(size.Height)), 96, 96, PixelFormats.Pbgra32);
+        bitmap.Render(viewer);
+        bitmap.Freeze();
+        return bitmap;
+    }
+
     // Loads content stored by RichContent.Save (base64 XamlPackage) into a detached document.
     public static FlowDocument LoadXamlPackage(string base64)
     {

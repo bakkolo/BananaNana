@@ -16,6 +16,8 @@
   <sys:String x:Key="Main.Empty">还没有片段。&#x0a;点击“新建片段”创建第一个。</sys:String>
   <sys:String x:Key="Main.Edit">编辑</sys:String>
   <sys:String x:Key="Main.Delete">删除</sys:String>
+  <sys:String x:Key="Main.CopyImage">复制为图片</sys:String>
+  <sys:String x:Key="Status.CopiedImage">已将 {0} 复制为图片。按 Ctrl+V 粘贴。</sys:String>
   <sys:String x:Key="Main.PreviewCaption">预览：这就是将要粘贴的内容</sys:String>
   <sys:String x:Key="Main.SnippetCount">片段：{0}</sys:String>
   <sys:String x:Key="Main.Pause">暂停</sys:String>

@@ -16,6 +16,8 @@
   <sys:String x:Key="Main.Empty">Nie masz jeszcze szablonów.&#x0a;Kliknij Nowy szablon, aby utworzyć pierwszy.</sys:String>
   <sys:String x:Key="Main.Edit">Edytuj</sys:String>
   <sys:String x:Key="Main.Delete">Usuń</sys:String>
+  <sys:String x:Key="Main.CopyImage">Kopiuj jako obraz</sys:String>
+  <sys:String x:Key="Status.CopiedImage">Skopiowano {0} jako obraz. Wklej przez Ctrl+V.</sys:String>
   <sys:String x:Key="Main.PreviewCaption">Podgląd: tak to zostanie wklejone</sys:String>
   <sys:String x:Key="Main.SnippetCount">Szablony: {0}</sys:String>
   <sys:String x:Key="Main.Pause">Wstrzymaj</sys:String>

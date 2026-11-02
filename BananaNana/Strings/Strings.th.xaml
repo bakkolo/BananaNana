@@ -16,6 +16,8 @@
   <sys:String x:Key="Main.Empty">ยังไม่มีข้อความสำเร็จรูป&#x0a;คลิก ข้อความสำเร็จรูปใหม่ เพื่อสร้างรายการแรก</sys:String>
   <sys:String x:Key="Main.Edit">แก้ไข</sys:String>
   <sys:String x:Key="Main.Delete">ลบ</sys:String>
+  <sys:String x:Key="Main.CopyImage">คัดลอกเป็นรูปภาพ</sys:String>
+  <sys:String x:Key="Status.CopiedImage">คัดลอก {0} เป็นรูปภาพแล้ว วางด้วย Ctrl+V</sys:String>
   <sys:String x:Key="Main.PreviewCaption">ตัวอย่าง: นี่คือสิ่งที่จะถูกวาง</sys:String>
   <sys:String x:Key="Main.SnippetCount">ข้อความสำเร็จรูป: {0}</sys:String>
   <sys:String x:Key="Main.Pause">หยุดชั่วคราว</sys:String>

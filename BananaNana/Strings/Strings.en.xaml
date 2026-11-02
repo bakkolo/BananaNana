@@ -19,6 +19,8 @@
   <sys:String x:Key="Main.Empty">No snippets yet.&#x0a;Click New snippet to create your first one.</sys:String>
   <sys:String x:Key="Main.Edit">Edit</sys:String>
   <sys:String x:Key="Main.Delete">Delete</sys:String>
+  <sys:String x:Key="Main.CopyImage">Copy as image</sys:String>
+  <sys:String x:Key="Status.CopiedImage">Copied {0} as an image. Paste it with Ctrl+V.</sys:String>
   <sys:String x:Key="Main.PreviewCaption">Preview: this is what gets pasted</sys:String>
   <sys:String x:Key="Main.SnippetCount">Snippets: {0}</sys:String>
   <sys:String x:Key="Main.Pause">Pause</sys:String>
