@@ -17,7 +17,7 @@
   <sys:String x:Key="Main.Edit">Modifier</sys:String>
   <sys:String x:Key="Main.Delete">Supprimer</sys:String>
   <sys:String x:Key="Main.CopyImage">Copier comme image</sys:String>
-  <sys:String x:Key="Status.CopiedImage">{0} copié comme image. Collez avec Ctrl+V.</sys:String>
+  <sys:String x:Key="Status.CopiedImage">Copié : {0} comme image. Collez avec Ctrl+V.</sys:String>
   <sys:String x:Key="Main.PreviewCaption">Aperçu : voici ce qui sera collé</sys:String>
   <sys:String x:Key="Main.SnippetCount">Extraits : {0}</sys:String>
   <sys:String x:Key="Main.Pause">Pause</sys:String>

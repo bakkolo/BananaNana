@@ -17,7 +17,7 @@
   <sys:String x:Key="Main.Edit">Bearbeiten</sys:String>
   <sys:String x:Key="Main.Delete">Löschen</sys:String>
   <sys:String x:Key="Main.CopyImage">Als Bild kopieren</sys:String>
-  <sys:String x:Key="Status.CopiedImage">{0} als Bild kopiert. Mit Strg+V einfügen.</sys:String>
+  <sys:String x:Key="Status.CopiedImage">Kopiert: {0} als Bild. Mit Strg+V einfügen.</sys:String>
   <sys:String x:Key="Main.PreviewCaption">Vorschau: so wird es eingefügt</sys:String>
   <sys:String x:Key="Main.SnippetCount">Textbausteine: {0}</sys:String>
   <sys:String x:Key="Main.Pause">Pausieren</sys:String>

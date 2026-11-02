@@ -17,7 +17,7 @@
   <sys:String x:Key="Main.Edit">Editar</sys:String>
   <sys:String x:Key="Main.Delete">Eliminar</sys:String>
   <sys:String x:Key="Main.CopyImage">Copiar como imagen</sys:String>
-  <sys:String x:Key="Status.CopiedImage">{0} copiado como imagen. Pégalo con Ctrl+V.</sys:String>
+  <sys:String x:Key="Status.CopiedImage">Copiado: {0} como imagen. Pégalo con Ctrl+V.</sys:String>
   <sys:String x:Key="Main.PreviewCaption">Vista previa: esto es lo que se pega</sys:String>
   <sys:String x:Key="Main.SnippetCount">Plantillas: {0}</sys:String>
   <sys:String x:Key="Main.Pause">Pausar</sys:String>
