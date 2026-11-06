@@ -9,6 +9,13 @@ public sealed class AppSettings
     public string Language { get; set; } = "en";
     public bool WelcomeShown { get; set; }
 
+    // Safety options (all on by default). Checked only at the moment a trigger is recognised, never in the background.
+    public bool ProtectPasswords { get; set; } = true;
+    public bool SkipAdminApps { get; set; } = true;
+    public bool UseExcludedApps { get; set; } = true;
+    // Program names to leave alone, one per line (e.g. keepass.exe).
+    public string ExcludedApps { get; set; } = "";
+
     // A separately named instance (BANANANANA_INSTANCE, used for testing) gets its own settings file.
     static string FilePath
     {

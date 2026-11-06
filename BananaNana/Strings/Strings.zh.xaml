@@ -37,6 +37,7 @@
   <sys:String x:Key="Status.Paused">已暂停展开。</sys:String>
   <sys:String x:Key="Status.Expanded">已展开 {0}（{1}）</sys:String>
   <sys:String x:Key="Status.Failed">无法展开 {0}：{1}</sys:String>
+  <sys:String x:Key="Status.SkippedAdmin">未展开 {0}：此程序以管理员身份运行</sys:String>
 
   <sys:String x:Key="Tray.Open">打开 Banana Nana</sys:String>
   <sys:String x:Key="Tray.Pause">暂停展开</sys:String>
@@ -102,6 +103,12 @@
   <sys:String x:Key="Set.LanguageHint">应用界面语言。你的片段不会被更改。</sys:String>
   <sys:String x:Key="Set.Autostart">开机自动启动</sys:String>
   <sys:String x:Key="Set.AutostartHint">登录后在托盘中静默启动。关闭窗口后 Banana Nana 仍在托盘中运行；要退出，请使用托盘菜单中的“退出”。</sys:String>
+  <sys:String x:Key="Set.Protect">不在密码框中展开</sys:String>
+  <sys:String x:Key="Set.ProtectHint">绝不粘贴到密码框，避免片段出现在登录栏或不该出现的地方。对标准的 Windows 密码框有效；部分浏览器和新式应用中的密码框无法识别。</sys:String>
+  <sys:String x:Key="Set.Admin">不在管理员程序中展开</sys:String>
+  <sys:String x:Key="Set.AdminHint">Windows 不允许普通程序向以管理员身份运行的程序输入，在那里展开会中途失败。开启后，Banana Nana 会跳过这些程序，并在状态栏提示。</sys:String>
+  <sys:String x:Key="Set.Exclude">要忽略的程序</sys:String>
+  <sys:String x:Key="Set.ExcludeHint">Banana Nana 绝不会在这些程序中展开。每行输入一个程序名，例如 keepass.exe 或 mstsc.exe。适合密码管理器和远程桌面。</sys:String>
   <sys:String x:Key="Set.Library">片段库：{0}</sys:String>
   <sys:String x:Key="Set.NotSaved">尚未保存。保存第一个片段时将在“文档\BananaNana”中创建。</sys:String>
   <sys:String x:Key="Set.OpenFolder">打开文件夹</sys:String>

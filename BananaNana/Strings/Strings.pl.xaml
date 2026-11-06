@@ -37,6 +37,7 @@
   <sys:String x:Key="Status.Paused">Rozwijanie wstrzymane.</sys:String>
   <sys:String x:Key="Status.Expanded">Rozwinięto {0} ({1})</sys:String>
   <sys:String x:Key="Status.Failed">Nie udało się rozwinąć {0}: {1}</sys:String>
+  <sys:String x:Key="Status.SkippedAdmin">Nie rozwinięto {0}: ten program działa jako administrator</sys:String>
 
   <sys:String x:Key="Tray.Open">Otwórz Banana Nana</sys:String>
   <sys:String x:Key="Tray.Pause">Wstrzymaj rozwijanie</sys:String>
@@ -102,6 +103,12 @@
   <sys:String x:Key="Set.LanguageHint">Język aplikacji. Twoje szablony się nie zmieniają.</sys:String>
   <sys:String x:Key="Set.Autostart">Uruchamiaj z Windows</sys:String>
   <sys:String x:Key="Set.AutostartHint">Uruchamia się po cichu w zasobniku po zalogowaniu. Zamknięcie okna zostawia Banana Nana w zasobniku; aby zakończyć, użyj Zakończ w menu ikony.</sys:String>
+  <sys:String x:Key="Set.Protect">Nie rozwijaj w polach hasła</sys:String>
+  <sys:String x:Key="Set.ProtectHint">Nigdy nie wkleja do pola hasła, więc skrót nie trafi do formularza logowania ani w niepożądane miejsce. Działa w standardowych polach hasła Windows; niektórych pól hasła w przeglądarkach i nowoczesnych aplikacjach nie da się rozpoznać.</sys:String>
+  <sys:String x:Key="Set.Admin">Nie rozwijaj w programach administratora</sys:String>
+  <sys:String x:Key="Set.AdminHint">Windows nie pozwala zwykłemu programowi pisać w programie uruchomionym jako administrator, więc rozwinięcie nie powiodłoby się w połowie. Po włączeniu Banana Nana pomija takie programy i informuje o tym w pasku stanu.</sys:String>
+  <sys:String x:Key="Set.Exclude">Programy do pominięcia</sys:String>
+  <sys:String x:Key="Set.ExcludeHint">Banana Nana nigdy nie rozwija w tych programach. Wpisz po jednej nazwie programu w wierszu, np. keepass.exe lub mstsc.exe. Przydatne dla menedżerów haseł i pulpitu zdalnego.</sys:String>
   <sys:String x:Key="Set.Library">Biblioteka: {0}</sys:String>
   <sys:String x:Key="Set.NotSaved">Jeszcze nie zapisana. Zostanie utworzona w Dokumenty\BananaNana po zapisaniu pierwszego szablonu.</sys:String>
   <sys:String x:Key="Set.OpenFolder">Otwórz folder</sys:String>

@@ -37,6 +37,7 @@
   <sys:String x:Key="Status.Paused">หยุดการแทนที่คำย่อชั่วคราว</sys:String>
   <sys:String x:Key="Status.Expanded">แทนที่ {0} แล้ว ({1})</sys:String>
   <sys:String x:Key="Status.Failed">แทนที่ {0} ไม่สำเร็จ: {1}</sys:String>
+  <sys:String x:Key="Status.SkippedAdmin">ไม่ได้แทนที่ {0}: โปรแกรมนี้รันแบบผู้ดูแลระบบ</sys:String>
 
   <sys:String x:Key="Tray.Open">เปิด Banana Nana</sys:String>
   <sys:String x:Key="Tray.Pause">หยุดการแทนที่คำย่อชั่วคราว</sys:String>
@@ -102,6 +103,12 @@
   <sys:String x:Key="Set.LanguageHint">ภาษาของแอป ข้อความสำเร็จรูปของคุณจะไม่ถูกเปลี่ยน</sys:String>
   <sys:String x:Key="Set.Autostart">เริ่มพร้อม Windows</sys:String>
   <sys:String x:Key="Set.AutostartHint">เริ่มทำงานเงียบ ๆ ในถาดระบบเมื่อคุณลงชื่อเข้าใช้ การปิดหน้าต่างจะยังให้ Banana Nana ทำงานอยู่ในถาดระบบ ใช้ ออก ในเมนูของไอคอนเพื่อปิดโปรแกรม</sys:String>
+  <sys:String x:Key="Set.Protect">ไม่แทนที่ในช่องรหัสผ่าน</sys:String>
+  <sys:String x:Key="Set.ProtectHint">จะไม่วางข้อความลงในช่องรหัสผ่าน เพื่อไม่ให้ข้อความที่บันทึกไว้หลุดไปอยู่ในช่องล็อกอินหรือที่ที่ไม่ควรอยู่ ใช้ได้กับช่องรหัสผ่านมาตรฐานของ Windows ส่วนช่องรหัสผ่านบางแบบในเบราว์เซอร์และแอปรุ่นใหม่ตรวจจับไม่ได้</sys:String>
+  <sys:String x:Key="Set.Admin">ไม่แทนที่ในโปรแกรมผู้ดูแลระบบ</sys:String>
+  <sys:String x:Key="Set.AdminHint">Windows ไม่อนุญาตให้โปรแกรมทั่วไปพิมพ์ลงในโปรแกรมที่รันแบบผู้ดูแลระบบ การแทนที่จึงจะล้มเหลวกลางคัน เมื่อเปิดไว้ Banana Nana จะข้ามโปรแกรมเหล่านั้นและแจ้งในแถบสถานะ</sys:String>
+  <sys:String x:Key="Set.Exclude">โปรแกรมที่ต้องการข้าม</sys:String>
+  <sys:String x:Key="Set.ExcludeHint">Banana Nana จะไม่แทนที่ในโปรแกรมเหล่านี้เลย พิมพ์ชื่อโปรแกรมบรรทัดละหนึ่งชื่อ เช่น keepass.exe หรือ mstsc.exe เหมาะกับโปรแกรมจัดการรหัสผ่านและรีโมตเดสก์ท็อป</sys:String>
   <sys:String x:Key="Set.Library">คลังข้อความ: {0}</sys:String>
   <sys:String x:Key="Set.NotSaved">ยังไม่ได้บันทึก ระบบจะสร้างไว้ใน Documents\BananaNana เมื่อคุณบันทึกข้อความสำเร็จรูปรายการแรก</sys:String>
   <sys:String x:Key="Set.OpenFolder">เปิดโฟลเดอร์</sys:String>

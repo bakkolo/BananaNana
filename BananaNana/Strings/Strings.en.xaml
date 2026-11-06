@@ -41,6 +41,7 @@
   <sys:String x:Key="Status.Paused">Expansion paused.</sys:String>
   <sys:String x:Key="Status.Expanded">Expanded {0} ({1})</sys:String>
   <sys:String x:Key="Status.Failed">Could not expand {0}: {1}</sys:String>
+  <sys:String x:Key="Status.SkippedAdmin">Not expanded {0}: this program runs as administrator</sys:String>
 
   <!-- Tray -->
   <sys:String x:Key="Tray.Open">Open Banana Nana</sys:String>
@@ -112,6 +113,12 @@
   <sys:String x:Key="Set.LanguageHint">Language of the app. Your snippets are not changed.</sys:String>
   <sys:String x:Key="Set.Autostart">Start with Windows</sys:String>
   <sys:String x:Key="Set.AutostartHint">Starts quietly in the tray when you sign in. Closing the window keeps Banana Nana running there; use Exit in the tray menu to quit.</sys:String>
+  <sys:String x:Key="Set.Protect">Don't expand in password boxes</sys:String>
+  <sys:String x:Key="Set.ProtectHint">Never pastes into a password box, so a snippet can't leak into a login field or end up where it shouldn't. It works for standard Windows password boxes; some browser and modern-app password fields can't be recognised.</sys:String>
+  <sys:String x:Key="Set.Admin">Don't expand in admin programs</sys:String>
+  <sys:String x:Key="Set.AdminHint">Windows does not let a normal program type into a program running as administrator, so expanding there would fail half-way. When on, Banana Nana skips those programs and tells you in the status line instead.</sys:String>
+  <sys:String x:Key="Set.Exclude">Programs to leave alone</sys:String>
+  <sys:String x:Key="Set.ExcludeHint">Banana Nana will never expand in these programs. Type one program name per line, for example keepass.exe or mstsc.exe. Handy for password managers and remote desktops.</sys:String>
   <sys:String x:Key="Set.Library">Library: {0}</sys:String>
   <sys:String x:Key="Set.NotSaved">Not saved yet. It will be created in Documents\BananaNana when you save the first snippet.</sys:String>
   <sys:String x:Key="Set.OpenFolder">Open folder</sys:String>

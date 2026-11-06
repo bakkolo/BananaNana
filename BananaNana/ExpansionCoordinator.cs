@@ -5,7 +5,7 @@ using BananaNana.Paste;
 namespace BananaNana;
 
 // Glues the key listener, matcher and paste engine to the snippet library.
-// Stage 4 adds password-field, elevated-app and excluded-app checks here.
+// Safety checks (password field, admin app, excluded app) run in ExpandAsync via ForegroundGuard.
 public sealed class ExpansionCoordinator : IDisposable
 {
     readonly KeyboardInputService input = new();
@@ -13,6 +13,8 @@ public sealed class ExpansionCoordinator : IDisposable
     readonly ClipboardPasteService paster = new();
     Dictionary<string, Snippet> snippets = new(StringComparer.OrdinalIgnoreCase);
     bool paused;
+
+    public AppSettings Settings { get; set; } = new();
 
     public event Action<string>? StatusChanged;
 
@@ -47,6 +49,11 @@ public sealed class ExpansionCoordinator : IDisposable
     {
         // Never expand inside Banana Nana itself (e.g. while typing a trigger in the editor).
         if (Application.Current.Windows.OfType<Window>().Any(w => w.IsActive)) return;
+        switch (ForegroundGuard.Check(Settings))
+        {
+            case Skip.Admin: StatusChanged?.Invoke(Loc.F("Status.SkippedAdmin", trigger)); return;
+            case Skip.Password or Skip.Excluded: return; // silent on purpose
+        }
         try
         {
             var content = string.IsNullOrEmpty(snippet.Content)

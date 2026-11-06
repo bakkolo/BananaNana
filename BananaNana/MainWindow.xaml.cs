@@ -17,7 +17,7 @@ public partial class MainWindow : Window {
  bool exiting, trayHintShown;
  int tip = Random.Shared.Next(TipCount);
  public const int TipCount = 8;
- public MainWindow(AppSettings settings){this.settings=settings;InitializeComponent();store.LoadStartup();expander.StatusChanged+=t=>StatusText.Text=t;expander.Start();tray.OpenRequested+=ShowFromTray;tray.PauseToggled+=()=>SetPaused(!expander.Paused);tray.ExitRequested+=ExitApp;Autostart.RepairIfMoved();Loc.Changed+=OnLanguageChanged;Refresh();SetPaused(false);ShowTip();}
+ public MainWindow(AppSettings settings){this.settings=settings;InitializeComponent();store.LoadStartup();expander.Settings=settings;expander.StatusChanged+=t=>StatusText.Text=t;expander.Start();tray.OpenRequested+=ShowFromTray;tray.PauseToggled+=()=>SetPaused(!expander.Paused);tray.ExitRequested+=ExitApp;Autostart.RepairIfMoved();Loc.Changed+=OnLanguageChanged;Refresh();SetPaused(false);ShowTip();}
  // Texts set from code (counts, status, summaries, tip) are re-rendered; XAML texts update by themselves.
  void OnLanguageChanged(){summaries.Clear();Refresh();SetPaused(expander.Paused);ShowTip();}
  public void ShowFromTray(){Show();if(WindowState==WindowState.Minimized)WindowState=WindowState.Normal;Activate();}

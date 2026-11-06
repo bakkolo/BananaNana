@@ -37,6 +37,7 @@
   <sys:String x:Key="Status.Paused">Expansion en pause.</sys:String>
   <sys:String x:Key="Status.Expanded">Développé : {0} ({1})</sys:String>
   <sys:String x:Key="Status.Failed">Impossible de développer {0} : {1}</sys:String>
+  <sys:String x:Key="Status.SkippedAdmin">{0} non développé : ce programme s’exécute en administrateur</sys:String>
 
   <sys:String x:Key="Tray.Open">Ouvrir Banana Nana</sys:String>
   <sys:String x:Key="Tray.Pause">Mettre l’expansion en pause</sys:String>
@@ -102,6 +103,12 @@
   <sys:String x:Key="Set.LanguageHint">Langue de l’application. Vos extraits ne sont pas modifiés.</sys:String>
   <sys:String x:Key="Set.Autostart">Démarrer avec Windows</sys:String>
   <sys:String x:Key="Set.AutostartHint">Démarre discrètement dans la zone de notification à l’ouverture de session. Fermer la fenêtre laisse Banana Nana actif ; utilisez Quitter dans le menu de l’icône pour l’arrêter.</sys:String>
+  <sys:String x:Key="Set.Protect">Ne pas développer dans les champs de mot de passe</sys:String>
+  <sys:String x:Key="Set.ProtectHint">Ne colle jamais dans un champ de mot de passe, pour qu’un extrait ne se retrouve pas dans un formulaire de connexion ou ailleurs par erreur. Fonctionne avec les champs de mot de passe Windows standard ; certains champs de navigateurs et d’applications modernes ne sont pas reconnaissables.</sys:String>
+  <sys:String x:Key="Set.Admin">Ne pas développer dans les programmes administrateur</sys:String>
+  <sys:String x:Key="Set.AdminHint">Windows ne permet pas à un programme normal de saisir dans un programme exécuté en administrateur ; le développement échouerait à mi-chemin. Activé, Banana Nana ignore ces programmes et vous le signale dans la ligne d’état.</sys:String>
+  <sys:String x:Key="Set.Exclude">Programmes à ignorer</sys:String>
+  <sys:String x:Key="Set.ExcludeHint">Banana Nana ne développera jamais dans ces programmes. Saisissez un nom de programme par ligne, par exemple keepass.exe ou mstsc.exe. Pratique pour les gestionnaires de mots de passe et le bureau à distance.</sys:String>
   <sys:String x:Key="Set.Library">Bibliothèque : {0}</sys:String>
   <sys:String x:Key="Set.NotSaved">Pas encore enregistrée. Elle sera créée dans Documents\BananaNana lors de l’enregistrement du premier extrait.</sys:String>
   <sys:String x:Key="Set.OpenFolder">Ouvrir le dossier</sys:String>

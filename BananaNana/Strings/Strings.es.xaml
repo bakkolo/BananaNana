@@ -37,6 +37,7 @@
   <sys:String x:Key="Status.Paused">Expansión en pausa.</sys:String>
   <sys:String x:Key="Status.Expanded">Expandido {0} ({1})</sys:String>
   <sys:String x:Key="Status.Failed">No se pudo expandir {0}: {1}</sys:String>
+  <sys:String x:Key="Status.SkippedAdmin">No se expandió {0}: este programa se ejecuta como administrador</sys:String>
 
   <sys:String x:Key="Tray.Open">Abrir Banana Nana</sys:String>
   <sys:String x:Key="Tray.Pause">Pausar la expansión</sys:String>
@@ -102,6 +103,12 @@
   <sys:String x:Key="Set.LanguageHint">Idioma de la aplicación. Tus plantillas no cambian.</sys:String>
   <sys:String x:Key="Set.Autostart">Iniciar con Windows</sys:String>
   <sys:String x:Key="Set.AutostartHint">Se inicia en silencio en la bandeja al iniciar sesión. Al cerrar la ventana, Banana Nana sigue en la bandeja; usa Salir en el menú del icono para cerrarlo.</sys:String>
+  <sys:String x:Key="Set.Protect">No expandir en campos de contraseña</sys:String>
+  <sys:String x:Key="Set.ProtectHint">Nunca pega en un campo de contraseña, así que un fragmento no acaba en un formulario de acceso ni donde no debe. Funciona con los campos de contraseña estándar de Windows; algunos campos de contraseña de navegadores y apps modernas no se pueden reconocer.</sys:String>
+  <sys:String x:Key="Set.Admin">No expandir en programas de administrador</sys:String>
+  <sys:String x:Key="Set.AdminHint">Windows no deja que un programa normal escriba en uno ejecutado como administrador, así que la expansión fallaría a medias. Si está activado, Banana Nana omite esos programas y te avisa en la línea de estado.</sys:String>
+  <sys:String x:Key="Set.Exclude">Programas que se deben ignorar</sys:String>
+  <sys:String x:Key="Set.ExcludeHint">Banana Nana nunca expandirá en estos programas. Escribe un nombre de programa por línea, por ejemplo keepass.exe o mstsc.exe. Útil para gestores de contraseñas y escritorio remoto.</sys:String>
   <sys:String x:Key="Set.Library">Biblioteca: {0}</sys:String>
   <sys:String x:Key="Set.NotSaved">Aún no se ha guardado. Se creará en Documentos\BananaNana al guardar la primera plantilla.</sys:String>
   <sys:String x:Key="Set.OpenFolder">Abrir carpeta</sys:String>

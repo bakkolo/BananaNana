@@ -37,6 +37,7 @@
   <sys:String x:Key="Status.Paused">Erweiterung pausiert.</sys:String>
   <sys:String x:Key="Status.Expanded">Erweitert: {0} ({1})</sys:String>
   <sys:String x:Key="Status.Failed">Fehler beim Erweitern von {0}: {1}</sys:String>
+  <sys:String x:Key="Status.SkippedAdmin">{0} nicht erweitert: Dieses Programm läuft als Administrator</sys:String>
 
   <sys:String x:Key="Tray.Open">Banana Nana öffnen</sys:String>
   <sys:String x:Key="Tray.Pause">Erweiterung pausieren</sys:String>
@@ -102,6 +103,12 @@
   <sys:String x:Key="Set.LanguageHint">Sprache der App. Ihre Textbausteine bleiben unverändert.</sys:String>
   <sys:String x:Key="Set.Autostart">Mit Windows starten</sys:String>
   <sys:String x:Key="Set.AutostartHint">Startet nach der Anmeldung unauffällig im Infobereich. Beim Schließen des Fensters läuft Banana Nana dort weiter; zum Beenden Beenden im Symbolmenü wählen.</sys:String>
+  <sys:String x:Key="Set.Protect">Nicht in Passwortfeldern erweitern</sys:String>
+  <sys:String x:Key="Set.ProtectHint">Fügt nie in ein Passwortfeld ein, damit kein Textbaustein in ein Anmeldefeld oder an eine falsche Stelle gelangt. Funktioniert bei normalen Windows-Passwortfeldern; manche Passwortfelder in Browsern und modernen Apps lassen sich nicht erkennen.</sys:String>
+  <sys:String x:Key="Set.Admin">Nicht in Administrator-Programmen erweitern</sys:String>
+  <sys:String x:Key="Set.AdminHint">Windows erlaubt einem normalen Programm nicht, in ein als Administrator laufendes Programm zu tippen; das Erweitern würde dort auf halbem Weg scheitern. Eingeschaltet überspringt Banana Nana solche Programme und meldet es in der Statuszeile.</sys:String>
+  <sys:String x:Key="Set.Exclude">Programme ausnehmen</sys:String>
+  <sys:String x:Key="Set.ExcludeHint">Banana Nana erweitert in diesen Programmen nie. Ein Programmname pro Zeile, zum Beispiel keepass.exe oder mstsc.exe. Praktisch für Passwortmanager und Remotedesktop.</sys:String>
   <sys:String x:Key="Set.Library">Bibliothek: {0}</sys:String>
   <sys:String x:Key="Set.NotSaved">Noch nicht gespeichert. Sie wird beim Speichern des ersten Textbausteins unter Dokumente\BananaNana angelegt.</sys:String>
   <sys:String x:Key="Set.OpenFolder">Ordner öffnen</sys:String>
