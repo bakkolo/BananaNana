@@ -10,4 +10,7 @@
     <Compile Include="..\..\BananaNana\Paste\*.cs" Link="Paste\%(Filename)%(Extension)" />
     <Compile Include="..\..\BananaNana\Input\*.cs" Link="Input\%(Filename)%(Extension)" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\BananaNana.Core\BananaNana.Core.csproj" />
+  </ItemGroup>
 </Project>

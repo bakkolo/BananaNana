@@ -12,11 +12,11 @@
     <Compile Include="..\..\BananaNana\Input\*.cs" Link="Input\%(Filename)%(Extension)" />
     <Compile Include="..\..\BananaNana\ImageResizeAdorner.cs" Link="ImageResizeAdorner.cs" />
     <Compile Include="..\..\BananaNana\ImageAnnotation.cs" Link="ImageAnnotation.cs" />
-    <Compile Include="..\..\BananaNana\LinkUrl.cs" Link="LinkUrl.cs" />
-    <Compile Include="..\..\BananaNana\LibraryStore.cs" Link="LibraryStore.cs" />
     <Compile Include="..\..\BananaNana\Autostart.cs" Link="Autostart.cs" />
     <Compile Include="..\..\BananaNana\Loc.cs" Link="Loc.cs" />
-    <Compile Include="..\..\BananaNana\AppSettings.cs" Link="AppSettings.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\BananaNana.Core\BananaNana.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />

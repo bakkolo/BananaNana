@@ -26,7 +26,7 @@ target app
    layout (flag `0x4` so dead keys in the target app keep working). Ctrl+Alt counts as AltGr (needed for
    Polish letters); Ctrl or Alt alone, and Win, count as shortcuts and reset the word.
    Our own injected keys carry a marker in `dwExtraInfo` and are ignored.
-2. **Matching** (`Input/TriggerMatcher.cs`): holds only the word being typed (max 64 characters, in
+2. **Matching** (`BananaNana.Core/Input/TriggerMatcher.cs`): holds only the word being typed (max 64 characters, in
    memory, never logged). A match needs a separator (space) right after a whole word equal to a trigger,
    case-insensitive. Backspace edits the word; deleting past its start makes it "unknown" until the next
    separator. Enter is deliberately not a separator (Teams sends on Enter).
@@ -49,6 +49,11 @@ drops `file:///` images, so images must be embedded.
 ## Project layout
 
 ```
+BananaNana.Core/                platform-neutral logic, plain net10.0 (builds and tests on Linux)
+  LibraryStore.cs               library JSON (source-generated serializer), duplicate checks
+  LinkUrl.cs                    link validation/normalisation (http, https, mailto only)
+  AppSettings.cs                %APPDATA%\BananaNana\settings.json (language, welcome shown)
+  Input/TriggerMatcher.cs       word matcher (no WPF)
 BananaNana/                     the app
   App.xaml(.cs)                 startup: single instance, settings, language, tray mode, welcome guide
   MainWindow                    library list, preview, status bar, tips, tray integration
@@ -57,20 +62,30 @@ BananaNana/                     the app
   HelpWindow                    help guide / welcome screen
   SettingsWindow, LinkDialog
   ExpansionCoordinator.cs       library ⇄ input ⇄ paste glue
-  LibraryStore.cs               library JSON (source-generated serializer), duplicate checks
   RichContent.cs                editor ⇄ XamlPackage storage
   ImageResizeAdorner.cs         corner handles; EditorImages.FixSizes (natural size, capped 500×350)
   ImageAnnotation.cs            arrow geometry, flattening drawings into the picture
-  LinkUrl.cs                    link validation/normalisation (http, https, mailto only)
   TrayIcon.cs, Autostart.cs     notification-area icon; HKCU Run entry with --tray
-  AppSettings.cs                %APPDATA%\BananaNana\settings.json (language, welcome shown)
   Loc.cs, Strings/*.xaml        translations
   Input/                        Raw Input listener, matcher, SendInput injector, P/Invoke
   Paste/                        renderer, CF_HTML builder, RTF writer, clipboard service
+tests/BananaNana.Core.Tests/    xUnit for Core (runs on Linux: dotnet test tests/BananaNana.Core.Tests)
 tests/BananaNana.Tests/         xUnit (links the app's source files; WPF tests run on an STA thread)
 tools/PasteLab/                 test bench: clipboard format variants A–F, live expansion test
 docs/                           documentation
 ```
+
+### Core project (`BananaNana.Core`)
+
+Platform-neutral code with no WPF or Win32 dependency: `TriggerMatcher`, `LinkUrl`, `AppSettings` and the snippet
+library (`LibraryStore`). The WPF app references it. Two hooks let the app supply UI behaviour, because Core cannot
+reference WPF:
+- `LibraryStore.Localize` is set once in `App.OnStartup` to `Loc.T`. It translates the two library error messages;
+  the default returns the key.
+- `LibraryStore.LoadStartup(choose)`: when both library files exist, `choose(text, caption)` shows the Yes/No/Cancel
+  prompt (`MainWindow.AskWhichLibrary`) and returns true (first file), false (second) or null (no library opened).
+
+Keep WPF code out of Core. WPF-dependent tests stay in `tests/BananaNana.Tests`.
 
 ## Data and files
 

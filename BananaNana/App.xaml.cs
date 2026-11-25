@@ -21,6 +21,7 @@ public partial class App : Application
             Shutdown();
             return;
         }
+        LibraryStore.Localize = Loc.T; // before any library load (MainWindow, Import)
         var settings = AppSettings.Load();
         Loc.Apply(settings.Language);
         var window = new MainWindow(settings);
