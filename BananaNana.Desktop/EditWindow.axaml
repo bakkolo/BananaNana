@@ -1,27 +1,42 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         x:Class="BananaNana.Desktop.EditWindow"
-        Title="Edit snippet" Width="620" Height="580" MinWidth="480" MinHeight="420"
+        Title="Edit snippet" Width="860" Height="640" MinWidth="600" MinHeight="440"
         WindowStartupLocation="CenterOwner">
-  <DockPanel Margin="22,18,22,18">
-    <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8" Margin="0,14,0,0">
-      <Button x:Name="CancelButton" Padding="14,6" Click="Cancel_Click" />
-      <Button x:Name="SaveButton" Classes="accent" Padding="14,6" Click="Save_Click" />
+  <!-- Frame of the Windows EditorWindow: trigger row on top, white paper below, Cancel and Save at the bottom right.
+       The formatting toolbar comes with the formatted editor; for now the text is plain. -->
+  <DockPanel Margin="24,18,24,18">
+    <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,14,0,0">
+      <Button x:Name="CancelButton" Padding="16,7" Margin="0,0,8,0" Click="Cancel_Click" />
+      <Button x:Name="SaveButton" Classes="accent" Padding="22,7" Click="Save_Click" />
     </StackPanel>
     <TextBlock x:Name="ErrorText" DockPanel.Dock="Bottom" Foreground="#C42B1C" TextWrapping="Wrap" Margin="0,10,0,0" />
 
-    <StackPanel Spacing="8">
-      <TextBlock x:Name="TriggerLabel" FontWeight="SemiBold" />
-      <TextBox x:Name="TriggerBox" FontFamily="monospace" />
-      <TextBlock x:Name="TriggerHint" Opacity="0.7" TextWrapping="Wrap" FontSize="12" />
-
-      <!-- A snippet with formatting or pictures: the text editor below keeps only plain text. -->
-      <Border x:Name="NoticeBorder" Classes="card" Padding="12,8" Margin="0,6,0,0" IsVisible="False">
-        <TextBlock x:Name="Notice" TextWrapping="Wrap" />
-      </Border>
-
-      <TextBlock x:Name="TextLabel" FontWeight="SemiBold" Margin="0,8,0,0" />
-      <TextBox x:Name="TextEditor" AcceptsReturn="True" TextWrapping="Wrap" MinHeight="200" />
+    <!-- Trigger -->
+    <StackPanel DockPanel.Dock="Top" Margin="0,0,0,14">
+      <TextBlock x:Name="TriggerLabel" FontWeight="SemiBold" Margin="1,0,0,6" />
+      <DockPanel>
+        <TextBox x:Name="TriggerBox" Width="300" FontFamily="monospace" FontSize="16" Padding="10,6" />
+        <TextBlock x:Name="TriggerHint" Opacity="0.7" FontSize="12" VerticalAlignment="Center" Margin="14,0,0,0" TextWrapping="Wrap" />
+      </DockPanel>
     </StackPanel>
+
+    <!-- A snippet with formatting or pictures: the plain text editor below keeps only its text. -->
+    <Border x:Name="NoticeBorder" Classes="card" Padding="12,8" Margin="0,0,0,10" DockPanel.Dock="Top" IsVisible="False">
+      <TextBlock x:Name="Notice" TextWrapping="Wrap" />
+    </Border>
+
+    <!-- Content on white paper: what you see is what gets pasted -->
+    <Border CornerRadius="8" Background="White" BorderBrush="{DynamicResource CardStroke}" BorderThickness="1" ClipToBounds="True">
+      <TextBox x:Name="TextEditor" AcceptsReturn="True" AcceptsTab="True" TextWrapping="Wrap" BorderThickness="0"
+               Padding="12,10" FontSize="14" Background="White" Foreground="Black">
+        <TextBox.Resources>
+          <SolidColorBrush x:Key="TextControlBackground">White</SolidColorBrush>
+          <SolidColorBrush x:Key="TextControlBackgroundPointerOver">White</SolidColorBrush>
+          <SolidColorBrush x:Key="TextControlForeground">Black</SolidColorBrush>
+          <SolidColorBrush x:Key="TextControlBorderBrush">Transparent</SolidColorBrush>
+        </TextBox.Resources>
+      </TextBox>
+    </Border>
   </DockPanel>
 </Window>

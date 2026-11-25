@@ -28,10 +28,11 @@ public partial class SettingsWindow : Window
         Heading.Text = Loc.T("Set.Title");
         LanguageLabel.Text = Loc.T("Set.Language");
         LanguageHint.Text = Loc.T("Set.LanguageHint");
-        AutostartBox.Content = Loc.T("Linux.Autostart");
+        AutostartLabel.Text = Loc.T("Linux.Autostart");
         AutostartHint.Text = Loc.T("Set.AutostartHint");
-        StartPausedBox.Content = Loc.T("Linux.StartPaused");
-        LibraryText.Text = Loc.F("Set.Library", service.LibraryName) + "\n" + service.LibraryPath;
+        StartPausedLabel.Text = Loc.T("Linux.StartPaused");
+        LibraryName.Text = Loc.F("Set.Library", service.LibraryName);
+        LibraryPath.Text = service.LibraryPath;
         OpenFolderButton.Content = Loc.T("Set.OpenFolder");
         CloseButton.Content = Loc.T("Common.Close");
     }

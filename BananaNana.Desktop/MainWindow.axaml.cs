@@ -1,7 +1,14 @@
+using System.Net;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Media;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform.Storage;
 using Avalonia.Threading;
+using TheArtOfDev.HtmlRenderer.Avalonia;
+using TheArtOfDev.HtmlRenderer.Core.Entities;
 namespace BananaNana.Desktop;
 
 // One list row: the trigger and a one-line summary of its text.
@@ -10,6 +17,8 @@ public sealed record SnippetRow(string Trigger, string Summary);
 public partial class MainWindow : Window
 {
     const int TipCount = 8;
+    static readonly IBrush StatusOn = new SolidColorBrush(Color.Parse("#2EA043"));
+    static readonly IBrush StatusOff = new SolidColorBrush(Color.Parse("#8A8480"));
     readonly ExpansionService service;
     int tip = Random.Shared.Next(TipCount);
 
@@ -18,6 +27,7 @@ public partial class MainWindow : Window
         this.service = service;
         InitializeComponent();
         Icon = App.Icon;
+        Preview.ImageLoad += OnPreviewImageLoad;
         service.Changed += () => Dispatcher.UIThread.Post(Refresh);
         Loc.Changed += Retranslate;
         Closed += (_, _) => Loc.Changed -= Retranslate;
@@ -39,12 +49,14 @@ public partial class MainWindow : Window
     void Retranslate()
     {
         SearchBox.Watermark = Loc.T("Main.Search");
-        SettingsButton.Content = Loc.T("Main.Settings");
-        HelpButton.Content = Loc.T("Main.Help");
-        NewButton.Content = Loc.T("Main.New");
-        EditButton.Content = Loc.T("Main.Edit");
-        RenameButton.Content = Loc.T("Main.Rename");
-        DeleteButton.Content = Loc.T("Main.Delete");
+        ToolTip.SetTip(ImportButton, Loc.T("Main.Import"));
+        ToolTip.SetTip(ExportButton, Loc.T("Main.Export"));
+        ToolTip.SetTip(SettingsButton, Loc.T("Main.Settings"));
+        ToolTip.SetTip(HelpButton, Loc.T("Main.Help"));
+        ToolTip.SetTip(PauseButton, Loc.T("Main.PauseTip"));
+        NewLabel.Text = Loc.T("Main.New");
+        EditLabel.Text = Loc.T("Main.Edit");
+        DeleteLabel.Text = Loc.T("Main.Delete");
         NextTipButton.Content = Loc.T("Main.NextTip");
         PreviewCaption.Text = Loc.T("Main.PreviewCaption");
         BannerTitle.Text = Loc.T("Linux.Banner.Title");
@@ -71,14 +83,21 @@ public partial class MainWindow : Window
         Title = "Banana Nana | " + service.LibraryName;
         LibraryText.Text = $"{service.LibraryName} · {Loc.F("Main.SnippetCount", snippets.Count)}";
 
+        // Status line and dot use the Windows wording: green while expansion is on, grey when paused or not working.
         var problem = service.Problem;
+        string status;
+        if (service.LibraryError is { } libraryError) status = Loc.F("Main.LibraryError", libraryError);
+        else if (problem is not null) status = Loc.F("Status.Error", problem);
+        else status = Loc.T(service.Paused ? "Status.Paused" : "Status.On");
+        StatusText.Text = status;
+        StatusDot.Fill = problem is null && !service.Paused && service.LibraryError is null ? StatusOn : StatusOff;
         Banner.IsVisible = problem is not null;
-        StatusText.Text = service.LibraryError is { } libraryError ? Loc.F("Main.LibraryError", libraryError)
-            : problem is not null ? Loc.F("Status.Error", problem)
-            : service.Paused ? Loc.T("Status.Paused")
-            : Loc.F("Status.Listening", service.KeyboardCount);
-        PauseButton.Content = Loc.T(service.Paused ? "Main.Resume" : "Main.Pause");
+
+        PauseLabel.Text = Loc.T(service.Paused ? "Main.Resume" : "Main.Pause");
+        PauseIcon.Data = this.FindResource(service.Paused ? "IconPlay" : "IconPause") as Geometry;
         NewButton.IsEnabled = service.CanEdit;
+        ImportButton.IsEnabled = service.CanEdit;
+        ExportButton.IsEnabled = service.CanEdit;
         ShowPreview();
     }
 
@@ -95,15 +114,38 @@ public partial class MainWindow : Window
     {
         var snippet = Selected();
         PreviewTitle.Text = snippet?.Trigger ?? "";
-        Preview.Text = snippet?.Text ?? "";
-        var notes = new List<string>();
-        if (snippet is not null && SnippetContent.HasFormatting(snippet.Html)) notes.Add(Loc.T("Main.HasFormatting"));
-        if (snippet is not null && SnippetContent.HasImages(snippet.Html)) notes.Add(Loc.T("Main.HasImages"));
-        Notes.Text = string.Join("  ·  ", notes);
+        Preview.Text = PreviewHtml(snippet);
         bool active = snippet is not null && service.CanEdit;
         EditButton.IsEnabled = active;
-        RenameButton.IsEnabled = active;
         DeleteButton.IsEnabled = active;
+    }
+
+    // The rich HTML when the snippet has it; plain text is shown as paragraphs so the preview looks the same either way.
+    static string PreviewHtml(HtmlSnippet? snippet)
+    {
+        if (snippet is null) return "";
+        if (!string.IsNullOrEmpty(snippet.Html)) return snippet.Html;
+        return "<p>" + WebUtility.HtmlEncode(snippet.Text).Replace("\n", "<br>") + "</p>";
+    }
+
+    // The renderer may not decode inline pictures itself: data:image/...;base64 URIs are decoded here.
+    static void OnPreviewImageLoad(object? sender, HtmlRendererRoutedEventArgs<HtmlImageLoadEventArgs> e)
+    {
+        var args = e.Event;
+        const string prefix = "data:";
+        if (!args.Src.StartsWith(prefix, StringComparison.OrdinalIgnoreCase)) return;
+        int comma = args.Src.IndexOf(',');
+        if (comma < 0 || !args.Src[..comma].EndsWith(";base64", StringComparison.OrdinalIgnoreCase)) return;
+        try
+        {
+            using var stream = new MemoryStream(Convert.FromBase64String(args.Src[(comma + 1)..]));
+            args.Callback(new Bitmap(stream));
+            args.Handled = true;
+        }
+        catch (Exception ex) when (ex is FormatException or NotSupportedException or ArgumentException or InvalidOperationException)
+        {
+            // A picture that cannot be decoded stays as the renderer shows it (its error icon).
+        }
     }
 
     void ShowTip() => TipText.Text = Loc.T($"Tip.{tip + 1}");
@@ -138,11 +180,56 @@ public partial class MainWindow : Window
         Refresh();
     }
 
-    async void Rename_Click(object? sender, RoutedEventArgs e)
+    // Import: choose a Windows BananaNana.library.json; the report says what came over.
+    async void Import_Click(object? sender, RoutedEventArgs e)
     {
-        if (Selected() is not { } snippet) return;
-        await new RenameWindow(service, snippet).ShowDialog(this);
+        var files = await StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+        {
+            Title = Loc.T("Main.ImportTitle"),
+            AllowMultiple = false,
+            FileTypeFilter = [new FilePickerFileType(Loc.T("Main.LibraryFilter")) { Patterns = ["*.json"] }],
+        });
+        if (files.FirstOrDefault()?.TryGetLocalPath() is not { } path) return;
+        try
+        {
+            var report = service.Import(path);
+            await Dialogs.Message(this, Loc.T("Main.ImportTitle"), ReportText(report));
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidDataException or InvalidOperationException or System.Text.Json.JsonException)
+        {
+            await Dialogs.Message(this, Loc.T("Main.ImportTitle"), ex.Message);
+        }
         Refresh();
+    }
+
+    // Export: save a copy of the Linux library file.
+    async void Export_Click(object? sender, RoutedEventArgs e)
+    {
+        var file = await StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
+        {
+            Title = Loc.T("Main.Export"),
+            SuggestedFileName = LinuxLibrary.FileName,
+            DefaultExtension = "json",
+            FileTypeChoices = [new FilePickerFileType(Loc.T("Main.LibraryFilter")) { Patterns = ["*.json"] }],
+        });
+        if (file?.TryGetLocalPath() is not { } path) return;
+        try
+        {
+            service.Export(path);
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidOperationException)
+        {
+            await Dialogs.Message(this, Loc.T("Main.Export"), ex.Message);
+        }
+    }
+
+    // The report is shown in English for now: its wording has no key in the shared Strings files yet.
+    static string ReportText(ImportReport report)
+    {
+        var lines = new List<string> { $"Imported: {report.Imported.Count}", $"Skipped: {report.Skipped.Count}", $"Failed: {report.Failed.Count}" };
+        lines.AddRange(report.Skipped.Select(i => $"  {i.Trigger}: {i.Reason}"));
+        lines.AddRange(report.Failed.Select(i => $"  {i.Trigger}: {i.Reason}"));
+        return string.Join(Environment.NewLine, lines);
     }
 
     async void Delete_Click(object? sender, RoutedEventArgs e)

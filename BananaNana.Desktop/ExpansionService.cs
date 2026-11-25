@@ -90,6 +90,38 @@ public sealed class ExpansionService : IDisposable
 
     public void Remove(string trigger) => Change(list => list.RemoveAll(s => s.Trigger == trigger));
 
+    // Imports a Windows library (the same rules as the CLI). The engine gets the new snippets at once.
+    public ImportReport Import(string windowsLibraryPath)
+    {
+        ImportReport report;
+        lock (gate)
+        {
+            if (!CanEdit) throw new InvalidOperationException(LibraryError);
+            var before = library.Data.Snippets.ToList();
+            try
+            {
+                report = library.ImportFromWindows(windowsLibraryPath);
+            }
+            catch
+            {
+                library.Data.Snippets = before; // a failed save leaves the file unchanged, so memory must match it
+                throw;
+            }
+            engine.SetSnippets(ToSnippets());
+        }
+        Changed?.Invoke();
+        return report;
+    }
+
+    public void Export(string path)
+    {
+        lock (gate)
+        {
+            if (!CanEdit) throw new InvalidOperationException(LibraryError);
+            library.Export(path);
+        }
+    }
+
     void Change(Action<List<HtmlSnippet>> edit)
     {
         lock (gate)

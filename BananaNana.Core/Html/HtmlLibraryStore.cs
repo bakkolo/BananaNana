@@ -88,6 +88,9 @@ public sealed class LinuxLibrary
         File.Move(temp, FilePath, true);
     }
 
+    // Writes a copy of the library (Export in the app): the same JSON as the library file.
+    public void Export(string path) => File.WriteAllText(path, JsonSerializer.Serialize(Data, HtmlLibraryJson.Default.HtmlSnippetLibrary));
+
     // Reads a Windows BananaNana.library.json (read only) and converts each snippet. One bad snippet is reported
     // as failed and does not stop the others. Saves this library when anything was imported.
     public ImportReport ImportFromWindows(string windowsLibraryPath, ImportMode mode = ImportMode.Auto)

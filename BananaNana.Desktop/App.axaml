@@ -2,14 +2,124 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="BananaNana.Desktop.App"
              RequestedThemeVariant="Default">
+  <!-- Colours copied from the Windows app: dark window #201C19, cards #2B2723, lilac accent #DDA0DD, purple selection #7B3F8C.
+       No light palette exists in the Windows XAML, so the light one uses the same accents on a Fluent-like light base. -->
+  <Application.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Dark">
+          <SolidColorBrush x:Key="AppBackground">#201C19</SolidColorBrush>
+          <SolidColorBrush x:Key="AppForeground">#F5F1EE</SolidColorBrush>
+          <SolidColorBrush x:Key="CardBackground">#2B2723</SolidColorBrush>
+          <SolidColorBrush x:Key="CardStroke">#3D3733</SolidColorBrush>
+          <SolidColorBrush x:Key="SubtleBackground">#352F2B</SolidColorBrush>
+          <SolidColorBrush x:Key="AccentText">#DDA0DD</SolidColorBrush>
+          <SolidColorBrush x:Key="StatusOff">#8A8480</SolidColorBrush>
+          <SolidColorBrush x:Key="ButtonBackground">#3A3430</SolidColorBrush>
+          <SolidColorBrush x:Key="ButtonBackgroundPointerOver">#463F3A</SolidColorBrush>
+          <SolidColorBrush x:Key="ButtonBackgroundPressed">#2F2A27</SolidColorBrush>
+          <SolidColorBrush x:Key="ButtonBorderBrush">#4A433E</SolidColorBrush>
+          <SolidColorBrush x:Key="ButtonForeground">#F5F1EE</SolidColorBrush>
+          <SolidColorBrush x:Key="TextControlBackground">#1A1613</SolidColorBrush>
+          <SolidColorBrush x:Key="TextControlBackgroundPointerOver">#211D1A</SolidColorBrush>
+          <SolidColorBrush x:Key="TextControlBorderBrush">#4A433E</SolidColorBrush>
+          <SolidColorBrush x:Key="TextControlForeground">#F5F1EE</SolidColorBrush>
+          <SolidColorBrush x:Key="AccentButtonBackground">#DDA0DD</SolidColorBrush>
+          <SolidColorBrush x:Key="AccentButtonBackgroundPointerOver">#E8B6E8</SolidColorBrush>
+          <SolidColorBrush x:Key="AccentButtonBackgroundPressed">#C98CC9</SolidColorBrush>
+          <SolidColorBrush x:Key="AccentButtonForeground">#201C19</SolidColorBrush>
+          <Color x:Key="SystemAccentColor">#7B3F8C</Color>
+          <Color x:Key="SystemAccentColorLight1">#9457A3</Color>
+          <Color x:Key="SystemAccentColorLight2">#AD7AB9</Color>
+          <Color x:Key="SystemAccentColorLight3">#C69BCD</Color>
+          <Color x:Key="SystemAccentColorDark1">#6A3279</Color>
+          <Color x:Key="SystemAccentColorDark2">#552866</Color>
+          <Color x:Key="SystemAccentColorDark3">#401E4D</Color>
+        </ResourceDictionary>
+        <ResourceDictionary x:Key="Light">
+          <SolidColorBrush x:Key="AppBackground">#F3F2F1</SolidColorBrush>
+          <SolidColorBrush x:Key="AppForeground">#201C19</SolidColorBrush>
+          <SolidColorBrush x:Key="CardBackground">#FFFFFF</SolidColorBrush>
+          <SolidColorBrush x:Key="CardStroke">#E2DDD9</SolidColorBrush>
+          <SolidColorBrush x:Key="SubtleBackground">#F1EEEB</SolidColorBrush>
+          <SolidColorBrush x:Key="AccentText">#7B3F8C</SolidColorBrush>
+          <SolidColorBrush x:Key="StatusOff">#8A8480</SolidColorBrush>
+          <SolidColorBrush x:Key="ButtonBackground">#FFFFFF</SolidColorBrush>
+          <SolidColorBrush x:Key="ButtonBackgroundPointerOver">#F0EDEB</SolidColorBrush>
+          <SolidColorBrush x:Key="ButtonBackgroundPressed">#E4DFDB</SolidColorBrush>
+          <SolidColorBrush x:Key="ButtonBorderBrush">#D0C9C4</SolidColorBrush>
+          <SolidColorBrush x:Key="ButtonForeground">#201C19</SolidColorBrush>
+          <SolidColorBrush x:Key="TextControlBackground">#FFFFFF</SolidColorBrush>
+          <SolidColorBrush x:Key="TextControlBackgroundPointerOver">#FBFAF9</SolidColorBrush>
+          <SolidColorBrush x:Key="TextControlBorderBrush">#CFC8C3</SolidColorBrush>
+          <SolidColorBrush x:Key="TextControlForeground">#201C19</SolidColorBrush>
+          <SolidColorBrush x:Key="AccentButtonBackground">#DDA0DD</SolidColorBrush>
+          <SolidColorBrush x:Key="AccentButtonBackgroundPointerOver">#E8B6E8</SolidColorBrush>
+          <SolidColorBrush x:Key="AccentButtonBackgroundPressed">#C98CC9</SolidColorBrush>
+          <SolidColorBrush x:Key="AccentButtonForeground">#201C19</SolidColorBrush>
+          <Color x:Key="SystemAccentColor">#7B3F8C</Color>
+          <Color x:Key="SystemAccentColorLight1">#9457A3</Color>
+          <Color x:Key="SystemAccentColorLight2">#AD7AB9</Color>
+          <Color x:Key="SystemAccentColorLight3">#C69BCD</Color>
+          <Color x:Key="SystemAccentColorDark1">#6A3279</Color>
+          <Color x:Key="SystemAccentColorDark2">#552866</Color>
+          <Color x:Key="SystemAccentColorDark3">#401E4D</Color>
+        </ResourceDictionary>
+      </ResourceDictionary.ThemeDictionaries>
+
+      <!-- Icons: simple 16x16 geometries standing in for the Segoe Fluent Icons glyphs of the Windows app. -->
+      <StreamGeometry x:Key="IconDownload">M7,1 H9 V8.6 L11.3,6.3 L12.7,7.7 L8,12.4 L3.3,7.7 L4.7,6.3 L7,8.6 Z M2,11 H4 V13 H12 V11 H14 V15 H2 Z</StreamGeometry>
+      <StreamGeometry x:Key="IconUpload">M8,1.6 L12.7,6.3 L11.3,7.7 L9,5.4 V11 H7 V5.4 L4.7,7.7 L3.3,6.3 Z M2,11 H4 V13 H12 V11 H14 V15 H2 Z</StreamGeometry>
+      <StreamGeometry x:Key="IconSettings">F1 M8,2 A6,6 0 1 1 8,14 A6,6 0 1 1 8,2 Z M8,5.5 A2.5,2.5 0 1 0 8,10.5 A2.5,2.5 0 1 0 8,5.5 Z M7,0 H9 V3 H7 Z M7,13 H9 V16 H7 Z M0,7 H3 V9 H0 Z M13,7 H16 V9 H13 Z</StreamGeometry>
+      <StreamGeometry x:Key="IconHelp">F1 M8,1 A7,7 0 1 1 8,15 A7,7 0 1 1 8,1 Z M8,3 A5,5 0 1 0 8,13 A5,5 0 1 0 8,3 Z M6.2,6 C6.2,4.2 7,3.2 8.1,3.2 C9.4,3.2 10.2,4.1 10.2,5.3 C10.2,6.8 8.6,7.2 8.6,8.6 V9.4 H7.2 V8.4 C7.2,6.9 8.8,6.5 8.8,5.3 C8.8,4.7 8.5,4.4 8.1,4.4 C7.5,4.4 7.6,5.2 7.6,6 Z M7.2,11 H8.8 V12.6 H7.2 Z</StreamGeometry>
+      <StreamGeometry x:Key="IconPlus">M7,2 H9 V7 H14 V9 H9 V14 H7 V9 H2 V7 H7 Z</StreamGeometry>
+      <StreamGeometry x:Key="IconEdit">M11,2 L14,5 L6,13 L3,13 L3,10 Z</StreamGeometry>
+      <StreamGeometry x:Key="IconDelete">F1 M5,1 H11 V2.5 H14 V4 H2 V2.5 H5 Z M3.5,5.5 H12.5 L12,15 H4 Z</StreamGeometry>
+      <StreamGeometry x:Key="IconPause">M4,2.5 H7 V13.5 H4 Z M9,2.5 H12 V13.5 H9 Z</StreamGeometry>
+      <StreamGeometry x:Key="IconPlay">M4,2.5 L13,8 L4,13.5 Z</StreamGeometry>
+      <StreamGeometry x:Key="IconSearch">F1 M7,2 A5,5 0 1 1 7,12 A5,5 0 1 1 7,2 Z M7,4 A3,3 0 1 0 7,10 A3,3 0 1 0 7,4 Z M9.4,10.8 L11,9.2 L14.5,12.7 L13,14.2 Z</StreamGeometry>
+      <StreamGeometry x:Key="IconTip">F1 M8,1 A5,5 0 0 0 5,10 V11.5 H11 V10 A5,5 0 0 0 8,1 Z M5.5,13 H10.5 V14.5 H5.5 Z</StreamGeometry>
+    </ResourceDictionary>
+  </Application.Resources>
+
   <Application.Styles>
     <FluentTheme />
-    <!-- Calm cards: a quiet background and hairline border, following the light or dark theme. -->
+    <Style Selector="Window">
+      <Setter Property="Background" Value="{DynamicResource AppBackground}" />
+      <Setter Property="Foreground" Value="{DynamicResource AppForeground}" />
+    </Style>
+    <!-- Rounded panel (Windows: CornerRadius 8, 1 px stroke, card fill). -->
     <Style Selector="Border.card">
-      <Setter Property="Background" Value="{DynamicResource ThemeControlBackgroundBaseLowBrush}" />
-      <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderLowBrush}" />
+      <Setter Property="Background" Value="{DynamicResource CardBackground}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource CardStroke}" />
       <Setter Property="BorderThickness" Value="1" />
       <Setter Property="CornerRadius" Value="8" />
+    </Style>
+    <!-- Borderless square toolbar button (Windows IconButton: 36 x 34, transparent). -->
+    <Style Selector="Button.icon">
+      <Setter Property="Width" Value="36" />
+      <Setter Property="Height" Value="34" />
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="Margin" Value="0,0,4,0" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+    <!-- Snippet list rows: the row Border (see MainWindow) carries the colour, so the theme's selection fill never shows.
+         Selected: purple #7B3F8C with white text, as in the Windows list. -->
+    <Style Selector="ListBoxItem">
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="Margin" Value="0,2" />
+    </Style>
+    <Style Selector="ListBoxItem:selected Border.row">
+      <Setter Property="Background" Value="#7B3F8C" />
+    </Style>
+    <Style Selector="ListBoxItem:selected">
+      <Setter Property="Foreground" Value="White" />
+    </Style>
+    <Style Selector="ListBoxItem:selected Border.row TextBlock">
+      <Setter Property="Foreground" Value="White" />
     </Style>
   </Application.Styles>
 </Application>

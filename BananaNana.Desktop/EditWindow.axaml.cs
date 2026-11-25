@@ -31,7 +31,6 @@ public partial class EditWindow : Window
         TriggerLabel.Text = Loc.T("Editor.Trigger");
         TriggerHint.Text = Loc.T("Editor.TriggerHint");
         Notice.Text = Loc.T("Edit.FormattingNotice");
-        TextLabel.Text = Loc.T("Edit.Text");
         CancelButton.Content = Loc.T("Common.Cancel");
         UpdateSaveButton();
     }

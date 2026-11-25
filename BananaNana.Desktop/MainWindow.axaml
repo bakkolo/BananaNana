@@ -1,24 +1,49 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:html="clr-namespace:TheArtOfDev.HtmlRenderer.Avalonia;assembly=Avalonia.HtmlRenderer"
         x:Class="BananaNana.Desktop.MainWindow"
-        Title="Banana Nana" Width="1040" Height="680" MinWidth="720" MinHeight="480">
+        Title="Banana Nana" Width="1060" Height="700" MinWidth="760" MinHeight="480">
+  <!-- Layout follows the Windows MainWindow.xaml (margins, 330 list column, 18 gap, 8 radius). Texts are set in code from Loc. -->
   <DockPanel Margin="24,18,24,14">
-    <!-- Status line and Pause -->
+    <!-- Status bar: dot and line on the left, Pause on the right -->
     <Grid DockPanel.Dock="Bottom" ColumnDefinitions="*,Auto" Margin="0,14,0,0">
-      <TextBlock x:Name="StatusText" VerticalAlignment="Center" TextWrapping="Wrap" Opacity="0.75" />
-      <Button x:Name="PauseButton" Grid.Column="1" Padding="14,5" Click="Pause_Click" />
+      <Grid ColumnDefinitions="Auto,*" VerticalAlignment="Center" Margin="0,0,16,0">
+        <Ellipse x:Name="StatusDot" Width="9" Height="9" Margin="2,0,10,0" VerticalAlignment="Center" />
+        <TextBlock x:Name="StatusText" Grid.Column="1" Opacity="0.7" TextWrapping="Wrap" VerticalAlignment="Center" />
+      </Grid>
+      <Button x:Name="PauseButton" Grid.Column="1" Padding="12,5" Click="Pause_Click">
+        <StackPanel Orientation="Horizontal">
+          <PathIcon x:Name="PauseIcon" Width="13" Height="13" Margin="0,0,8,0" />
+          <TextBlock x:Name="PauseLabel" VerticalAlignment="Center" />
+        </StackPanel>
+      </Button>
     </Grid>
 
-    <!-- Header: name and library summary, actions on the right -->
-    <Grid DockPanel.Dock="Top" ColumnDefinitions="*,Auto" Margin="0,0,0,16">
-      <StackPanel>
+    <!-- Header: name and library summary on the left; icon buttons and New snippet on the right -->
+    <Grid DockPanel.Dock="Top" ColumnDefinitions="*,Auto" Margin="0,0,0,18">
+      <StackPanel VerticalAlignment="Center">
         <TextBlock Text="Banana Nana" FontSize="26" FontWeight="SemiBold" />
-        <TextBlock x:Name="LibraryText" Opacity="0.7" />
+        <TextBlock x:Name="LibraryText" Opacity="0.7" Margin="1,2,0,0" />
       </StackPanel>
-      <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
-        <Button x:Name="SettingsButton" Click="Settings_Click" />
-        <Button x:Name="HelpButton" Click="Help_Click" />
-        <Button x:Name="NewButton" Classes="accent" Padding="14,6" Click="New_Click" />
+      <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+        <Button x:Name="ImportButton" Classes="icon" Click="Import_Click">
+          <PathIcon Data="{StaticResource IconDownload}" Width="16" Height="16" />
+        </Button>
+        <Button x:Name="ExportButton" Classes="icon" Click="Export_Click">
+          <PathIcon Data="{StaticResource IconUpload}" Width="16" Height="16" />
+        </Button>
+        <Button x:Name="SettingsButton" Classes="icon" Click="Settings_Click">
+          <PathIcon Data="{StaticResource IconSettings}" Width="16" Height="16" />
+        </Button>
+        <Button x:Name="HelpButton" Classes="icon" Margin="0,0,12,0" Click="Help_Click">
+          <PathIcon Data="{StaticResource IconHelp}" Width="16" Height="16" />
+        </Button>
+        <Button x:Name="NewButton" Classes="accent" Padding="14,7" Click="New_Click">
+          <StackPanel Orientation="Horizontal">
+            <PathIcon Data="{StaticResource IconPlus}" Width="14" Height="14" Margin="0,0,8,0" />
+            <TextBlock x:Name="NewLabel" />
+          </StackPanel>
+        </Button>
       </StackPanel>
     </Grid>
 
@@ -30,25 +55,41 @@
       </StackPanel>
     </Border>
 
-    <Grid ColumnDefinitions="300,18,*">
-      <!-- Snippet list -->
+    <Grid ColumnDefinitions="330,18,*">
+      <!-- Snippet list card -->
       <Border Classes="card" Padding="10">
         <DockPanel>
-          <TextBox x:Name="SearchBox" DockPanel.Dock="Top" Margin="0,0,0,10" TextChanged="Search_Changed" />
-          <Border DockPanel.Dock="Bottom" Classes="card" Margin="0,10,0,0" Padding="12,10">
-            <StackPanel Spacing="6">
-              <TextBlock x:Name="TipText" TextWrapping="Wrap" FontSize="12.5" />
-              <Button x:Name="NextTipButton" Padding="0" Background="Transparent" BorderThickness="0" HorizontalAlignment="Left" Click="NextTip_Click" />
-            </StackPanel>
+          <Grid DockPanel.Dock="Top" Margin="0,0,0,10">
+            <TextBox x:Name="SearchBox" Padding="34,6,8,6" TextChanged="Search_Changed" />
+            <PathIcon Data="{StaticResource IconSearch}" Width="14" Height="14" Margin="12,0,0,0" Opacity="0.6"
+                      HorizontalAlignment="Left" IsHitTestVisible="False" />
+          </Grid>
+
+          <!-- Rotating tip -->
+          <Border DockPanel.Dock="Bottom" Margin="0,10,0,0" Padding="12,10" CornerRadius="6"
+                  Background="{DynamicResource SubtleBackground}">
+            <DockPanel>
+              <PathIcon Data="{StaticResource IconTip}" Width="16" Height="16" Foreground="#F2B600"
+                        DockPanel.Dock="Left" VerticalAlignment="Top" Margin="0,1,10,0" />
+              <StackPanel>
+                <TextBlock x:Name="TipText" TextWrapping="Wrap" FontSize="12.5" />
+                <Button x:Name="NextTipButton" Padding="0" Margin="0,6,0,0" Background="Transparent" BorderThickness="0"
+                        HorizontalAlignment="Left" Foreground="{DynamicResource AccentText}" FontSize="12" Click="NextTip_Click" />
+              </StackPanel>
+            </DockPanel>
           </Border>
+
           <Grid>
-            <ListBox x:Name="SnippetList" Background="Transparent" BorderThickness="0" SelectionChanged="List_SelectionChanged" DoubleTapped="List_DoubleTapped">
+            <ListBox x:Name="SnippetList" Background="Transparent" BorderThickness="0" SelectionChanged="List_SelectionChanged"
+                     DoubleTapped="List_DoubleTapped">
               <ListBox.ItemTemplate>
                 <DataTemplate>
-                  <StackPanel Margin="2,5">
-                    <TextBlock Text="{Binding Trigger}" FontFamily="monospace" FontWeight="SemiBold" />
-                    <TextBlock Text="{Binding Summary}" Opacity="0.7" FontSize="12" TextTrimming="CharacterEllipsis" Margin="0,3,0,0" />
-                  </StackPanel>
+                  <Border Classes="row" Padding="10,7" CornerRadius="4">
+                    <StackPanel>
+                      <TextBlock Text="{Binding Trigger}" FontFamily="monospace" FontSize="14" FontWeight="SemiBold" />
+                      <TextBlock Text="{Binding Summary}" Opacity="0.7" FontSize="12" TextTrimming="CharacterEllipsis" Margin="0,3,0,0" />
+                    </StackPanel>
+                  </Border>
                 </DataTemplate>
               </ListBox.ItemTemplate>
             </ListBox>
@@ -60,19 +101,31 @@
       <!-- Preview of the selected snippet -->
       <DockPanel Grid.Column="2">
         <DockPanel DockPanel.Dock="Top" Margin="2,0,0,10">
-          <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Spacing="8">
-            <Button x:Name="EditButton" Padding="12,6" Click="Edit_Click" />
-            <Button x:Name="RenameButton" Padding="12,6" Click="Rename_Click" />
-            <Button x:Name="DeleteButton" Padding="12,6" Click="Delete_Click" />
+          <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+            <Button x:Name="EditButton" Padding="12,6" Margin="0,0,8,0" Click="Edit_Click">
+              <StackPanel Orientation="Horizontal">
+                <PathIcon Data="{StaticResource IconEdit}" Width="14" Height="14" Margin="0,0,8,0" />
+                <TextBlock x:Name="EditLabel" />
+              </StackPanel>
+            </Button>
+            <Button x:Name="DeleteButton" Padding="12,6" Click="Delete_Click">
+              <StackPanel Orientation="Horizontal">
+                <PathIcon Data="{StaticResource IconDelete}" Width="14" Height="14" Margin="0,0,8,0" />
+                <TextBlock x:Name="DeleteLabel" />
+              </StackPanel>
+            </Button>
           </StackPanel>
           <StackPanel VerticalAlignment="Center">
             <TextBlock x:Name="PreviewTitle" FontFamily="monospace" FontSize="18" FontWeight="SemiBold" />
-            <TextBlock x:Name="PreviewCaption" Opacity="0.7" />
+            <TextBlock x:Name="PreviewCaption" Opacity="0.7" Margin="0,2,0,0" FontSize="12" />
           </StackPanel>
         </DockPanel>
-        <TextBlock x:Name="Notes" DockPanel.Dock="Bottom" Margin="2,8,0,0" Opacity="0.75" />
-        <Border Classes="card" Padding="14">
-          <TextBox x:Name="Preview" IsReadOnly="True" AcceptsReturn="True" TextWrapping="Wrap" Background="Transparent" BorderThickness="0" />
+
+        <!-- The snippet as it will be pasted: white paper in both themes -->
+        <Border CornerRadius="8" BorderBrush="{DynamicResource CardStroke}" BorderThickness="1" Background="White" ClipToBounds="True">
+          <ScrollViewer>
+            <html:HtmlPanel x:Name="Preview" Background="White" Padding="12,10" />
+          </ScrollViewer>
         </Border>
       </DockPanel>
     </Grid>
