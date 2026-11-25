@@ -21,6 +21,7 @@ public static class Program
     [STAThread]
     public static int Main(string[] args)
     {
+        if (args.Contains(GuideExportDemo.Argument)) return GuideExportDemo.Run(args); // standalone, no window
         GuideStartup = args.Contains(GuideMarkupDemoEditArgument) ? GuideStart.MarkupDemoEdit
             : args.Contains(GuideMarkupDemoArgument) ? GuideStart.MarkupDemo
             : args.Contains(GuideMakerSampleArgument) ? GuideStart.Sample

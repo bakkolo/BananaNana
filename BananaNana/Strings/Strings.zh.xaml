@@ -293,4 +293,39 @@
   <sys:String x:Key="Markup.DeleteTip">Delete the selected item (Delete)</sys:String>
   <!-- TODO translate -->
   <sys:String x:Key="Picker.Unavailable">The file dialog could not be opened. Install kdialog or zenity, then try again.</sys:String>
+  <!-- Guide maker, stage 3: export -->
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.Export">Export</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.ExportCopy">Copy guide</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.ExportPdf">Save as PDF…</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.ExportDocx">Save as Word document…</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.ExportHtml">Save as web page…</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.ExportSnippet">Save as snippet…</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.ExportSaveTitle">Save guide</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.PdfFilter">PDF documents</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.WordFilter">Word documents</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.WebFilter">Web pages</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.Copied">Copied - paste it into your email or document</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.ClipboardFailed">The clipboard could not be used. Install wl-clipboard (wl-copy), then try again.</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.SnippetTitle">Save as snippet</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.SnippetHint">Type this trigger in any app, then a space or Enter, to put the guide in as a snippet.</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.SnippetAdd">Add snippet</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.SnippetAdded">Snippet added to the library</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.SnippetNoLibrary">The snippet library is not available.</sys:String>
 </ResourceDictionary>

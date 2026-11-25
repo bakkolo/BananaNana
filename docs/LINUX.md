@@ -221,3 +221,33 @@ Undo, Redo and Delete, and Done or Cancel.
 - Demo: `banananana --guide-markup-demo` makes (or remakes) a "Markup demo" guide with one step: one of each kind, two
   numbers, a 5 % crop. `--guide-markup-demo-edit` also opens that step in the markup window. Both go through the
   single-instance socket like `--guide-maker`.
+
+## Guide maker (stage 3: export)
+
+The **Export** button in the guide view's top bar (lilac, with an icon) opens a menu. Every picture goes through
+`GuideRender.Flatten`, so the crop, the blur and the marks are in every export.
+
+- **Copy guide**: the whole guide on the clipboard as `text/html`, through `wl-copy` (so `wl-clipboard` must be
+  installed). The status says "Copied - paste it into your email or document". Only the HTML type is put on the
+  clipboard, so an app that takes plain text only pastes nothing (wl-copy offers one type per copy; see the TODO in
+  `WaylandClipboard`).
+- **Save as PDF…**: A4 portrait with 40 pt margins. The title, the intro, then each step: a lilac number circle with
+  the step title, the wrapped text and the picture at the text width (scaled down when taller than a page). A step
+  moves to the next page together with its picture when they do not fit, so a heading is never left alone at the
+  bottom of a page. The footer says "Page n of m". The font is Noto Sans when it is installed and has the Polish
+  letters, else the system default.
+- **Save as Word document…**: a `.docx` written by hand (no library): Title style for the title, Heading 1 for each
+  step ("n. title"), Normal for the text. A picture is inline at its pixel size (96 dpi), or 6 inches wide when that is
+  wider.
+- **Save as web page…**: one HTML file with a little inline CSS. Pictures are embedded and shown at most 640 px wide.
+- **Save as snippet…**: asks for a trigger (suggested: `;` and a slug of the title, with the editor's rules: no
+  spaces, not empty, unique). The guide then becomes a snippet in the Linux library: Html is the HTML, Text the plain
+  text. The engine reloads the library at once.
+- Save dialogs start in Documents and suggest the guide's title as the file name.
+
+Demo: `banananana --guide-export-demo <outdir>` makes (or remakes) the "Markup demo" guide, as `--guide-markup-demo`
+does, writes `demo.pdf`, `demo.docx` and `demo.html` into `<outdir>`, prints the paths and exits. It runs on its own: no
+window, not forwarded to a running app, and the clipboard and the snippet library are not touched.
+
+Simplified: no lists, tables or hyphenation in the exports (a word wider than a line is broken by letter); the Word
+picture size rule above; the PDF uses no kerning.

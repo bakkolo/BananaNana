@@ -13,6 +13,8 @@ public partial class App : Application
     public static WindowIcon? Icon { get; private set; }
     // True once Exit was chosen: the main window then really closes instead of hiding to the tray.
     public static bool Exiting { get; private set; }
+    // The library and the engine, for the Guide maker's snippet export. Null until the app has started.
+    public static ExpansionService? Expansion { get; private set; }
 
     ExpansionService? expansion;
     SystemTheme? systemTheme;
@@ -44,6 +46,7 @@ public partial class App : Application
             Icon = new WindowIcon(LoadIcon()); // the window icon keeps the bitmap, so it is not disposed here
 
             expansion = new ExpansionService(LinuxLibrary.DefaultPath, Settings.StartPaused);
+            Expansion = expansion;
             expansion.Changed += () => Dispatcher.UIThread.Post(UpdateTray);
             main = new MainWindow(expansion);
             BuildTray();

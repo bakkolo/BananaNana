@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Text;
 using Avalonia;
 using Avalonia.Collections;
 using Avalonia.Controls;
@@ -21,6 +22,9 @@ public partial class GuideMakerWindow : Window
     const int AutosaveMs = 800;
     static readonly string[] PictureFormats = ["image/png", "image/jpeg"];
     static GuideMakerWindow? open;
+
+    // The Export menu's items (the menu itself is built in BuildExportMenu).
+    readonly MenuItem copyItem = new(), pdfItem = new(), wordItem = new(), webItem = new(), snippetItem = new();
 
     readonly GuideStore store = new(GuideStore.DefaultFolder());
     readonly DispatcherTimer saveTimer = new() { Interval = TimeSpan.FromMilliseconds(AutosaveMs) };
@@ -95,6 +99,7 @@ public partial class GuideMakerWindow : Window
         AddHandler(InputElement.KeyDownEvent, new EventHandler<KeyEventArgs>(OnKeyDown), RoutingStrategies.Tunnel);
         DragDrop.AddDragOverHandler(this, OnDragOver);
         DragDrop.AddDropHandler(this, OnDrop);
+        BuildExportMenu();
         Retranslate();
         ShowList();
     }
@@ -115,6 +120,12 @@ public partial class GuideMakerWindow : Window
         TitleBox.Watermark = Loc.T("Guide.TitleWatermark");
         IntroBox.Watermark = Loc.T("Guide.IntroWatermark");
         AddStepButton.Content = Loc.T("Guide.AddStep");
+        ExportLabel.Text = Loc.T("Guide.Export");
+        copyItem.Header = Loc.T("Guide.ExportCopy");
+        pdfItem.Header = Loc.T("Guide.ExportPdf");
+        wordItem.Header = Loc.T("Guide.ExportDocx");
+        webItem.Header = Loc.T("Guide.ExportHtml");
+        snippetItem.Header = Loc.T("Guide.ExportSnippet");
         SetStatus(statusKey);
         if (GuideView.IsVisible && doc is not null) RebuildSteps();
         if (ListView.IsVisible) ShowList();
@@ -301,6 +312,123 @@ public partial class GuideMakerWindow : Window
     {
         var card = StepPanel.Children.OfType<Border>().FirstOrDefault(b => b.Tag is Guid g && g == id);
         card?.GetVisualDescendants().OfType<TextBox>().FirstOrDefault()?.Focus();
+    }
+
+    // ---- Export -----------------------------------------------------------------------------------------------
+
+    // The Export button opens this menu. Every item takes the guide as it is now, unsaved text included.
+    void BuildExportMenu()
+    {
+        copyItem.Click += (_, _) => _ = CopyGuideAsync();
+        pdfItem.Click += (_, _) => _ = SaveFileAsync("pdf", "Guide.PdfFilter", GuidePdf.Write);
+        wordItem.Click += (_, _) => _ = SaveFileAsync("docx", "Guide.WordFilter", GuideDocx.Write);
+        webItem.Click += (_, _) => _ = SaveFileAsync("html", "Guide.WebFilter", WriteHtml);
+        snippetItem.Click += (_, _) => _ = AddSnippetAsync();
+        var menu = new MenuFlyout();
+        menu.Items.Add(copyItem);
+        menu.Items.Add(pdfItem);
+        menu.Items.Add(wordItem);
+        menu.Items.Add(webItem);
+        menu.Items.Add(snippetItem);
+        ExportButton.Flyout = menu;
+    }
+
+    static void WriteHtml(ExportGuide guide, Stream stream)
+    {
+        var bytes = Encoding.UTF8.GetBytes(GuideExport.Document(guide));
+        stream.Write(bytes, 0, bytes.Length);
+    }
+
+    // Copy guide: the whole guide as HTML on the clipboard (text/html, through wl-copy).
+    async Task CopyGuideAsync()
+    {
+        if (doc is null) return;
+        ExportGuide guide;
+        try
+        {
+            guide = GuideExport.Prepare(doc);
+        }
+        catch (InvalidDataException)
+        {
+            await Dialogs.Message(this, Loc.T("Guide.Title"), Loc.T("Guide.NotAPicture"));
+            return;
+        }
+        var html = Encoding.UTF8.GetBytes(GuideExport.Fragment(guide));
+        try
+        {
+            await Task.Run(() => new WaylandClipboard().Set(html, ClipboardFormat.Html));
+            SetStatus("Guide.Copied");
+        }
+        catch (Exception ex) when (ex is Win32Exception or IOException or InvalidOperationException or TimeoutException)
+        {
+            await Dialogs.Message(this, Loc.T("Guide.Title"), Loc.T("Guide.ClipboardFailed"));
+        }
+    }
+
+    // Save as PDF, Word or web page: the guide is read now, and the file dialog starts in Documents with its name.
+    async Task SaveFileAsync(string extension, string filterKey, Action<ExportGuide, Stream> write)
+    {
+        if (doc is null) return;
+        ExportGuide guide;
+        try
+        {
+            guide = GuideExport.Prepare(doc);
+        }
+        catch (InvalidDataException)
+        {
+            await Dialogs.Message(this, Loc.T("Guide.Title"), Loc.T("Guide.NotAPicture"));
+            return;
+        }
+        var picked = await FilePicker.SaveAsync(this, new PickRequest(Loc.T("Guide.ExportSaveTitle"), Loc.T(filterKey), ["*." + extension],
+            FilePicker.DocumentsFolder, GuideExport.FileName(doc.Title, extension)));
+        if (picked.Path is not { } path) return;
+        try
+        {
+            await Task.Run(() =>
+            {
+                using var file = File.Create(path);
+                write(guide, file);
+            });
+            SetStatus("Guide.Saved");
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+        {
+            await Dialogs.Message(this, Loc.T("Guide.Title"), ex.Message);
+        }
+    }
+
+    // Save as snippet: the guide goes into the Linux library (Html = the HTML, Text = the plain text). The engine
+    // reloads the library by itself.
+    async Task AddSnippetAsync()
+    {
+        if (doc is null) return;
+        var service = App.Expansion;
+        if (service is null || !service.CanEdit)
+        {
+            await Dialogs.Message(this, Loc.T("Guide.Title"), service?.LibraryError ?? Loc.T("Guide.SnippetNoLibrary"));
+            return;
+        }
+        ExportGuide guide;
+        try
+        {
+            guide = GuideExport.Prepare(doc);
+        }
+        catch (InvalidDataException)
+        {
+            await Dialogs.Message(this, Loc.T("Guide.Title"), Loc.T("Guide.NotAPicture"));
+            return;
+        }
+        var trigger = await TriggerPrompt.AskAsync(this, GuideExport.SuggestedTrigger(doc.Title), service.Snapshot().Select(s => s.Trigger).ToList());
+        if (trigger is null) return;
+        try
+        {
+            service.Upsert(null, GuideExport.Snippet(guide, trigger));
+            SetStatus("Guide.SnippetAdded");
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidDataException or InvalidOperationException)
+        {
+            await Dialogs.Message(this, Loc.T("Guide.Title"), ex.Message);
+        }
     }
 
     // ---- Step cards -------------------------------------------------------------------------------------------
