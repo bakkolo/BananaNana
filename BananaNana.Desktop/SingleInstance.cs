@@ -6,7 +6,9 @@ namespace BananaNana.Desktop;
 // copy brings its window forward. Nothing here can stop the app from starting: if the socket cannot be used, the app runs anyway.
 public sealed class SingleInstance : IDisposable
 {
-    const string Command = "show";
+    public const string ShowCommand = "show";
+    public const string GuideCommand = "guide";
+    public const string GuideSampleCommand = "guide-sample";
     readonly Socket listener;
     volatile Action? onShow;
 
@@ -17,13 +19,13 @@ public sealed class SingleInstance : IDisposable
             "banananana.sock");
 
     // True when another copy answered and was asked to show its window.
-    public static bool TryNotifyExisting()
+    public static bool TryNotifyExisting(string command = ShowCommand)
     {
         using var client = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified);
         try
         {
             client.Connect(new UnixDomainSocketEndPoint(SocketPath));
-            client.Send(Encoding.ASCII.GetBytes(Command + "\n"));
+            client.Send(Encoding.ASCII.GetBytes(command + "\n"));
             return true;
         }
         catch (SocketException)
@@ -56,6 +58,9 @@ public sealed class SingleInstance : IDisposable
     // Called on a background thread when a second copy asks for the window.
     public Action? OnShow { get => onShow; set => onShow = value; }
 
+    // Called with true for the sample guide, false for the plain Guide maker.
+    public Action<bool>? OnGuide { get; set; }
+
     async Task Serve()
     {
         while (true)
@@ -71,9 +76,14 @@ public sealed class SingleInstance : IDisposable
     {
         try
         {
-            var buffer = new byte[32];
+            var buffer = new byte[64];
             int read = client.Receive(buffer);
-            if (Encoding.ASCII.GetString(buffer, 0, read).StartsWith(Command, StringComparison.Ordinal)) OnShow?.Invoke();
+            switch (Encoding.ASCII.GetString(buffer, 0, read).Trim())
+            {
+                case ShowCommand: OnShow?.Invoke(); break;
+                case GuideCommand: OnGuide?.Invoke(false); break;
+                case GuideSampleCommand: OnGuide?.Invoke(true); break;
+            }
         }
         catch (SocketException) { }
         finally { client.Dispose(); }

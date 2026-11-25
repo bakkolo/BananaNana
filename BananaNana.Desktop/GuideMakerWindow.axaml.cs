@@ -28,8 +28,8 @@ public partial class GuideMakerWindow : Window
     bool dirty, loading;
     string statusKey = "";
 
-    // One window at a time: a second request brings the open window forward.
-    public static void ShowOrActivate()
+    // One window at a time: a second request brings the open window forward. With sample, the sample guide is opened.
+    public static void ShowOrActivate(bool sample = false)
     {
         if (open is null)
         {
@@ -42,6 +42,21 @@ public partial class GuideMakerWindow : Window
             if (open.WindowState == WindowState.Minimized) open.WindowState = WindowState.Normal;
             open.Show();
             open.Activate();
+        }
+        if (sample) open.OpenSample();
+    }
+
+    // Opens the sample guide (made by GuideSample when it does not exist yet).
+    void OpenSample()
+    {
+        if (!SaveNow()) return;
+        try
+        {
+            OpenGuide(GuideSample.EnsureSample(store));
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or InvalidDataException)
+        {
+            _ = Dialogs.Message(this, Loc.T("Guide.Title"), ex.Message);
         }
     }
 

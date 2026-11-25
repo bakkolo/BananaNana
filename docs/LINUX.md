@@ -200,3 +200,6 @@ guides and, for one guide, its title, intro and steps. Each step has a title, a 
 - Pictures wider than 1600 px are scaled down. They are stored as PNG, or as JPEG (quality 90) when that PNG is over 1.5 MB.
 - Steps are reordered with Move up and Move down (no drag handle yet). Delete step asks first.
 - Annotations are stored as an empty list; the export comes in a later stage.
+- Starting options: `banananana --guide-maker` opens the Guide maker, and `banananana --guide-maker-sample` also opens
+  a "Sample guide" (created once, two steps, the first with a generated picture). If the app is already running, the
+  request goes over the single-instance socket and the running window opens or comes forward.

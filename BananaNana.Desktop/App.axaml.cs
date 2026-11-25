@@ -49,8 +49,13 @@ public partial class App : Application
             BuildTray();
             Loc.Changed += UpdateTray;
 
-            if (Program.Listener is { } listener) listener.OnShow = () => Dispatcher.UIThread.Post(ShowMain);
+            if (Program.Listener is { } listener)
+            {
+                listener.OnShow = () => Dispatcher.UIThread.Post(ShowMain);
+                listener.OnGuide = sample => Dispatcher.UIThread.Post(() => GuideMakerWindow.ShowOrActivate(sample));
+            }
             if (!Program.StartInTray) main.Show();
+            if (Program.GuideStartup != GuideStart.None) GuideMakerWindow.ShowOrActivate(Program.GuideStartup == GuideStart.Sample);
         }
         base.OnFrameworkInitializationCompleted();
     }
