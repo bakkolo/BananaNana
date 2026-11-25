@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using Avalonia.Styling;
 using Avalonia.Media.Imaging;
 using Avalonia.Threading;
 namespace BananaNana.Desktop;
@@ -14,6 +15,7 @@ public partial class App : Application
     public static bool Exiting { get; private set; }
 
     ExpansionService? expansion;
+    SystemTheme? systemTheme;
     MainWindow? main;
     TrayIcon? tray;
     NativeMenuItem? openItem, pauseItem, exitItem;
@@ -30,6 +32,15 @@ public partial class App : Application
 
             Settings = AppSettings.Load();
             Loc.Apply(Settings.Language);
+
+            // Light or dark follows the desktop, and switches while the app runs. Set before any window opens.
+            systemTheme = new SystemTheme();
+            RequestedThemeVariant = SystemTheme.Current();
+            systemTheme.Changed += () => Dispatcher.UIThread.Post(() =>
+            {
+                var variant = SystemTheme.Current();
+                if (RequestedThemeVariant != variant) RequestedThemeVariant = variant;
+            });
             Icon = new WindowIcon(LoadIcon()); // the window icon keeps the bitmap, so it is not disposed here
 
             expansion = new ExpansionService(LinuxLibrary.DefaultPath, Settings.StartPaused);
@@ -93,6 +104,7 @@ public partial class App : Application
 
     void Cleanup()
     {
+        systemTheme?.Dispose();
         tray?.Dispose();
         expansion?.Dispose();
         Program.Listener?.Dispose();
