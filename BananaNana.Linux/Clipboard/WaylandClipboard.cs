@@ -45,6 +45,19 @@ public sealed class WaylandClipboard
         if (saved is not null) Set(saved.Data, saved.MimeType);
     }
 
+    // The clipboard's picture as PNG (or JPEG when there is no PNG), or null when it holds none.
+    // Throws when wl-paste cannot be started. The Guide maker uses this when Avalonia's clipboard has no picture.
+    public Saved? ReadImage()
+    {
+        var raw = Capture(["--list-types"]);
+        if (raw is null) return null;
+        var types = Encoding.UTF8.GetString(raw).Split('\n', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+        var type = types.FirstOrDefault(t => t == "image/png") ?? types.FirstOrDefault(t => t == "image/jpeg");
+        if (type is null) return null;
+        var data = Capture(["--no-newline", "--type", type]);
+        return data is null || data.Length == 0 ? null : new Saved(type, data);
+    }
+
     // Runs wl-paste and returns its stdout, or null when it fails (for example, an empty clipboard).
     static byte[]? Capture(string[] args)
     {

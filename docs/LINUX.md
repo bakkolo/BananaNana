@@ -182,3 +182,21 @@ Limitations of the first desktop build:
 - The help text is the Windows one. It mentions the toolbar, pasting from Word and Ctrl+K, which this build does not
   have yet.
 - The status line says "Listening on 1 keyboards" for a single keyboard (the string is shared with the Windows wording).
+
+## Guide maker (stage 1)
+
+The Guide maker is a header button and a tray menu item. It opens one native window (no browser) with the list of
+guides and, for one guide, its title, intro and steps. Each step has a title, a text and a picture.
+
+- Folder: `xdg-user-dir DOCUMENTS` + `BananaNana Guides` (`~/Documents/BananaNana Guides` when that tool is missing).
+  One file per guide: `<guid>.bnguide` (JSON, `version` 1). A save writes `<guid>.bnguide.tmp` and moves it over the old file.
+- Changes autosave 800 ms after the last one. Ctrl+S saves now, and closing the window saves first. When a save fails,
+  the status says "Couldn't save" and the window stays open.
+- Pictures: with a step focused, Ctrl+V puts the clipboard picture into that step. With no step focused, Ctrl+V adds a
+  new step (take a screenshot, Ctrl+V, repeat). A picture can also be dropped on a step or on the window, or chosen
+  with the file picker.
+- Clipboard: Avalonia's clipboard is tried first (`image/png`, then `image/jpeg`). When it has no picture on Linux,
+  `wl-paste --type image/png` (or `image/jpeg`) is used, so `wl-clipboard` must be installed.
+- Pictures wider than 1600 px are scaled down. They are stored as PNG, or as JPEG (quality 90) when that PNG is over 1.5 MB.
+- Steps are reordered with Move up and Move down (no drag handle yet). Delete step asks first.
+- Annotations are stored as an empty list; the export comes in a later stage.

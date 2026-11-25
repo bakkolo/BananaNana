@@ -32,6 +32,9 @@
         <Button x:Name="ExportButton" Classes="icon" Click="Export_Click">
           <PathIcon Data="{StaticResource IconUpload}" Width="16" Height="16" />
         </Button>
+        <Button x:Name="GuideButton" Classes="icon" Click="Guide_Click">
+          <PathIcon Data="{StaticResource IconGuide}" Width="16" Height="16" />
+        </Button>
         <Button x:Name="SettingsButton" Classes="icon" Click="Settings_Click">
           <PathIcon Data="{StaticResource IconSettings}" Width="16" Height="16" />
         </Button>

@@ -51,6 +51,7 @@ public partial class MainWindow : Window
         SearchBox.Watermark = Loc.T("Main.Search");
         ToolTip.SetTip(ImportButton, Loc.T("Main.Import"));
         ToolTip.SetTip(ExportButton, Loc.T("Main.Export"));
+        ToolTip.SetTip(GuideButton, Loc.T("Guide.Title"));
         ToolTip.SetTip(SettingsButton, Loc.T("Main.Settings"));
         ToolTip.SetTip(HelpButton, Loc.T("Main.Help"));
         ToolTip.SetTip(PauseButton, Loc.T("Main.PauseTip"));
@@ -163,6 +164,8 @@ public partial class MainWindow : Window
     }
 
     void Pause_Click(object? sender, RoutedEventArgs e) => service.Paused = !service.Paused;
+
+    void Guide_Click(object? sender, RoutedEventArgs e) => GuideMakerWindow.ShowOrActivate();
 
     void Settings_Click(object? sender, RoutedEventArgs e) => _ = new SettingsWindow(service).ShowDialog(this);
 

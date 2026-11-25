@@ -18,7 +18,7 @@ public partial class App : Application
     SystemTheme? systemTheme;
     MainWindow? main;
     TrayIcon? tray;
-    NativeMenuItem? openItem, pauseItem, exitItem;
+    NativeMenuItem? openItem, guideItem, pauseItem, exitItem;
 
     public override void Initialize() => AvaloniaXamlLoader.Load(this);
 
@@ -75,6 +75,8 @@ public partial class App : Application
     {
         openItem = new NativeMenuItem();
         openItem.Click += (_, _) => ShowMain();
+        guideItem = new NativeMenuItem();
+        guideItem.Click += (_, _) => GuideMakerWindow.ShowOrActivate();
         pauseItem = new NativeMenuItem();
         pauseItem.Click += (_, _) => { if (expansion is not null) expansion.Paused = !expansion.Paused; };
         exitItem = new NativeMenuItem();
@@ -82,6 +84,7 @@ public partial class App : Application
 
         var menu = new NativeMenu();
         menu.Items.Add(openItem);
+        menu.Items.Add(guideItem);
         menu.Items.Add(pauseItem);
         menu.Items.Add(new NativeMenuItemSeparator());
         menu.Items.Add(exitItem);
@@ -97,6 +100,7 @@ public partial class App : Application
         if (tray is null || expansion is null) return;
         bool paused = expansion.Paused;
         openItem!.Header = Loc.T("Tray.Open");
+        guideItem!.Header = Loc.T("Guide.Title");
         pauseItem!.Header = Loc.T(paused ? "Tray.Resume" : "Tray.Pause");
         exitItem!.Header = Loc.T("Tray.Exit");
         tray.ToolTipText = Loc.T(paused ? "Tray.Paused" : "Tray.Open");

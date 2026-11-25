@@ -173,4 +173,66 @@
   <sys:String x:Key="Edit.FormattingNotice">This snippet has formatting; editing here will save it as plain text</sys:String>
   <!-- TODO translate -->
   <sys:String x:Key="Edit.SavePlain">Save as plain text</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.Title">Guide maker</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.New">New guide</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.Empty">No guides yet. Click New guide to make one, with a title, steps and pictures.</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.Open">Open</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.Delete">Delete</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.DeleteTitle">Delete guide</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.DeleteConfirm">Delete the guide "{0}"? Its steps and pictures are deleted too.</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.Untitled">Untitled guide</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.Edited">Last edited {0}</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.Back">Back</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.TitleWatermark">Guide title</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.IntroWatermark">Short intro (optional)</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.StepTitleWatermark">Step title</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.StepTextWatermark">What to do in this step</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.AddStep">+ Add step</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.Saved">Saved</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.SaveFailed">Couldn't save</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.DropHint">Paste (Ctrl+V), drop or choose a picture</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.Choose">Choose</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.Replace">Replace</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.Remove">Remove</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.MoveUp">Move up</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.MoveDown">Move down</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.Duplicate">Duplicate</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.DeleteStep">Delete step</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.DeleteStepTitle">Delete step</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.DeleteStepConfirm">Delete step {0}? This cannot be undone.</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.ChoosePicture">Choose a picture</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.PictureFilter">Pictures</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.NotAPicture">That file is not a picture Banana Nana can read.</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.OpenFailed">This guide could not be opened.</sys:String>
 </ResourceDictionary>
