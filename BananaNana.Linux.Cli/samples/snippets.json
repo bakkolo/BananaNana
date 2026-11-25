@@ -1,0 +1,12 @@
+[
+  {
+    "trigger": ";demo",
+    "html": "<p><b>Bold</b>, <i>italic</i> and <span style=\"color:#c0392b\">red text</span>.</p><ul><li>First item</li><li>Second item</li></ul><p><img alt=\"pixel\" src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==\"></p>",
+    "text": "Bold, italic and red text.\nFirst item\nSecond item\n[image]"
+  },
+  {
+    "trigger": ";sig",
+    "html": "Kind regards,\nMatt",
+    "text": "Kind regards,\nMatt"
+  }
+]
