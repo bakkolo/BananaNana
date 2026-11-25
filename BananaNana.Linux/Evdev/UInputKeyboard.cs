@@ -23,7 +23,7 @@ public sealed class UInputKeyboard : IDisposable
     const int O_WRONLY = 0x1, O_NONBLOCK = 0x800, O_CLOEXEC = 0x80000;
     const ushort EvSyn = 0, EvKeyType = 1, SynReport = 0, BusVirtual = 0x06;
     const int MaxKey = 248, SetupSize = 92, NameMax = 80, EventSize = 24, DelayMs = 20, CreateWaitMs = 300;
-    const int KeyBackspace = 14, KeyLeftCtrl = 29, KeyV = 47;
+    const int KeyBackspace = 14, KeyLeftCtrl = 29;
 
     int fd = -1;
     readonly byte[] evBuf = new byte[EventSize];
@@ -72,10 +72,11 @@ public sealed class UInputKeyboard : IDisposable
         for (int i = 0; i < count; i++) Tap(KeyBackspace);
     }
 
-    public void CtrlV()
+    // key is the evdev code that types 'v' in the active layout (Dvorak has it on another key).
+    public void CtrlV(int key)
     {
         Send(KeyLeftCtrl, 1);
-        Tap(KeyV);
+        Tap(key);
         Send(KeyLeftCtrl, 0);
     }
 

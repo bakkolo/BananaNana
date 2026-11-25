@@ -17,7 +17,7 @@ public readonly record struct KeyResult(KeyAction Action, char Char = '\0');
 // Turns evdev codes into the same actions the Windows KeyboardInputService produces, for a US layout.
 // Backspace removes a character, the context keys and mouse buttons reset the word, Ctrl or Alt alone and
 // Meta are shortcuts (reset), and modifiers and CapsLock type nothing.
-public sealed class KeyMap
+public sealed class KeyMap : IKeyMap
 {
     static readonly HashSet<int> ContextKeys =
     [
@@ -57,6 +57,22 @@ public sealed class KeyMap
     }
 
     public void Up(int code) => SetModifier(code, false);
+
+    // The built-in table is fixed US; there is no group to switch.
+    public void SetGroup(uint group)
+    {
+    }
+
+    public int CodeFor(char c)
+    {
+        foreach (var kv in Printable)
+            if (kv.Value.Plain == c) return kv.Key;
+        return -1;
+    }
+
+    public void Dispose()
+    {
+    }
 
     static KeyResult Ignore => new(KeyAction.Ignore);
     static KeyResult Reset => new(KeyAction.Reset);

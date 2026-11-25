@@ -8,25 +8,34 @@ namespace BananaNana.Linux;
 
 public sealed record LinuxSnippet(string Trigger, string Html, string PlainText);
 
-// Input -> KeyMap -> TriggerMatcher -> expansion. The sequence and timings match the Python prototype:
+// Input -> key map -> TriggerMatcher -> expansion. The sequence and timings match the Python prototype:
 // backspaces, save clipboard, copy snippet, wait 150 ms, Ctrl+V, wait 500 ms, restore clipboard.
 public sealed class LinuxExpansionEngine : IDisposable
 {
-    const int PasteWaitMs = 150, RestoreWaitMs = 500;
+    const int PasteWaitMs = 150, RestoreWaitMs = 500, ConfigSettleMs = 300;
+    const int FallbackKeyV = 47; // evdev KEY_V, used when the layout has no 'v'
 
     readonly Action<string> log;
+    readonly LayoutConfig? layoutOverride;
     readonly object gate = new();
-    readonly KeyMap keyMap = new();
     readonly TriggerMatcher matcher = new([]);
     readonly WaylandClipboard clipboard = new();
     readonly InputMonitor input;
+    string home = "/";
     Dictionary<string, LinuxSnippet> snippets = new(StringComparer.OrdinalIgnoreCase);
     UInputKeyboard? keyboard;
-    bool paused, expanding;
+    IKeyMap keyMap = new KeyMap();
+    LayoutConfig layout = LayoutConfig.Us;
+    uint group;
+    bool paused, expanding, disposed;
+    KdeLayoutMonitor? kde;
+    FileSystemWatcher? kxkbWatcher;
 
-    public LinuxExpansionEngine(Action<string> log)
+    // layoutOverride (from --layout) fixes the layout and disables detection and KDE following.
+    public LinuxExpansionEngine(Action<string> log, LayoutConfig? layoutOverride = null)
     {
         this.log = log;
+        this.layoutOverride = layoutOverride;
         input = new InputMonitor(log, OnKeyDown, OnKeyUp);
     }
 
@@ -36,10 +45,21 @@ public sealed class LinuxExpansionEngine : IDisposable
         set { lock (gate) { paused = value; matcher.Reset(); } }
     }
 
-    // Creates the virtual keyboard (throws if /dev/uinput is not usable), then starts reading input.
+    // Creates the virtual keyboard (throws if /dev/uinput is not usable), sets up the layout, then reads input.
     public void Start()
     {
         keyboard = new UInputKeyboard();
+        home = Environment.GetEnvironmentVariable("HOME") ?? "/";
+        if (layoutOverride is { } forced)
+        {
+            ApplyLayout(forced, "--layout", followKde: false);
+        }
+        else
+        {
+            var (config, source) = LayoutConfig.Detect(home, Environment.GetEnvironmentVariable);
+            ApplyLayout(config, source, followKde: true);
+            WatchKxkbrc();
+        }
         input.Start();
     }
 
@@ -52,13 +72,98 @@ public sealed class LinuxExpansionEngine : IDisposable
         }
     }
 
+    // Builds the key map for config and swaps it in. followKde also reads KDE's active layout and follows it.
+    void ApplyLayout(LayoutConfig config, string source, bool followKde)
+    {
+        IKeyMap next = BuildKeyMap(config);
+        uint start = 0;
+        if (followKde && config.Layouts.Length > 1)
+        {
+            start = KdeLayoutMonitor.QueryGroup() ?? 0;
+            if (start >= config.Layouts.Length) start = 0;
+            if (kde is null)
+            {
+                kde = new KdeLayoutMonitor(OnKdeGroup);
+                kde.Start();
+            }
+        }
+        next.SetGroup(start);
+
+        lock (gate)
+        {
+            if (disposed)
+            {
+                next.Dispose();
+                return;
+            }
+            var old = keyMap;
+            keyMap = next;
+            layout = config;
+            group = start;
+            matcher.Reset();
+            old.Dispose();
+        }
+        log($"layout: {config.Describe(start)} (from {source})");
+    }
+
+    IKeyMap BuildKeyMap(LayoutConfig config)
+    {
+        try
+        {
+            return new XkbKeymap(config);
+        }
+        catch (Exception e) when (e is DllNotFoundException or EntryPointNotFoundException or InvalidOperationException)
+        {
+            log($"warning: {e.Message} Using the built-in US key map.");
+            return new KeyMap();
+        }
+    }
+
+    void OnKdeGroup(uint newGroup)
+    {
+        string name;
+        lock (gate)
+        {
+            if (newGroup == group || newGroup >= layout.Layouts.Length) return;
+            group = newGroup;
+            keyMap.SetGroup(newGroup);
+            matcher.Reset();
+            name = layout.Describe(newGroup);
+        }
+        log($"layout changed: {name}");
+    }
+
+    void WatchKxkbrc()
+    {
+        string dir = Path.Combine(home, ".config");
+        if (!Directory.Exists(dir)) return;
+        kxkbWatcher = new FileSystemWatcher(dir, "kxkbrc")
+        {
+            NotifyFilter = NotifyFilters.FileName | NotifyFilters.LastWrite | NotifyFilters.Size,
+        };
+        kxkbWatcher.Changed += (_, _) => Task.Run(ReloadLayout);
+        kxkbWatcher.Created += (_, _) => Task.Run(ReloadLayout);
+        kxkbWatcher.EnableRaisingEvents = true;
+    }
+
+    void ReloadLayout()
+    {
+        Thread.Sleep(ConfigSettleMs); // editors write in bursts
+        var (config, source) = LayoutConfig.Detect(home, Environment.GetEnvironmentVariable);
+        lock (gate)
+        {
+            if (disposed || config.Key == layout.Key) return;
+        }
+        ApplyLayout(config, source, followKde: true);
+    }
+
     void OnKeyDown(int code, bool isRepeat)
     {
         LinuxSnippet? matched = null;
         string trigger = "";
         lock (gate)
         {
-            // Modifier state is tracked even during an expansion, so it never gets stuck.
+            // The key map sees every key, even during an expansion, so modifier and layout state stay correct.
             var result = keyMap.Down(code, isRepeat);
             if (paused || expanding) return;
             switch (result.Action)
@@ -92,6 +197,10 @@ public sealed class LinuxExpansionEngine : IDisposable
         var kb = keyboard!;
         try
         {
+            int vKey;
+            lock (gate) vKey = keyMap.CodeFor('v');
+            if (vKey < 0) vKey = FallbackKeyV;
+
             kb.Backspace(s.Trigger.Length + 1); // the trigger plus the separator the user typed
             Mark($"{s.Trigger.Length + 1} backspaces sent");
 
@@ -103,7 +212,7 @@ public sealed class LinuxExpansionEngine : IDisposable
             Mark($"snippet copied as {mime}");
 
             Thread.Sleep(PasteWaitMs);
-            kb.CtrlV();
+            kb.CtrlV(vKey);
             Mark("Ctrl+V sent");
 
             Thread.Sleep(RestoreWaitMs);
@@ -127,7 +236,11 @@ public sealed class LinuxExpansionEngine : IDisposable
 
     public void Dispose()
     {
+        lock (gate) disposed = true;
+        kxkbWatcher?.Dispose();
+        kde?.Dispose();
         input.Dispose();
+        lock (gate) keyMap.Dispose();
         keyboard?.Dispose();
     }
 }
