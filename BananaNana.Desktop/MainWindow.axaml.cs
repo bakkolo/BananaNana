@@ -186,13 +186,8 @@ public partial class MainWindow : Window
     // Import: choose a Windows BananaNana.library.json; the report says what came over.
     async void Import_Click(object? sender, RoutedEventArgs e)
     {
-        var files = await StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
-        {
-            Title = Loc.T("Main.ImportTitle"),
-            AllowMultiple = false,
-            FileTypeFilter = [new FilePickerFileType(Loc.T("Main.LibraryFilter")) { Patterns = ["*.json"] }],
-        });
-        if (files.FirstOrDefault()?.TryGetLocalPath() is not { } path) return;
+        var picked = await FilePicker.OpenAsync(this, new PickRequest(Loc.T("Main.ImportTitle"), Loc.T("Main.LibraryFilter"), ["*.json"], FilePicker.DocumentsFolder));
+        if (picked.Path is not { } path) return;
         try
         {
             var report = service.Import(path);
@@ -208,14 +203,8 @@ public partial class MainWindow : Window
     // Export: save a copy of the Linux library file.
     async void Export_Click(object? sender, RoutedEventArgs e)
     {
-        var file = await StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
-        {
-            Title = Loc.T("Main.Export"),
-            SuggestedFileName = LinuxLibrary.FileName,
-            DefaultExtension = "json",
-            FileTypeChoices = [new FilePickerFileType(Loc.T("Main.LibraryFilter")) { Patterns = ["*.json"] }],
-        });
-        if (file?.TryGetLocalPath() is not { } path) return;
+        var picked = await FilePicker.SaveAsync(this, new PickRequest(Loc.T("Main.Export"), Loc.T("Main.LibraryFilter"), ["*.json"], FilePicker.DocumentsFolder, LinuxLibrary.FileName));
+        if (picked.Path is not { } path) return;
         try
         {
             service.Export(path);

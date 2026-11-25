@@ -566,16 +566,8 @@ public partial class GuideMakerWindow : Window
 
     async Task ChooseFileAsync(Guid id)
     {
-        var files = await StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
-        {
-            Title = Loc.T("Guide.ChoosePicture"),
-            AllowMultiple = false,
-            FileTypeFilter = [new FilePickerFileType(Loc.T("Guide.PictureFilter"))
-            {
-                Patterns = ["*.png", "*.jpg", "*.jpeg", "*.gif", "*.bmp", "*.webp", "*.PNG", "*.JPG", "*.JPEG", "*.GIF", "*.BMP", "*.WEBP"],
-            }],
-        });
-        if (files.FirstOrDefault()?.TryGetLocalPath() is not { } path) return;
+        var picked = await FilePicker.OpenAsync(this, new PickRequest(Loc.T("Guide.ChoosePicture"), Loc.T("Guide.PictureFilter"), FilePicker.ImagePatterns, FilePicker.PicturesFolder));
+        if (picked.Path is not { } path) return;
         await SetImageFromFileAsync(id, path);
     }
 

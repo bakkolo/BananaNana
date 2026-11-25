@@ -228,4 +228,5 @@
   <sys:String x:Key="Markup.UndoTip">Undo (Ctrl+Z)</sys:String>
   <sys:String x:Key="Markup.RedoTip">Redo (Ctrl+Y)</sys:String>
   <sys:String x:Key="Markup.DeleteTip">Delete the selected item (Delete)</sys:String>
+  <sys:String x:Key="Picker.Unavailable">The file dialog could not be opened. Install kdialog or zenity, then try again.</sys:String>
 </ResourceDictionary>
