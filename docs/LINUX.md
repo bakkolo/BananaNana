@@ -1,6 +1,39 @@
-# Banana Nana on Linux (step 3: engine and CLI)
+# Banana Nana on Linux (step 2: library import, engine and CLI)
 
-Status: experimental. The engine is a test harness (`bn-linux-cli`), not the full app yet.
+Status: experimental. The engine runs from the CLI (`bn-linux-cli`), not the full app yet.
+
+## Library
+
+The Linux library is `$XDG_DATA_HOME/BananaNana/library.json` (default `~/.local/share/BananaNana/library.json`):
+
+```json
+{ "Name": "My library", "Snippets": [ { "Trigger": ";sig", "Html": "<p>Kind regards</p>", "Text": "Kind regards" } ] }
+```
+
+Triggers must be non-empty and unique (case-insensitive). Saves go to a `.tmp` file that is then moved into place.
+
+Import a Windows library (read only, the Windows file is never changed):
+
+```sh
+bn-linux-cli import /path/to/BananaNana.library.json
+bn-linux-cli list
+```
+
+- Empty Linux library: every snippet is imported.
+- Otherwise: snippets whose trigger already exists are skipped and listed.
+- A snippet that cannot be converted is listed as failed; the others are still imported. The exit code is 1 if anything failed.
+
+The Windows snippet `Content` is a base64 WPF XamlPackage. It is converted without WPF: bold, italic, underline,
+strikethrough, colours (`#AARRGGBB`, `#RRGGBB`, named), font size and weight, alignment, line breaks, ordered and
+unordered lists (nested), tables, links (http, https, mailto only), and images (PNG, JPEG, GIF embedded as data URIs).
+Unknown elements are walked through. Images that are missing from the package, or in another format, are left out.
+
+Layout guesses that have not been checked against a real Windows library yet: the XAML part is found through
+`_rels/.rels`, then `[Content_Types].xml`, then the first `.xaml` part; images are looked up relative to the XAML part,
+then at the package root, then by file name.
+
+`bn-linux-cli` with no arguments runs the snippets in the Linux library and reloads them about 0.3 s after the file
+changes. `bn-linux-cli snippets.json` still runs a test file in the `{ trigger, html, text }` format.
 
 ## How it works
 
