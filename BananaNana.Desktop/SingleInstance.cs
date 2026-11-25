@@ -9,6 +9,8 @@ public sealed class SingleInstance : IDisposable
     public const string ShowCommand = "show";
     public const string GuideCommand = "guide";
     public const string GuideSampleCommand = "guide-sample";
+    public const string GuideMarkupDemoCommand = "guide-markup-demo";
+    public const string GuideMarkupDemoEditCommand = "guide-markup-demo-edit";
     readonly Socket listener;
     volatile Action? onShow;
 
@@ -61,6 +63,9 @@ public sealed class SingleInstance : IDisposable
     // Called with true for the sample guide, false for the plain Guide maker.
     public Action<bool>? OnGuide { get; set; }
 
+    // Called with true for the markup demo with its step opened in the markup window, false for the demo guide alone.
+    public Action<bool>? OnMarkupDemo { get; set; }
+
     async Task Serve()
     {
         while (true)
@@ -83,6 +88,8 @@ public sealed class SingleInstance : IDisposable
                 case ShowCommand: OnShow?.Invoke(); break;
                 case GuideCommand: OnGuide?.Invoke(false); break;
                 case GuideSampleCommand: OnGuide?.Invoke(true); break;
+                case GuideMarkupDemoCommand: OnMarkupDemo?.Invoke(false); break;
+                case GuideMarkupDemoEditCommand: OnMarkupDemo?.Invoke(true); break;
             }
         }
         catch (SocketException) { }

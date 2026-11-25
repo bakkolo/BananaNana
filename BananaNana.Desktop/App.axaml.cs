@@ -52,10 +52,11 @@ public partial class App : Application
             if (Program.Listener is { } listener)
             {
                 listener.OnShow = () => Dispatcher.UIThread.Post(ShowMain);
-                listener.OnGuide = sample => Dispatcher.UIThread.Post(() => GuideMakerWindow.ShowOrActivate(sample));
+                listener.OnGuide = sample => Dispatcher.UIThread.Post(() => GuideMakerWindow.ShowOrActivate(sample ? GuideStart.Sample : GuideStart.Window));
+                listener.OnMarkupDemo = edit => Dispatcher.UIThread.Post(() => GuideMakerWindow.ShowOrActivate(edit ? GuideStart.MarkupDemoEdit : GuideStart.MarkupDemo));
             }
             if (!Program.StartInTray) main.Show();
-            if (Program.GuideStartup != GuideStart.None) GuideMakerWindow.ShowOrActivate(Program.GuideStartup == GuideStart.Sample);
+            if (Program.GuideStartup != GuideStart.None) GuideMakerWindow.ShowOrActivate(Program.GuideStartup);
         }
         base.OnFrameworkInitializationCompleted();
     }

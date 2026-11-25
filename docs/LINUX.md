@@ -199,7 +199,25 @@ guides and, for one guide, its title, intro and steps. Each step has a title, a 
   `wl-paste --type image/png` (or `image/jpeg`) is used, so `wl-clipboard` must be installed.
 - Pictures wider than 1600 px are scaled down. They are stored as PNG, or as JPEG (quality 90) when that PNG is over 1.5 MB.
 - Steps are reordered with Move up and Move down (no drag handle yet). Delete step asks first.
-- Annotations are stored as an empty list; the export comes in a later stage.
 - Starting options: `banananana --guide-maker` opens the Guide maker, and `banananana --guide-maker-sample` also opens
   a "Sample guide" (created once, two steps, the first with a generated picture). If the app is already running, the
   request goes over the single-instance socket and the running window opens or comes forward.
+
+## Guide maker (stage 2: picture markup)
+
+Each step picture has a **Mark up** button (next to Replace and Remove). It opens the markup window: the picture fitted
+to the window, a toolbar with Select, Arrow, Box, Highlight, Number, Text, Blur and Crop, seven colours, three line sizes,
+Undo, Redo and Delete, and Done or Cancel.
+
+- Markup is stored in the step's JSON (`annotations`, `crop`) in image pixels, so the window size does not matter. Files
+  from stage 1 have no markup and read as before. The original picture is never changed.
+- Drawing: drag for arrows, boxes, highlights, blurs and the crop; click for a number (the next number is one more than
+  the highest) or a text (type, Enter adds, Esc cancels). Select: click, drag to move, drag a handle to resize, Delete.
+  Double-click a text to edit it. Ctrl+Z, Ctrl+Y (or Ctrl+Shift+Z), Esc cancels the drag in progress.
+- Blur: pixelated in blocks of 12 image pixels, on the picture's pixels. Steps are drawn by `GuideRender.Flatten`
+  (SkiaSharp): crop first, blur before the other marks. The step cards show this drawing. Stage 3 export uses it too.
+- Known simplification: the markup window shows a blur as a grey block and draws texts without the outline; the saved
+  picture has both.
+- Demo: `banananana --guide-markup-demo` makes (or remakes) a "Markup demo" guide with one step: one of each kind, two
+  numbers, a 5 % crop. `--guide-markup-demo-edit` also opens that step in the markup window. Both go through the
+  single-instance socket like `--guide-maker`.

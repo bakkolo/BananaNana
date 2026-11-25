@@ -28,8 +28,9 @@ public partial class GuideMakerWindow : Window
     bool dirty, loading;
     string statusKey = "";
 
-    // One window at a time: a second request brings the open window forward. With sample, the sample guide is opened.
-    public static void ShowOrActivate(bool sample = false)
+    // One window at a time: a second request brings the open window forward. The start says what to open in it:
+    // the sample guide, or the markup demo (with edit: its step opens in the markup window too).
+    public static void ShowOrActivate(GuideStart start = GuideStart.Window)
     {
         if (open is null)
         {
@@ -43,7 +44,12 @@ public partial class GuideMakerWindow : Window
             open.Show();
             open.Activate();
         }
-        if (sample) open.OpenSample();
+        switch (start)
+        {
+            case GuideStart.Sample: open.OpenSample(); break;
+            case GuideStart.MarkupDemo: _ = open.OpenDemoAsync(edit: false); break;
+            case GuideStart.MarkupDemoEdit: _ = open.OpenDemoAsync(edit: true); break;
+        }
     }
 
     // Opens the sample guide (made by GuideSample when it does not exist yet).
@@ -58,6 +64,24 @@ public partial class GuideMakerWindow : Window
         {
             _ = Dialogs.Message(this, Loc.T("Guide.Title"), ex.Message);
         }
+    }
+
+    // --guide-markup-demo: the demo guide is made again and opened. With edit, its step opens in the markup window.
+    async Task OpenDemoAsync(bool edit)
+    {
+        if (!SaveNow()) return;
+        Guid id;
+        try
+        {
+            id = GuideMarkupDemo.Create(store);
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+        {
+            await Dialogs.Message(this, Loc.T("Guide.Title"), ex.Message);
+            return;
+        }
+        OpenGuide(id);
+        if (edit && doc is not null && doc.Steps.Count > 0) await MarkUpAsync(doc.Steps[0].Id);
     }
 
     public GuideMakerWindow()
@@ -379,28 +403,56 @@ public partial class GuideMakerWindow : Window
             panel.Children.Add(new Image { Source = bitmap, Stretch = Stretch.Uniform, HorizontalAlignment = HorizontalAlignment.Stretch });
 
         var row = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8 };
+        var markUp = new Button { Content = Loc.T("Guide.MarkUp"), Padding = new Thickness(12, 5), IsEnabled = bitmap is not null };
+        markUp.Click += (_, _) => _ = MarkUpAsync(step.Id);
         var replace = new Button { Content = Loc.T("Guide.Replace"), Padding = new Thickness(12, 5) };
         replace.Click += (_, _) => _ = ChooseFileAsync(step.Id);
         var remove = new Button { Content = Loc.T("Guide.Remove"), Padding = new Thickness(12, 5) };
         remove.Click += (_, _) => RemoveImage(step.Id);
+        row.Children.Add(markUp);
         row.Children.Add(replace);
         row.Children.Add(remove);
         panel.Children.Add(row);
         return panel;
     }
 
+    // The picture as the card shows it: with its crop and markup when there are any (GuideRender), else as stored.
     static Bitmap? DecodeStepImage(GuideStep step)
     {
         if (step.Image is null) return null;
         try
         {
-            using var stream = new MemoryStream(Convert.FromBase64String(step.Image));
+            var bytes = GuideRender.HasMarkup(step) ? GuideRender.Flatten(step) : Convert.FromBase64String(step.Image);
+            using var stream = new MemoryStream(bytes);
             return new Bitmap(stream);
         }
-        catch (Exception ex) when (ex is FormatException or NotSupportedException or ArgumentException or InvalidOperationException)
+        catch (Exception ex) when (ex is FormatException or NotSupportedException or ArgumentException or InvalidOperationException or InvalidDataException)
         {
             return null;
         }
+    }
+
+    // Opens the markup window for a step with a picture. Done stores the markup and the crop in the step; Cancel changes nothing.
+    async Task MarkUpAsync(Guid id)
+    {
+        var step = FindStep(id);
+        if (step?.Image is null) return;
+        ImageMarkupWindow window;
+        try
+        {
+            window = new ImageMarkupWindow(step);
+        }
+        catch (Exception ex) when (ex is FormatException or NotSupportedException or ArgumentException or InvalidOperationException)
+        {
+            await Dialogs.Message(this, Loc.T("Guide.Title"), Loc.T("Guide.NotAPicture"));
+            return;
+        }
+        bool done = await window.ShowDialog<bool>(this);
+        if (!done || !window.Changed || FindStep(id) is null) return;
+        step.Annotations = window.Annotations;
+        step.Crop = window.Crop;
+        RebuildCard(id);
+        MarkChanged();
     }
 
     // ---- Step actions -----------------------------------------------------------------------------------------
@@ -442,7 +494,8 @@ public partial class GuideMakerWindow : Window
             Text = source.Text,
             Image = source.Image,
             ImageType = source.ImageType,
-            Annotations = new(),
+            Annotations = source.Annotations.Select(a => a.Clone()).ToList(),
+            Crop = source.Crop?.Clone(),
         };
         doc.Steps.Insert(index + 1, copy);
         RebuildSteps();

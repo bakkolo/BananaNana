@@ -2,8 +2,9 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 namespace BananaNana;
 
-// One step of a guide. Image is base64 (PNG or JPEG, see ImageType) or null. Annotations stay empty until
-// stage 2 adds vector markup; the original picture is kept separate from them.
+// One step of a guide. Image is base64 (PNG or JPEG, see ImageType) or null. Annotations and Crop are markup over the
+// picture; the original picture is never changed by them (GuideRender.Flatten draws them). Files written before
+// stage 2 have no crop and empty annotations, which read as no markup.
 public sealed class GuideStep
 {
     public Guid Id { get; set; }
@@ -11,7 +12,8 @@ public sealed class GuideStep
     public string Text { get; set; } = "";
     public string? Image { get; set; }
     public string? ImageType { get; set; }
-    public List<JsonElement> Annotations { get; set; } = new();
+    public List<Annotation> Annotations { get; set; } = new();
+    public CropRect? Crop { get; set; }
 }
 
 // The file format: <guid>.bnguide, version 1. The guide id is the file name, so it is not stored in the JSON.

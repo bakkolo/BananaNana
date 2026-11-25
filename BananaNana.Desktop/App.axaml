@@ -84,6 +84,16 @@
       <StreamGeometry x:Key="IconUp">M8,3 L13,8.5 L11.6,9.9 L8,6.3 L4.4,9.9 L3,8.5 Z</StreamGeometry>
       <StreamGeometry x:Key="IconDown">M8,13 L3,7.5 L4.4,6.1 L8,9.7 L11.6,6.1 L13,7.5 Z</StreamGeometry>
       <StreamGeometry x:Key="IconCopy">M5,1 H14 V10 H5 Z M2,5 H11 V15 H2 Z</StreamGeometry>
+      <StreamGeometry x:Key="IconSelect">F1 M4,2 L4,13 L7,10.2 L9,14.5 L10.8,13.7 L8.8,9.5 L12.5,9.5 Z</StreamGeometry>
+      <StreamGeometry x:Key="IconArrow">F1 M3,12 L8.5,6.5 L6,4 L13,3 L12,10 L9.5,7.5 L4,13 Z</StreamGeometry>
+      <StreamGeometry x:Key="IconBox">F1 M2,3 H14 V13 H2 Z M3.5,4.5 V11.5 H12.5 V4.5 Z</StreamGeometry>
+      <StreamGeometry x:Key="IconHighlight">F1 M3,9 L9,3 L13,7 L7,13 Z M2,14 H14 V15.5 H2 Z</StreamGeometry>
+      <StreamGeometry x:Key="IconNumber">F1 M8,1 A7,7 0 1 1 8,15 A7,7 0 1 1 8,1 Z</StreamGeometry>
+      <StreamGeometry x:Key="IconText">F1 M2,3 H14 V5.5 H9.5 V13 H6.5 V5.5 H2 Z</StreamGeometry>
+      <StreamGeometry x:Key="IconBlur">F1 M2,2 H5 V5 H2 Z M7,2 H10 V5 H7 Z M12,2 H15 V5 H12 Z M2,7 H5 V10 H2 Z M7,7 H10 V10 H7 Z M12,7 H15 V10 H12 Z M2,12 H5 V15 H2 Z M7,12 H10 V15 H7 Z M12,12 H15 V15 H12 Z</StreamGeometry>
+      <StreamGeometry x:Key="IconCrop">F1 M4,0 H6 V10 H16 V12 H6 V16 H4 V12 H0 V10 H4 Z</StreamGeometry>
+      <StreamGeometry x:Key="IconUndo">F1 M5,3 L1,7 L5,11 V8.5 C9,8.5 11,10 12,13 C11.5,8 9.5,5.5 5,5.5 Z</StreamGeometry>
+      <StreamGeometry x:Key="IconRedo">F1 M11,3 L15,7 L11,11 V8.5 C7,8.5 5,10 4,13 C4.5,8 6.5,5.5 11,5.5 Z</StreamGeometry>
     </ResourceDictionary>
   </Application.Resources>
 

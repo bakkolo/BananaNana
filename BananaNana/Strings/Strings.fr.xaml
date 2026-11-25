@@ -235,4 +235,60 @@
   <sys:String x:Key="Guide.NotAPicture">That file is not a picture Banana Nana can read.</sys:String>
   <!-- TODO translate -->
   <sys:String x:Key="Guide.OpenFailed">This guide could not be opened.</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Guide.MarkUp">Mark up</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Markup.Title">Mark up picture</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Markup.Done">Done</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Markup.ResetCrop">Reset crop</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Markup.DiscardText">Throw away the changes made to this picture?</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Markup.Discard">Discard changes</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Markup.TextWatermark">Type the text, Enter adds it</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Markup.SelectTip">Select: click to select, drag to move, drag a handle to resize, Delete removes, double-click a text to edit</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Markup.ArrowTip">Arrow: drag from the tail to the tip</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Markup.BoxTip">Box: drag to draw a frame with rounded corners</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Markup.HighlightTip">Highlight: drag over an area, like a highlighter pen</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Markup.NumberTip">Number: click to place the next number</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Markup.TextTip">Text: click where the text goes, type, Enter adds it (Esc cancels)</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Markup.BlurTip">Blur: drag over what must not be readable (it is pixelated)</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Markup.CropTip">Crop: drag over the part to keep (a new crop replaces the old one)</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Markup.Red">Red</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Markup.Yellow">Yellow</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Markup.Green">Green</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Markup.Blue">Blue</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Markup.Purple">Purple</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Markup.White">White</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Markup.Black">Black</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Markup.SizeSTip">Thin line</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Markup.SizeMTip">Medium line</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Markup.SizeLTip">Thick line</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Markup.UndoTip">Undo (Ctrl+Z)</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Markup.RedoTip">Redo (Ctrl+Y)</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Markup.DeleteTip">Delete the selected item (Delete)</sys:String>
 </ResourceDictionary>
