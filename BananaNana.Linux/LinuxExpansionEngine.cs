@@ -39,6 +39,9 @@ public sealed class LinuxExpansionEngine : IDisposable
         input = new InputMonitor(log, OnKeyDown, OnKeyUp);
     }
 
+    // Keyboards the input monitor is reading (0 before Start, or when /dev/input cannot be read).
+    public int KeyboardCount => input.KeyboardCount;
+
     public bool Paused
     {
         get { lock (gate) return paused; }

@@ -1,6 +1,6 @@
 # Banana Nana on Linux (step 2: library import, engine and CLI)
 
-Status: experimental. The engine runs from the CLI (`bn-linux-cli`), not the full app yet.
+Status: experimental. The desktop app (`banananana`, see below) runs the engine; `bn-linux-cli` stays for debugging.
 
 ## Library
 
@@ -132,3 +132,53 @@ of each step. Press Ctrl+C to quit; the virtual keyboard is destroyed on exit.
 - Ctrl+V uses the key that types 'v' in the active layout, found at the time of the expansion.
 - wl-copy offers one mime type per copy, so HTML and plain text cannot be offered together yet.
 - Only text is saved and restored. If the clipboard holds an image, the snippet replaces it.
+
+## Desktop app (step 4a)
+
+`banananana` is the desktop window: snippet list, editor, settings, help and a tray icon. The expansion engine runs
+inside it, so `bn-linux-cli` is only needed for debugging.
+
+Build and publish (self-contained, one file):
+
+```sh
+dotnet publish BananaNana.Desktop -c Release -r linux-x64 --self-contained true \
+  -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o ~/bn/out/linux-step4a
+```
+
+The solution (`BananaNana.sln`) also contains the Windows WPF projects; build it with `-p:EnableWindowsTargeting=true`.
+
+Install for one user:
+
+```sh
+install -Dm755 banananana ~/.local/bin/banananana
+install -Dm644 BananaNana.Desktop/packaging/banananana.png ~/.local/share/icons/hicolor/256x256/apps/banananana.png
+install -Dm644 BananaNana.Desktop/packaging/banananana.desktop ~/.local/share/applications/banananana.desktop
+```
+
+- `banananana` opens the window. `banananana --tray` starts hidden in the tray.
+- A second start brings the running window forward (socket `$XDG_RUNTIME_DIR/banananana.sock`).
+- Closing the window hides it to the tray. Exit in the tray menu quits.
+- Settings: language, "Start Banana Nana when I log in" (writes `~/.config/autostart/banananana.desktop`, which
+  runs this binary with `--tray`), and "Pause expansion when Banana Nana starts".
+- Settings file: `$XDG_CONFIG_HOME/BananaNana/settings.json` (default `~/.config/BananaNana/settings.json`), the same
+  `AppSettings` class as Windows.
+- Library: the same Linux library file as above. The app reloads it when the file changes.
+
+Keyboard access: if the app cannot read the keyboards or `/dev/uinput`, the window shows a banner with the setup steps.
+A new group membership only applies to a new login session, so log out and back in after `usermod -aG input`.
+
+Editing: the editor works on plain text. A snippet with formatting or pictures shows a notice. Saving a changed
+text saves it as plain text (the button says so). Renaming the trigger keeps the formatting.
+
+Texts come from the Windows app's `BananaNana/Strings/Strings.*.xaml`, read by a small XML loader (`Loc`). New
+Linux keys are in all seven files, marked `<!-- TODO translate -->` in the non-English ones.
+
+Tests: `dotnet test tests/BananaNana.Desktop.Tests` (string files, trigger rules, autostart file, snippet helpers).
+
+Limitations of the first desktop build:
+
+- The window runs through XWayland on a KDE Wayland session (the Avalonia Wayland backend is not in this build).
+- Avalonia's tray icon has no notification, so there is no "still running in the tray" balloon on the first close.
+- The help text is the Windows one. It mentions the toolbar, pasting from Word and Ctrl+K, which this build does not
+  have yet.
+- The status line says "Listening on 1 keyboards" for a single keyboard (the string is shared with the Windows wording).

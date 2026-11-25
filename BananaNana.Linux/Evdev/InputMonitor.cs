@@ -8,9 +8,13 @@ public sealed class InputMonitor : IDisposable
     readonly Action<int, bool> keyDown;
     readonly Action<int> keyUp;
     readonly Dictionary<string, KeyboardReader> readers = new(); // keyed by node path
+    readonly HashSet<string> keyboardNodes = new(); // the subset of readers that are keyboards
     readonly object gate = new();
     FileSystemWatcher? watcher;
     bool disposed;
+
+    // Keyboards being read right now (mice are not counted).
+    public int KeyboardCount { get { lock (gate) return keyboardNodes.Count; } }
 
     public InputMonitor(Action<string> log, Action<int, bool> keyDown, Action<int> keyUp)
     {
@@ -80,6 +84,7 @@ public sealed class InputMonitor : IDisposable
             reader.KeyUp += keyUp;
             reader.Stopped += OnStopped;
             readers[info.Node] = reader;
+            if (info.Kind == DeviceKind.Keyboard) keyboardNodes.Add(info.Node);
             reader.Start();
             log($"{info.Kind} connected: {info.Name} ({info.Node})");
             return null;
@@ -89,7 +94,11 @@ public sealed class InputMonitor : IDisposable
     void Detach(string node)
     {
         KeyboardReader? reader;
-        lock (gate) readers.Remove(node, out reader);
+        lock (gate)
+        {
+            readers.Remove(node, out reader);
+            keyboardNodes.Remove(node);
+        }
         if (reader is null) return;
         reader.Dispose();
         log($"disconnected: {reader.Name} ({node})");
@@ -98,7 +107,11 @@ public sealed class InputMonitor : IDisposable
     void OnStopped(KeyboardReader reader, string reason)
     {
         bool removed;
-        lock (gate) removed = readers.Remove(reader.Node);
+        lock (gate)
+        {
+            removed = readers.Remove(reader.Node);
+            keyboardNodes.Remove(reader.Node);
+        }
         if (!removed) return; // Detach already handled it.
         reader.Dispose();
         log($"disconnected: {reader.Name} ({reader.Node}): {reason}");
@@ -114,6 +127,7 @@ public sealed class InputMonitor : IDisposable
             watcher = null;
             toClose = readers.Values.ToList();
             readers.Clear();
+            keyboardNodes.Clear();
         }
         foreach (var r in toClose) r.Dispose();
     }

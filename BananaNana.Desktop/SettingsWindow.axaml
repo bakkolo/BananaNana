@@ -1,0 +1,28 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="BananaNana.Desktop.SettingsWindow"
+        Title="Settings" Width="560" SizeToContent="Height" CanResize="False"
+        WindowStartupLocation="CenterOwner">
+  <StackPanel Margin="24,20,24,20" Spacing="14">
+    <TextBlock x:Name="Heading" FontSize="22" FontWeight="SemiBold" />
+
+    <StackPanel Orientation="Horizontal" Spacing="12">
+      <TextBlock x:Name="LanguageLabel" VerticalAlignment="Center" Width="150" FontWeight="SemiBold" />
+      <ComboBox x:Name="LanguageBox" Width="200" SelectionChanged="Language_Changed" />
+    </StackPanel>
+    <TextBlock x:Name="LanguageHint" Opacity="0.7" TextWrapping="Wrap" FontSize="12" />
+
+    <CheckBox x:Name="AutostartBox" Click="Autostart_Click" Margin="0,8,0,0" />
+    <TextBlock x:Name="AutostartHint" Opacity="0.7" TextWrapping="Wrap" FontSize="12" Margin="26,0,0,0" />
+
+    <CheckBox x:Name="StartPausedBox" Click="StartPaused_Click" Margin="0,8,0,0" />
+
+    <TextBlock x:Name="LibraryText" TextWrapping="Wrap" Margin="0,8,0,0" />
+    <TextBlock x:Name="ErrorText" Foreground="#C42B1C" TextWrapping="Wrap" />
+
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8" Margin="0,8,0,0">
+      <Button x:Name="OpenFolderButton" Padding="14,6" Click="OpenFolder_Click" />
+      <Button x:Name="CloseButton" Classes="accent" Padding="14,6" Click="Close_Click" />
+    </StackPanel>
+  </StackPanel>
+</Window>

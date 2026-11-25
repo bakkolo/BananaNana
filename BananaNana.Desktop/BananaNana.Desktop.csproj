@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <AssemblyName>banananana</AssemblyName>
+    <RootNamespace>BananaNana.Desktop</RootNamespace>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <!-- No satellite resource assemblies: the UI texts come from Loc, not from .NET resource files. -->
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <!-- AVLN3001: the windows are created in code (new MainWindow(...)), never loaded by the runtime XAML loader. -->
+    <NoWarn>$(NoWarn);AVLN3001</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.3.23" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.3.23" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.23" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BananaNana.Core\BananaNana.Core.csproj" />
+    <ProjectReference Include="..\BananaNana.Linux\BananaNana.Linux.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- The Windows app's translations, shared as they are. Resource names become Strings.en.xaml and so on. -->
+    <EmbeddedResource Include="..\BananaNana\Strings\Strings.en.xaml" LogicalName="Strings.en.xaml" WithCulture="false" />
+    <EmbeddedResource Include="..\BananaNana\Strings\Strings.pl.xaml" LogicalName="Strings.pl.xaml" WithCulture="false" />
+    <EmbeddedResource Include="..\BananaNana\Strings\Strings.de.xaml" LogicalName="Strings.de.xaml" WithCulture="false" />
+    <EmbeddedResource Include="..\BananaNana\Strings\Strings.es.xaml" LogicalName="Strings.es.xaml" WithCulture="false" />
+    <EmbeddedResource Include="..\BananaNana\Strings\Strings.fr.xaml" LogicalName="Strings.fr.xaml" WithCulture="false" />
+    <EmbeddedResource Include="..\BananaNana\Strings\Strings.th.xaml" LogicalName="Strings.th.xaml" WithCulture="false" />
+    <EmbeddedResource Include="..\BananaNana\Strings\Strings.zh.xaml" LogicalName="Strings.zh.xaml" WithCulture="false" />
+    <EmbeddedResource Include="packaging\banananana.png" LogicalName="banananana.png" />
+  </ItemGroup>
+</Project>

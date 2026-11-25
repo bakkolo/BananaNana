@@ -139,4 +139,38 @@
   <sys:String x:Key="Tip.6">Pon BananaNana.library.json junto al EXE para llevar tus plantillas en una memoria USB.</sys:String>
   <sys:String x:Key="Tip.7">Ctrl+clic en un enlace del editor muestra adónde lleva.</sys:String>
   <sys:String x:Key="Tip.8">El cuadro de búsqueda filtra tus plantillas mientras escribes.</sys:String>
+
+  <!-- Linux desktop app (step 4a) -->
+  <!-- TODO translate -->
+  <sys:String x:Key="Linux.Autostart">Start Banana Nana when I log in</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Linux.AutostartFailed">Could not change the start-at-login setting: </sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Linux.StartPaused">Start with expansion paused</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Linux.Banner.Title">Banana Nana cannot read the keyboard yet</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Linux.Banner.Body">Banana Nana needs access to the keyboards and to /dev/uinput.&#x0a;1. sudo usermod -aG input $USER, then log out and log in again.&#x0a;2. Create /etc/udev/rules.d/99-banana-nana-uinput.rules with the line: KERNEL=="uinput", GROUP="input", MODE="0660", OPTIONS+="static_node=uinput"&#x0a;3. sudo udevadm control --reload &amp;&amp; sudo udevadm trigger&#x0a;Full steps: docs/LINUX.md.</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Status.Listening">Listening on {0} keyboards</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Status.Error">Not expanding: {0}</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Tray.Resume">Resume expansion</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Main.Rename">Rename trigger</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Main.HasFormatting">Contains formatting</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Main.HasImages">Contains images</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Main.LibraryError">The library file could not be read, so changes are turned off: {0}</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Edit.Text">Text</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Edit.TitleEdit">Edit snippet</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Edit.FormattingNotice">This snippet has formatting; editing here will save it as plain text</sys:String>
+  <!-- TODO translate -->
+  <sys:String x:Key="Edit.SavePlain">Save as plain text</sys:String>
 </ResourceDictionary>

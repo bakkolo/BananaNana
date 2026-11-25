@@ -8,6 +8,8 @@ public sealed class AppSettings
 {
     public string Language { get; set; } = "en";
     public bool WelcomeShown { get; set; }
+    // Desktop (Linux) only: start with expansion paused. The Windows app does not read it.
+    public bool StartPaused { get; set; }
 
     // Safety options (all on by default). Checked only at the moment a trigger is recognised, never in the background.
     public bool ProtectPasswords { get; set; } = true;

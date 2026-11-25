@@ -1,0 +1,80 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="BananaNana.Desktop.MainWindow"
+        Title="Banana Nana" Width="1040" Height="680" MinWidth="720" MinHeight="480">
+  <DockPanel Margin="24,18,24,14">
+    <!-- Status line and Pause -->
+    <Grid DockPanel.Dock="Bottom" ColumnDefinitions="*,Auto" Margin="0,14,0,0">
+      <TextBlock x:Name="StatusText" VerticalAlignment="Center" TextWrapping="Wrap" Opacity="0.75" />
+      <Button x:Name="PauseButton" Grid.Column="1" Padding="14,5" Click="Pause_Click" />
+    </Grid>
+
+    <!-- Header: name and library summary, actions on the right -->
+    <Grid DockPanel.Dock="Top" ColumnDefinitions="*,Auto" Margin="0,0,0,16">
+      <StackPanel>
+        <TextBlock Text="Banana Nana" FontSize="26" FontWeight="SemiBold" />
+        <TextBlock x:Name="LibraryText" Opacity="0.7" />
+      </StackPanel>
+      <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+        <Button x:Name="SettingsButton" Click="Settings_Click" />
+        <Button x:Name="HelpButton" Click="Help_Click" />
+        <Button x:Name="NewButton" Classes="accent" Padding="14,6" Click="New_Click" />
+      </StackPanel>
+    </Grid>
+
+    <!-- Shown when keyboards or /dev/uinput cannot be used -->
+    <Border x:Name="Banner" DockPanel.Dock="Top" Classes="card" Padding="14,10" Margin="0,0,0,16" IsVisible="False">
+      <StackPanel Spacing="4">
+        <TextBlock x:Name="BannerTitle" FontWeight="SemiBold" />
+        <TextBlock x:Name="BannerBody" TextWrapping="Wrap" />
+      </StackPanel>
+    </Border>
+
+    <Grid ColumnDefinitions="300,18,*">
+      <!-- Snippet list -->
+      <Border Classes="card" Padding="10">
+        <DockPanel>
+          <TextBox x:Name="SearchBox" DockPanel.Dock="Top" Margin="0,0,0,10" TextChanged="Search_Changed" />
+          <Border DockPanel.Dock="Bottom" Classes="card" Margin="0,10,0,0" Padding="12,10">
+            <StackPanel Spacing="6">
+              <TextBlock x:Name="TipText" TextWrapping="Wrap" FontSize="12.5" />
+              <Button x:Name="NextTipButton" Padding="0" Background="Transparent" BorderThickness="0" HorizontalAlignment="Left" Click="NextTip_Click" />
+            </StackPanel>
+          </Border>
+          <Grid>
+            <ListBox x:Name="SnippetList" Background="Transparent" BorderThickness="0" SelectionChanged="List_SelectionChanged" DoubleTapped="List_DoubleTapped">
+              <ListBox.ItemTemplate>
+                <DataTemplate>
+                  <StackPanel Margin="2,5">
+                    <TextBlock Text="{Binding Trigger}" FontFamily="monospace" FontWeight="SemiBold" />
+                    <TextBlock Text="{Binding Summary}" Opacity="0.7" FontSize="12" TextTrimming="CharacterEllipsis" Margin="0,3,0,0" />
+                  </StackPanel>
+                </DataTemplate>
+              </ListBox.ItemTemplate>
+            </ListBox>
+            <TextBlock x:Name="EmptyText" TextAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Opacity="0.6" Margin="20" IsVisible="False" />
+          </Grid>
+        </DockPanel>
+      </Border>
+
+      <!-- Preview of the selected snippet -->
+      <DockPanel Grid.Column="2">
+        <DockPanel DockPanel.Dock="Top" Margin="2,0,0,10">
+          <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Spacing="8">
+            <Button x:Name="EditButton" Padding="12,6" Click="Edit_Click" />
+            <Button x:Name="RenameButton" Padding="12,6" Click="Rename_Click" />
+            <Button x:Name="DeleteButton" Padding="12,6" Click="Delete_Click" />
+          </StackPanel>
+          <StackPanel VerticalAlignment="Center">
+            <TextBlock x:Name="PreviewTitle" FontFamily="monospace" FontSize="18" FontWeight="SemiBold" />
+            <TextBlock x:Name="PreviewCaption" Opacity="0.7" />
+          </StackPanel>
+        </DockPanel>
+        <TextBlock x:Name="Notes" DockPanel.Dock="Bottom" Margin="2,8,0,0" Opacity="0.75" />
+        <Border Classes="card" Padding="14">
+          <TextBox x:Name="Preview" IsReadOnly="True" AcceptsReturn="True" TextWrapping="Wrap" Background="Transparent" BorderThickness="0" />
+        </Border>
+      </DockPanel>
+    </Grid>
+  </DockPanel>
+</Window>

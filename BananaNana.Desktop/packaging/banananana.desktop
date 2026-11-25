@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Banana Nana
+GenericName=Text expander
+Comment=Type a short trigger, get your snippet
+# Copy the banananana binary to a folder on PATH (for example ~/.local/bin), or put its full path here.
+Exec=banananana
+Icon=banananana
+Terminal=false
+Categories=Utility;
